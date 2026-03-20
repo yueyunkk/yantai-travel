@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟台美食推荐 - 山海仙境 魅力烟台</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 自定义CSS -->
+    <style>
+        /* 基础样式优化 - 蓝色系主色调，与首页协调，高级质感 */
+        body {
+            padding-top: 80px;
+            font-family: "Microsoft Yahei", sans-serif;
+            background-color: #e8f4f8; /* 浅蓝柔化背景，高级不刺眼 */
+            color: #333;
+        }
+
+        /* 导航栏样式 - 深海蓝渐变，与首页主色完全统一 */
+        .navbar {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            box-shadow: 0 4px 8px rgba(30, 87, 153, 0.3);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid #fff;
+            color: #e8f4f8 !important;
+        }
+
+        .nav-link:hover {
+            color: #e8f4f8 !important;
+            transform: translateY(-1px);
+        }
+
+        /* 页面标题 - 深海蓝渐变背景，高级艺术感 */
+        .page-header {
+            background: linear-gradient(135deg, #144272 0%, #1e5799 50%, #2989d8 100%);
+            padding: 100px 0;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 50px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* 高级光影装饰效果 */
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            animation: shimmer 8s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translate(-30%, -30%); }
+            50% { transform: translate(30%, 30%); }
+            100% { transform: translate(-30%, -30%); }
+        }
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        /* 标题艺术装饰线 */
+        .page-header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #7fc8f8, transparent);
+        }
+        .page-header p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 20px auto 0;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 12px 24px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 分类标签 - 未选中状态极致清晰，蓝色系统一 */
+        .category-tabs {
+            margin-bottom: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-tabs .nav-link {
+            color: #144272 !important; /* 深蓝文字，高对比度清晰可见 */
+            background-color: #ffffff; /* 纯白背景，强化文字辨识度 */
+            border: 2px solid #2989d8; /* 蓝色边框，轮廓清晰 */
+            margin: 0;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .category-tabs .nav-link.active {
+            background: linear-gradient(135deg, #144272 0%, #1e5799 100%);
+            color: #fff !important;
+            border-color: #144272;
+            box-shadow: 0 6px 12px rgba(20, 66, 114, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .category-tabs .nav-link:hover:not(.active) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(20, 66, 114, 0.2);
+            border-color: #144272;
+            color: #144272 !important;
+            background-color: #e8f4f8;
+        }
+
+        /* 美食卡片 - 蓝色系高级质感，细节特色 */
+        .food-card {
+            background: #f8fbfe;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(20, 66, 114, 0.15);
+            margin-bottom: 35px;
+            transition: all 0.4s ease;
+            border: none;
+            position: relative;
+        }
+        .food-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #144272, #1e5799);
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(20, 66, 114, 0.22);
+        }
+
+        .food-card img {
+            height: 240px;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            filter: brightness(0.92);
+        }
+
+        .food-card:hover img {
+            transform: scale(1.05);
+            filter: brightness(0.98);
+        }
+
+        .food-card .card-body {
+            padding: 25px;
+        }
+
+        .food-card .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #144272;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #d0e8f8;
+            padding-bottom: 10px;
+        }
+
+        .food-card .card-text {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .badge {
+            margin-right: 8px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+        }
+        .badge.bg-primary {
+            background-color: #144272 !important;
+        }
+        .badge.bg-success {
+            background-color: #2a7f62 !important;
+        }
+        .badge.bg-info {
+            background-color: #2989d8 !important;
+        }
+
+        .food-card .btn-primary {
+            background: linear-gradient(135deg, #144272 0%, #1e5799 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .food-card .btn-primary:hover {
+            background: linear-gradient(135deg, #1e5799 0%, #144272 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(20, 66, 114, 0.25);
+        }
+
+        /* 餐厅卡片 - 蓝色系统一优化 */
+        .food-list {
+            margin-top: 60px;
+        }
+
+        .food-list h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #144272;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .food-list h3::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #7fc8f8;
+            margin: 15px auto 0;
+            border-radius: 4px;
+        }
+
+        .restaurant-card {
+            background: #f8fbfe;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 15px rgba(20, 66, 114, 0.15);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #2989d8;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(20, 66, 114, 0.2);
+        }
+
+        .restaurant-card h4 {
+            color: #144272;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .address, .phone {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* 模态框样式 - 蓝色系统一模板 */
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 15px 40px rgba(20, 66, 114, 0.25);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #144272 0%, #1e5799 100%);
+            color: #fff;
+            border-radius: 16px 16px 0 0;
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .modal-body img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            filter: brightness(0.92);
+        }
+
+        .modal-body h6 {
+            color: #144272;
+            font-weight: 700;
+            margin: 20px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .modal-body p, .modal-body li {
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .modal-footer .btn-secondary {
+            background: #666;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-weight: 600;
+        }
+        .modal-footer .btn-primary {
+            background: linear-gradient(135deg, #144272 0%, #1e5799 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-weight: 600;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 992px) {
+            .food-card img {
+                height: 200px;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.4rem;
+            }
+            .page-header p {
+                font-size: 1.2rem;
+                padding: 8px 15px;
+            }
+            .food-card img {
+                height: 180px;
+            }
+            .modal-body img {
+                height: 220px;
+            }
+            .category-tabs .nav-link {
+                padding: 10px 20px;
+                min-width: 100px;
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .page-header {
+                padding: 60px 0;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .food-card .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water"></i> 烟台旅游
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attractions.html">景点介绍</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="food.html">美食推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accommodation.html">住宿推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="routes.html">旅游路线</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">联系我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container text-center">
+            <h1>寻味烟台</h1>
+            <p>一口尝尽渤海鲜，唇齿留香胶东味，解锁烟台舌尖上的极致诱惑</p>
+        </div>
+    </header>
+
+    <!-- 美食分类标签 -->
+    <div class="container">
+        <ul class="nav category-tabs" id="foodTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-food-tab" data-bs-toggle="tab" data-bs-target="#all-food" type="button" role="tab" aria-controls="all-food" aria-selected="true">全部美食</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="seafood-tab" data-bs-toggle="tab" data-bs-target="#seafood" type="button" role="tab" aria-controls="seafood" aria-selected="false">海鲜美食</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="noodle-tab" data-bs-toggle="tab" data-bs-target="#noodle" type="button" role="tab" aria-controls="noodle" aria-selected="false">特色面食</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="snack-tab" data-bs-toggle="tab" data-bs-target="#snack" type="button" role="tab" aria-controls="snack" aria-selected="false">地方小吃</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="fruit-tab" data-bs-toggle="tab" data-bs-target="#fruit" type="button" role="tab" aria-controls="fruit" aria-selected="false">特色水果</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 美食内容 -->
+    <div class="container">
+        <div class="tab-content" id="foodTabsContent">
+            <!-- 全部美食 -->
+            <div class="tab-pane fade show active" id="all-food" role="tabpanel" aria-labelledby="all-food-tab">
+                <div class="row g-4">
+                    <!-- 海鲜类 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haichanglaofan.jpg" class="card-img-top" alt="海肠捞饭">
+                            <div class="card-body">
+                                <h5 class="card-title">海肠捞饭</h5>
+                                <p class="card-text">烟台最具代表性的特色美食，渤海湾海肠肉质脆嫩无腥味，快速爆炒后搭配韭菜肉沫，浇饭拌匀鲜到极致。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">烟台招牌</span>
+                                    <span class="badge bg-info">海鲜特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#seaCucumberModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haishen.jpg" class="card-img-top" alt="葱烧海参">
+                            <div class="card-body">
+                                <h5 class="card-title">葱烧海参</h5>
+                                <p class="card-text">鲁菜经典，烟台海参品质极佳，口感软糯弹牙，葱香浓郁，是高档宴请的必点菜。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">鲁菜经典</span>
+                                    <span class="badge bg-info">高档菜品</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#braisedSeaCucumberModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haixian.jpg" class="card-img-top" alt="清蒸海鲜">
+                            <div class="card-body">
+                                <h5 class="card-title">清蒸海鲜</h5>
+                                <p class="card-text">扒虾、螃蟹、扇贝、生蚝等鲜活海鲜清蒸烹制，最大程度保留原汁原味，鲜甜无比。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">原汁原味</span>
+                                    <span class="badge bg-info">健康美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#steamedSeafoodModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 面食类 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/bayu.jpg" class="card-img-top" alt="鲅鱼水饺">
+                            <div class="card-body">
+                                <h5 class="card-title">鲅鱼水饺</h5>
+                                <p class="card-text">烟台招牌非遗美食，新鲜大鲅鱼手工去刺，加五花肉韭菜调馅，个头大、汤汁足、鲜味浓。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">胶东特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#fishDumplingModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/penglaixiaomian.jpg" class="card-img-top" alt="蓬莱小面">
+                            <div class="card-body">
+                                <h5 class="card-title">蓬莱小面</h5>
+                                <p class="card-text">200年历史非遗面食，手工拉制细面搭配浓稠海鲜卤，鲜香味美，是烟台早餐的经典选择。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">传统面食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#penglaiNoodleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/lamian.jpg" class="card-img-top" alt="福山拉面">
+                            <div class="card-body">
+                                <h5 class="card-title">福山拉面</h5>
+                                <p class="card-text">烟台三大风味面食之一，百年工艺拉制，面条筋道爽滑，三鲜卤/炸酱卤各具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">传统面食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#fushanNoodleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 小吃类 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/menzi.jpg" class="card-img-top" alt="烟台焖子">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台焖子</h5>
+                                <p class="card-text">百年街头小吃，地瓜粉煎至外酥里Q，浇芝麻酱汁，三鲜版加虾仁鱿鱼更具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">百年小吃</span>
+                                    <span class="badge bg-info">街头美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#menziModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/shaokao.jpg" class="card-img-top" alt="牟平烧烤">
+                            <div class="card-body">
+                                <h5 class="card-title">牟平烧烤</h5>
+                                <p class="card-text">烟台夜市顶流，新鲜食材+独特火候，烤五花肉、烤鱿鱼、烤马步鱼是必点。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">烟台特色</span>
+                                    <span class="badge bg-info">夜市美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#mupingBarbecueModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/baozi.jpg" class="card-img-top" alt="长岛海菜包子">
+                            <div class="card-body">
+                                <h5 class="card-title">长岛海菜包子</h5>
+                                <p class="card-text">海岛渔民家常美味，海青菜/骆驼毛海菜搭配猪肉虾仁调馅，鲜美又营养。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">海岛特色</span>
+                                    <span class="badge bg-info">健康美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#seaweedBunModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/rouhe.jpg" class="card-img-top" alt="黄县肉盒">
+                            <div class="card-body">
+                                <h5 class="card-title">黄县肉盒</h5>
+                                <p class="card-text">400年历史美食，外酥里嫩，猪肉蔬菜馅鲜香十足，是烟台经典早餐。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">历史悠久</span>
+                                    <span class="badge bg-info">早餐美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#huangxianMeatBoxModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 水果类 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/pingguo.jpg" class="card-img-top" alt="烟台苹果">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台苹果</h5>
+                                <p class="card-text">烟台地标水果，红富士苹果果形端正、果肉脆甜、汁水充沛，被誉为"水果皇后"。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">地标产品</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiAppleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/yingtao.jpg" class="card-img-top" alt="烟台大樱桃">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台大樱桃</h5>
+                                <p class="card-text">中国樱桃之乡出品，果大肉厚、酸甜适口，红灯/美早/萨米脱等品种各具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">地理标志</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiCherryModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/putao.jpg" class="card-img-top" alt="烟台葡萄">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台葡萄</h5>
+                                <p class="card-text">张裕葡萄酒核心原料，蛇龙珠/赤霞珠等品种，果肉饱满、糖分足，鲜食酿酒皆佳。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">酿酒名品</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiGrapeModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/li.jpg" class="card-img-top" alt="莱阳梨">
+                            <div class="card-body">
+                                <h5 class="card-title">莱阳梨</h5>
+                                <p class="card-text">烟台莱阳特产，果肉细腻、汁水丰富、甜中带香，润肺止咳，被誉为"梨中上品"。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">历史名果</span>
+                                    <span class="badge bg-info">养生水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#laiyangPearModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 海鲜美食 -->
+            <div class="tab-pane fade" id="seafood" role="tabpanel" aria-labelledby="seafood-tab">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haichanglaofan.jpg" class="card-img-top" alt="海肠捞饭">
+                            <div class="card-body">
+                                <h5 class="card-title">海肠捞饭</h5>
+                                <p class="card-text">烟台最具代表性的特色美食，渤海湾海肠肉质脆嫩无腥味，快速爆炒后搭配韭菜肉沫，浇饭拌匀鲜到极致。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">烟台招牌</span>
+                                    <span class="badge bg-info">海鲜特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#seaCucumberModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haishen.jpg" class="card-img-top" alt="葱烧海参">
+                            <div class="card-body">
+                                <h5 class="card-title">葱烧海参</h5>
+                                <p class="card-text">鲁菜经典，烟台海参品质极佳，口感软糯弹牙，葱香浓郁，是高档宴请的必点菜。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">鲁菜经典</span>
+                                    <span class="badge bg-info">高档菜品</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#braisedSeaCucumberModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/haixian.jpg" class="card-img-top" alt="清蒸海鲜">
+                            <div class="card-body">
+                                <h5 class="card-title">清蒸海鲜</h5>
+                                <p class="card-text">扒虾、螃蟹、扇贝、生蚝等鲜活海鲜清蒸烹制，最大程度保留原汁原味，鲜甜无比。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">原汁原味</span>
+                                    <span class="badge bg-info">健康美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#steamedSeafoodModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特色面食 -->
+            <div class="tab-pane fade" id="noodle" role="tabpanel" aria-labelledby="noodle-tab">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/bayu.jpg" class="card-img-top" alt="鲅鱼水饺">
+                            <div class="card-body">
+                                <h5 class="card-title">鲅鱼水饺</h5>
+                                <p class="card-text">烟台招牌非遗美食，新鲜大鲅鱼手工去刺，加五花肉韭菜调馅，个头大、汤汁足、鲜味浓。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">胶东特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#fishDumplingModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/penglaixiaomian.jpg" class="card-img-top" alt="蓬莱小面">
+                            <div class="card-body">
+                                <h5 class="card-title">蓬莱小面</h5>
+                                <p class="card-text">200年历史非遗面食，手工拉制细面搭配浓稠海鲜卤，鲜香味美，是烟台早餐的经典选择。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">传统面食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#penglaiNoodleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/lamian.jpg" class="card-img-top" alt="福山拉面">
+                            <div class="card-body">
+                                <h5 class="card-title">福山拉面</h5>
+                                <p class="card-text">烟台三大风味面食之一，百年工艺拉制，面条筋道爽滑，三鲜卤/炸酱卤各具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">非遗美食</span>
+                                    <span class="badge bg-info">传统面食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#fushanNoodleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 地方小吃 -->
+            <div class="tab-pane fade" id="snack" role="tabpanel" aria-labelledby="snack-tab">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/menzi.jpg" class="card-img-top" alt="烟台焖子">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台焖子</h5>
+                                <p class="card-text">百年街头小吃，地瓜粉煎至外酥里Q，浇芝麻酱汁，三鲜版加虾仁鱿鱼更具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">百年小吃</span>
+                                    <span class="badge bg-info">街头美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#menziModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/shaokao.jpg" class="card-img-top" alt="牟平烧烤">
+                            <div class="card-body">
+                                <h5 class="card-title">牟平烧烤</h5>
+                                <p class="card-text">烟台夜市顶流，新鲜食材+独特火候，烤五花肉、烤鱿鱼、烤马步鱼是必点。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">烟台特色</span>
+                                    <span class="badge bg-info">夜市美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#mupingBarbecueModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/baozi.jpg" class="card-img-top" alt="长岛海菜包子">
+                            <div class="card-body">
+                                <h5 class="card-title">长岛海菜包子</h5>
+                                <p class="card-text">海岛渔民家常美味，海青菜/骆驼毛海菜搭配猪肉虾仁调馅，鲜美又营养。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">海岛特色</span>
+                                    <span class="badge bg-info">健康美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#seaweedBunModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/rouhe.jpg" class="card-img-top" alt="黄县肉盒">
+                            <div class="card-body">
+                                <h5 class="card-title">黄县肉盒</h5>
+                                <p class="card-text">400年历史美食，外酥里嫩，猪肉蔬菜馅鲜香十足，是烟台经典早餐。</p>
+                                <div>
+                                    <span class="badge bg-primary">必吃推荐</span>
+                                    <span class="badge bg-success">历史悠久</span>
+                                    <span class="badge bg-info">早餐美食</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#huangxianMeatBoxModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 特色水果 -->
+            <div class="tab-pane fade" id="fruit" role="tabpanel" aria-labelledby="fruit-tab">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/pingguo.jpg" class="card-img-top" alt="烟台苹果">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台苹果</h5>
+                                <p class="card-text">烟台地标水果，红富士苹果果形端正、果肉脆甜、汁水充沛，被誉为"水果皇后"。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">地标产品</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiAppleModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/yingtao.jpg" class="card-img-top" alt="烟台大樱桃">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台大樱桃</h5>
+                                <p class="card-text">中国樱桃之乡出品，果大肉厚、酸甜适口，红灯/美早/萨米脱等品种各具风味。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">地理标志</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiCherryModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/putao.jpg" class="card-img-top" alt="烟台葡萄">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台葡萄</h5>
+                                <p class="card-text">张裕葡萄酒核心原料，蛇龙珠/赤霞珠等品种，果肉饱满、糖分足，鲜食酿酒皆佳。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">酿酒名品</span>
+                                    <span class="badge bg-info">时令水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#yantaiGrapeModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="food-card">
+                            <img src="images/li.jpg" class="card-img-top" alt="莱阳梨">
+                            <div class="card-body">
+                                <h5 class="card-title">莱阳梨</h5>
+                                <p class="card-text">烟台莱阳特产，果肉细腻、汁水丰富、甜中带香，润肺止咳，被誉为"梨中上品"。</p>
+                                <div>
+                                    <span class="badge bg-primary">必尝推荐</span>
+                                    <span class="badge bg-success">历史名果</span>
+                                    <span class="badge bg-info">养生水果</span>
+                                </div>
+                                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#laiyangPearModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐餐厅列表 -->
+        <div class="food-list">
+            <h3>烟台美食打卡地推荐</h3>
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-12">
+                    <div class="restaurant-card">
+                        <h4>烟台山海鲜大排档</h4>
+                        <p class="address"><i class="fas fa-map-marker-alt"></i> 地址：芝罘区烟台山路滨海景区</p>
+                        <p class="phone"><i class="fas fa-phone"></i> 电话：0535-6228888</p>
+                        <p class="card-text">本地老牌海鲜大排档，现捞现做，价格亲民，海肠捞饭、清蒸梭子蟹是招牌，夜景绝美。</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="restaurant-card">
+                        <h4>蓬莱小面非遗传承店</h4>
+                        <p class="address"><i class="fas fa-map-marker-alt"></i> 地址：蓬莱区钟楼北路126号</p>
+                        <p class="phone"><i class="fas fa-phone"></i> 电话：0535-5648899</p>
+                        <p class="card-text">百年传承老店，蓬莱小面制作技艺非遗传承，海鲜卤汁浓郁，搭配油条堪称早餐天花板。</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="restaurant-card">
+                        <h4>牟平烧烤城</h4>
+                        <p class="address"><i class="fas fa-map-marker-alt"></i> 地址：牟平区宁海大街88号</p>
+                        <p class="phone"><i class="fas fa-phone"></i> 电话：0535-4287777</p>
+                        <p class="card-text">烟台烧烤地标，烤马步鱼、烤鱿鱼、烤五花肉必点，本地人私藏的深夜食堂。</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="restaurant-card">
+                        <h4>福山鲁菜文化体验馆</h4>
+                        <p class="address"><i class="fas fa-map-marker-alt"></i> 地址：福山区河滨路189号</p>
+                        <p class="phone"><i class="fas fa-phone"></i> 电话：0535-6339999</p>
+                        <p class="card-text">鲁菜发源地正宗体验，葱烧海参、糟溜鱼片等经典鲁菜，食材考究，技法地道。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 所有美食详情模态框（完整无遗漏） ===================== -->
+    <!-- 海肠捞饭 -->
+    <div class="modal fade" id="seaCucumberModal" tabindex="-1" aria-labelledby="seaCucumberModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seaCucumberModalLabel">海肠捞饭</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/haichang.jpg" alt="海肠捞饭">
+                    <h6>菜品介绍</h6>
+                    <p>海肠捞饭是烟台最具代表性的海鲜美食，选用渤海湾特有的新鲜海肠，这种海肠生长在烟台近海的泥沙中，肉质脆嫩无腥味，口感独特。制作时将海肠切成段，快速爆炒至断生，搭配韭菜段、肉沫提香，用高汤勾芡后浇在软糯的米饭上，拌匀后每一粒米饭都裹满鲜美的汤汁，鲜到极致。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>海肠必须选用当天鲜活的，处理干净后快速烹饪</li>
+                        <li>爆炒时间不超过30秒，保持海肠的脆嫩口感</li>
+                        <li>韭菜要最后放，保持翠绿和清香</li>
+                        <li>勾薄芡，让汤汁能挂在米饭上但又不粘稠</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>烟台市区各大海鲜酒楼均有供应，推荐尝试老字号的海鲜馆，如喜乐小馆、荣祥海鲜等。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 葱烧海参 -->
+    <div class="modal fade" id="braisedSeaCucumberModal" tabindex="-1" aria-labelledby="braisedSeaCucumberModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="braisedSeaCucumberModalLabel">葱烧海参</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/haishen1.jpg" alt="葱烧海参">
+                    <h6>菜品介绍</h6>
+                    <p>葱烧海参是鲁菜的经典代表，也是烟台宴席上的压轴菜品。烟台地处渤海湾，所产海参品质极佳，肉质厚实、口感软糯弹牙。制作时选用三年以上的本地刺参，泡发至透，用章丘大葱炸出葱油，再用葱油慢炖海参，让海参充分吸收葱香，成品色泽红亮，葱香浓郁，海参软糯入味，营养丰富。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>海参泡发是关键，需用纯净水低温泡发3-5天</li>
+                        <li>大葱要炸至金黄但不糊，葱油是灵魂</li>
+                        <li>慢火煨制，让海参充分吸收汤汁味道</li>
+                        <li>勾芡要薄，保持汤汁透亮</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>推荐到烟台老字号鲁菜馆品尝，如蓬莱春、福来齐等，能吃到最正宗的做法。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 清蒸海鲜 -->
+    <div class="modal fade" id="steamedSeafoodModal" tabindex="-1" aria-labelledby="steamedSeafoodModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="steamedSeafoodModalLabel">清蒸海鲜</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/haixian1.jpg" alt="清蒸海鲜">
+                    <h6>菜品介绍</h6>
+                    <p>清蒸海鲜是烟台最具代表性的吃法，体现了烟台人对食材本味的追求。选用当天从渔码头运来的鲜活海鲜，如爬虾、梭子蟹、扇贝、生蚝、鲍鱼等，简单处理后直接清蒸，最大程度保留海鲜的原汁原味。搭配姜醋汁或蒜蓉汁，鲜甜无比，是品尝烟台海鲜的最佳方式。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>海鲜必须鲜活，当天捕捞当天食用</li>
+                        <li>蒸制时间要精准，不同海鲜时间不同</li>
+                        <li>水开后再上锅蒸，保持海鲜的鲜嫩</li>
+                        <li>少盐少调味，突出本味</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>推荐到东口、西口渔码头附近的海鲜大排档，或市区的喜乐渔家、小渔夫等海鲜餐厅。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 鲅鱼水饺 -->
+    <div class="modal fade" id="fishDumplingModal" tabindex="-1" aria-labelledby="fishDumplingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fishDumplingModalLabel">鲅鱼水饺</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/bayu1.jpg" alt="鲅鱼水饺">
+                    <h6>菜品介绍</h6>
+                    <p>鲅鱼水饺是烟台的非遗美食，也是胶东特色面食的代表。选用新鲜的大鲅鱼，手工去刺取肉，加入适量五花肉末增加油脂香气，搭配韭菜提鲜，调制成馅。饺子皮要擀得大而薄，包入足量馅料，煮熟后饺子饱满多汁，咬开后鲜美的汤汁满口，鱼肉细嫩无刺，味道极其鲜美。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>鲅鱼要选用新鲜的，最好是当天捕捞的</li>
+                        <li>必须手工去刺，保证食用安全</li>
+                        <li>加入少量五花肉提升香味，比例要恰当</li>
+                        <li>韭菜最后放，保持翠绿和清香</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>烟台几乎所有饺子馆都有鲅鱼水饺，推荐尝试老边饺子馆、大娘水饺等老字号。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 蓬莱小面 -->
+    <div class="modal fade" id="penglaiNoodleModal" tabindex="-1" aria-labelledby="penglaiNoodleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="penglaiNoodleModalLabel">蓬莱小面</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/xiaomian.jpg" alt="蓬莱小面">
+                    <h6>菜品介绍</h6>
+                    <p>蓬莱小面拥有200多年的历史，是烟台蓬莱地区的特色早餐。采用手工拉制的细面，面条细如发丝却筋道爽滑，搭配用扇贝、海米、虾仁等熬制的浓稠海鲜卤，鲜香味美。传统吃法是"登州府一碗面"，即少量面条搭配大量卤汁，吃完再续，是烟台早餐的经典选择。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>面条要手工拉制，讲究"细、韧、滑"</li>
+                        <li>卤汁要用多种海鲜熬制，味道浓郁</li>
+                        <li>勾芡要恰到好处，浓稠但不粘腻</li>
+                        <li>出锅后立即浇卤，保持温度</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>蓬莱市区的建兴面馆是最有名的蓬莱小面老店，已有百年历史。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 福山拉面 -->
+    <div class="modal fade" id="fushanNoodleModal" tabindex="-1" aria-labelledby="fushanNoodleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fushanNoodleModalLabel">福山拉面</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/lamian1.jpg" alt="福山拉面">
+                    <h6>菜品介绍</h6>
+                    <p>福山拉面又称福山大面，是烟台三大风味面食之一，拥有百年历史，已列入非遗名录。采用传统的手工拉制工艺，经过和面、醒面、溜条、拉抻等多道工序，面条可拉制出细如发丝的毛细面到宽如带宽的宽面等多个规格，口感筋道爽滑。经典的卤汁有三鲜卤、炸酱卤、海鲜卤等，各具风味。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>和面时要加入适量盐，增加面条筋度</li>
+                        <li>醒面时间要充足，保证拉制时不易断</li>
+                        <li>拉制手法讲究，要均匀用力</li>
+                        <li>煮面时间不宜过长，断生即可</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>福山区的东记拉面、老福山拉面馆都是品尝正宗福山拉面的好去处。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台焖子 -->
+    <div class="modal fade" id="menziModal" tabindex="-1" aria-labelledby="menziModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="menziModalLabel">烟台焖子</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/menzi1.jpg" alt="烟台焖子">
+                    <h6>菜品介绍</h6>
+                    <p>烟台焖子是拥有百年历史的街头小吃，也是烟台最具代表性的平民美食。以地瓜淀粉为主要原料，熬制成稠糊状后冷却凝固，切成小块煎至外酥里Q，浇上由芝麻酱、蒜泥、酱油、醋、香油等调制的酱汁，口感软糯弹牙，味道咸香微辣。升级版的三鲜焖子会加入虾仁、鱿鱼、海参等海鲜，风味更佳。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>淀粉糊要熬至透明状，保证口感Q弹</li>
+                        <li>煎制时要煎至两面金黄，外酥里嫩</li>
+                        <li>酱汁调配是关键，比例要恰当</li>
+                        <li>可根据口味加入香菜、辣椒等调味</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>烟台夜市、海边的小吃摊都能吃到地道的焖子，推荐尝试南洪街的老字号焖子摊。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 牟平烧烤 -->
+    <div class="modal fade" id="mupingBarbecueModal" tabindex="-1" aria-labelledby="mupingBarbecueModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mupingBarbecueModalLabel">牟平烧烤</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/shaokao1.jpg" alt="牟平烧烤">
+                    <h6>菜品介绍</h6>
+                    <p>牟平烧烤是烟台夜市的顶流美食，以独特的腌制方法和火候控制著称。选用新鲜的食材，如本地黑猪肉、各类海鲜、蔬菜等，经过简单腌制后用果木炭烤制，保留食材的原汁原味。招牌菜品有烤五花肉、烤鱿鱼、烤马步鱼、烤鸡胗等，搭配本地的啤酒，是烟台夜生活的代表。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>食材要新鲜，当天采购当天烤制</li>
+                        <li>腌制时间要适中，不宜过长</li>
+                        <li>火候控制关键，外焦里嫩最佳</li>
+                        <li>撒料要均匀，突出香味</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>牟平区的高陵烧烤一条街、烟台市区的幸福夜市都能吃到正宗的牟平烧烤。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 长岛海菜包子 -->
+    <div class="modal fade" id="seaweedBunModal" tabindex="-1" aria-labelledby="seaweedBunModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="seaweedBunModalLabel">长岛海菜包子</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/baozi1.jpg" alt="长岛海菜包子">
+                    <h6>菜品介绍</h6>
+                    <p>长岛海菜包子是长岛渔民的家常美食，也是海岛特色的代表。选用长岛海域特有的海青菜、骆驼毛等海菜，焯水后挤干水分，加入猪肉末、虾仁、扇贝丁等调制成馅，包入发面包子皮中蒸熟。海菜的鲜香搭配肉类的醇厚，味道独特，营养丰富，是长岛必尝的特色美食。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>海菜要提前焯水，去除腥味和多余盐分</li>
+                        <li>挤干水分，避免馅料过稀</li>
+                        <li>包子皮要发得适中，松软有弹性</li>
+                        <li>蒸制时间要控制好，15-20分钟为宜</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>长岛南长山岛的渔家餐馆都能吃到正宗的海菜包子，推荐尝试渔家乐的家常做法。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 黄县肉盒 -->
+    <div class="modal fade" id="huangxianMeatBoxModal" tabindex="-1" aria-labelledby="huangxianMeatBoxModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="huangxianMeatBoxModalLabel">黄县肉盒</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/rouhe1.jpg" alt="黄县肉盒">
+                    <h6>菜品介绍</h6>
+                    <p>黄县肉盒是烟台龙口（原黄县）的传统名吃，拥有400多年的历史，曾是清代宫廷贡品。采用烫面和油酥结合的面皮，包裹猪肉、蔬菜、海米等调制的馅料，经煎、炸两道工序制作而成。成品外皮金黄酥脆，内馅鲜嫩多汁，咸香适口，是烟台经典的早餐和宴席点心。</p>
+                    <h6>制作要点</h6>
+                    <ul>
+                        <li>面皮采用烫面+油酥工艺，保证酥脆口感</li>
+                        <li>馅料要选用三分肥七分瘦的猪肉，口感最佳</li>
+                        <li>先煎后炸，火候控制是外皮酥脆的关键</li>
+                        <li>出锅后趁热食用，口感最佳</li>
+                    </ul>
+                    <h6>推荐品尝地</h6>
+                    <p>龙口市的老黄县肉盒店、烟台西南河早市的老字号摊位，都能吃到正宗的黄县肉盒。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台苹果 -->
+    <div class="modal fade" id="yantaiAppleModal" tabindex="-1" aria-labelledby="yantaiAppleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yantaiAppleModalLabel">烟台苹果</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/pingguo1.jpg" alt="烟台苹果">
+                    <h6>水果介绍</h6>
+                    <p>烟台苹果是中国国家地理标志产品，烟台也被誉为"中国苹果之都"。烟台地处北纬37°苹果黄金种植带，气候、土壤条件得天独厚，所产苹果果形端正、色泽艳丽、果肉脆甜多汁、含糖量高、耐储存，其中红富士品种最为知名，远销海内外，是烟台的城市名片之一。</p>
+                    <h6>核心品种</h6>
+                    <ul>
+                        <li>红富士：主打品种，果肉脆甜，汁水充沛，耐储存</li>
+                        <li>嘎啦：早熟品种，8月上市，酸甜适口，果肉细腻</li>
+                        <li>金帅：黄皮苹果，果香浓郁，口感绵甜，适合老人食用</li>
+                        <li>国光：传统品种，酸甜平衡，风味浓郁，怀旧经典</li>
+                    </ul>
+                    <h6>推荐采摘/购买地</h6>
+                    <p>栖霞市苹果小镇采摘园、烟台三站水果批发市场、各大商超及水果店，最佳品尝期为10月-次年5月。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台大樱桃 -->
+    <div class="modal fade" id="yantaiCherryModal" tabindex="-1" aria-labelledby="yantaiCherryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yantaiCherryModalLabel">烟台大樱桃</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/yingtao1.jpg" alt="烟台大樱桃">
+                    <h6>水果介绍</h6>
+                    <p>烟台是中国大樱桃的发源地，被誉为"中国大樱桃之乡"，已有150多年的种植历史。烟台大樱桃果大肉厚、色泽鲜艳、酸甜适口、营养丰富，富含维生素C和多种矿物质，被誉为"北方春果第一枝"，是春季烟台最具代表性的时令水果。</p>
+                    <h6>核心品种</h6>
+                    <ul>
+                        <li>美早：主流品种，果大肉硬，甜度高，耐运输</li>
+                        <li>红灯：早熟品种，5月上市，酸甜口感，汁水丰富</li>
+                        <li>萨米脱：心形果形，果肉饱满，甜度适中，风味浓郁</li>
+                        <li>水晶：黄皮樱桃，甜度极高，果肉细腻，口感软糯</li>
+                    </ul>
+                    <h6>推荐采摘/购买地</h6>
+                    <p>福山区张格庄樱桃采摘园、莱山解甲庄樱桃市场，最佳品尝期为5月中旬-6月下旬。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台葡萄 -->
+    <div class="modal fade" id="yantaiGrapeModal" tabindex="-1" aria-labelledby="yantaiGrapeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yantaiGrapeModalLabel">烟台葡萄</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/putao1.jpg" alt="烟台葡萄">
+                    <h6>水果介绍</h6>
+                    <p>烟台是亚洲唯一的"国际葡萄·葡萄酒城"，是中国葡萄酒工业的发源地，张裕葡萄酒就诞生于此。烟台地处北纬37°黄金酿酒带，气候条件与法国波尔多相似，所产葡萄品质优异，不仅是酿造高端葡萄酒的核心原料，鲜食品种也果肉饱满、糖分充足、酸甜适口，深受喜爱。</p>
+                    <h6>核心品种</h6>
+                    <ul>
+                        <li>蛇龙珠：张裕专属酿酒品种，风味独特，是解百纳干红的核心原料</li>
+                        <li>赤霞珠：经典酿酒品种，单宁丰富，香气浓郁，高端干红首选</li>
+                        <li>巨峰：鲜食主流品种，果大味甜，汁水丰富，8月上市</li>
+                        <li>玫瑰香：鲜食经典品种，果香浓郁，带有玫瑰香气，甜度极高</li>
+                    </ul>
+                    <h6>推荐采摘/体验地</h6>
+                    <p>张裕卡斯特酒庄、蓬莱大辛店葡萄基地、开发区柳林河葡萄采摘园，最佳品尝期为8月-10月。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 莱阳梨 -->
+    <div class="modal fade" id="laiyangPearModal" tabindex="-1" aria-labelledby="laiyangPearModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="laiyangPearModalLabel">莱阳梨</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/li1.jpg" alt="莱阳梨">
+                    <h6>水果介绍</h6>
+                    <p>莱阳梨是中国国家地理标志产品，又称莱阳茌梨，已有400多年的种植历史，是山东传统名果。莱阳梨果肉细腻无渣、汁水丰富、甜中带香、石细胞极少，具有润肺止咳、生津化痰的功效，被誉为"梨中上品"，是烟台秋季最具代表性的养生水果。</p>
+                    <h6>核心特色</h6>
+                    <ul>
+                        <li>果肉细腻无渣，入口即化，汁水含量极高</li>
+                        <li>含糖量达12%-14%，甜而不腻，果香浓郁</li>
+                        <li>具有润肺止咳的食疗功效，秋冬煮梨水是经典养生吃法</li>
+                        <li>果形独特，果皮上有褐色锈斑，是正宗莱阳梨的标志</li>
+                    </ul>
+                    <h6>推荐采摘/购买地</h6>
+                    <p>莱阳市照旺庄梨园、烟台文化路水果市场，最佳品尝期为9月-12月。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
