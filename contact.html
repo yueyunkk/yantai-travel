@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- 引入百度地图API：【必须修改】把这里的「你的AK密钥」替换成你申请的AK -->
-    <script src="https://api.map.baidu.com/api?v=3.0&ak=YPexuWRDw8uyo8E5ZVQTMwqWrJ32yFM4"></script>
+    <!-- 【修复】百度地图API v2.0 兼容版，彻底解决浏览器拦截问题，替换成你的AK -->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=YPexuWRDw8uyo8E5ZVQTMwqWrJ32yFM4"></script>
     <!-- 联系页专属样式 -->
     <style>
         /* 全局变量优化：增加过渡变量、适配暗色模式 */
@@ -484,7 +484,7 @@
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="fas fa-water me-2"></i> 烟台旅游
@@ -541,7 +541,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h5>地址</h5>
-                                    <p>重庆市南岸区重庆邮电大学逸夫科技楼</p>
+                                    <p>重庆市南岸区重庆邮电大学明志苑2舍511</p>
                                 </div>
                             </div>
                             <div class="contact-info-item">
@@ -813,9 +813,33 @@
     <!-- 脚本 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
-    <!-- 表单验证与交互 -->
+    <!-- 【修复】百度地图初始化代码，确保API加载完成后执行，适配v2.0版本 -->
     <script>
-        // 表单实时验证与提交处理
+        // 页面所有资源加载完成后，再初始化地图
+        window.onload = function() {
+            // 1. 创建地图实例，绑定到id为yantaiMap的容器
+            const map = new BMap.Map("yantaiMap");
+            // 2. 设置地图中心点：重庆邮电大学的经纬度（和页面地址匹配）
+            const point = new BMap.Point(106.6054, 29.5333);
+            // 3. 初始化地图，设置中心点和缩放级别
+            map.centerAndZoom(point, 15);
+            // 4. 开启鼠标滚轮缩放
+            map.enableScrollWheelZoom(true);
+            // 5. 添加地图控件（缩放按钮）
+            map.addControl(new BMap.NavigationControl());
+            // 6. 添加定位标记点
+            const marker = new BMap.Marker(point);
+            map.addOverlay(marker);
+            // 7. 点击标记弹出信息窗口
+            const infoWindow = new BMap.InfoWindow("<div style='padding:10px;'><h5>重庆邮电大学</h5><p>地址：重庆市南岸区重庆邮电大学</p></div>");
+            marker.addEventListener("click", function() {
+                map.openInfoWindow(infoWindow, point);
+            });
+            // 8. 页面加载自动打开信息窗口
+            map.openInfoWindow(infoWindow, point);
+        }
+
+        // 表单验证与提交处理
         (() => {
             'use strict';
             
@@ -886,29 +910,6 @@
                 navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
             }
         });
-
-        // ===================== 百度地图初始化代码 =====================
-        // 页面加载完成后初始化地图
-        window.onload = function() {
-            // 1. 创建地图实例，绑定到id为yantaiMap的容器
-            const map = new BMapGL.Map("yantaiMap");
-            // 2. 设置地图中心点：烟台莱山区滨海中路168号的经纬度
-            const point = new BMapGL.Point(106.616980, 29.539812);
-            // 3. 初始化地图，设置中心点和缩放级别（数字越大，地图放得越大）
-            map.centerAndZoom(point, 15);
-            // 4. 开启鼠标滚轮缩放（用户可以鼠标滚轮放大缩小地图）
-            map.enableScrollWheelZoom(true);
-            // 5. 添加地图标记点（红色定位图标）
-            const marker = new BMapGL.Marker(point);
-            map.addOverlay(marker);
-            // 6. 点击标记点弹出信息窗口
-            const infoWindow = new BMapGL.InfoWindow("<div style='padding:10px;'><h5>烟台旅游服务中心</h5><p>地址：重庆市南岸区重庆邮电大学</p></div>");
-            marker.addEventListener("click", function() {
-                map.openInfoWindow(infoWindow, point);
-            });
-            // 7. 页面加载完成自动打开信息窗口
-            map.openInfoWindow(infoWindow, point);
-        }
     </script>
 </body>
 </html>
