@@ -4,221 +4,521 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>联系我们 - 山海仙境 魅力烟台</title>
-    <!-- Bootstrap CSS -->
+    <!-- 统一依赖引入 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- 自定义CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- 联系页专属样式 -->
     <style>
-        /* ===================== 与首页完全一致的导航栏样式 ===================== */
+        /* 全局变量优化：增加过渡变量、适配暗色模式 */
         :root {
-            --color-bg-main: #f8f9fa;
-            --color-bg-card: #ffffff;
-            --color-text-primary: #333333;
-            --color-text-secondary: #6c757d;
-            --shadow-card: 0 4px 12px rgba(0,0,0,0.1);
-            --color-blue-brand: #0d6efd;
+            --primary-color: #e63946; /* 热情红 */
+            --secondary-color: #1d3557; /* 深海蓝 */
+            --warm-color: #f4a261; /* 暖橙 */
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 更丝滑的过渡曲线 */
         }
 
-        .navbar {
-            background-color: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        /* 基础样式重置 */
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            color: var(--dark-color);
+            background-color: #f9f9f9;
+            padding-top: 70px; /* 适配固定导航栏 */
         }
-        .navbar.scrolled {
-            background-color: rgba(255,255,255,0.98);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+
+        /* 导航栏优化：增强交互与适配 */
+        .navbar {
+            background-color: var(--secondary-color) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .navbar-brand {
-            font-family: 'Microsoft Yahei', 'PingFang SC', sans-serif;
             font-weight: 700;
-            font-size: 1.6rem;
-            letter-spacing: 1px;
-            line-height: 1;
-            padding: 0.5rem 0;
-            color: var(--color-text-primary) !important;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
+            font-size: 1.25rem;
         }
-        .navbar-brand i {
-            color: var(--color-blue-brand);
-            margin-right: 0.5rem;
-            transition: all 0.3s ease;
-        }
-        .navbar-nav {
-            align-items: center;
-            gap: 0;
-        }
-        .nav-link {
-            font-family: 'Microsoft Yahei', 'PingFang SC', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            line-height: 1;
-            display: inline-block;
-            padding: 0.8rem 1.2rem !important;
-            margin: 0;
+        .navbar-nav .nav-link {
             position: relative;
-            color: var(--color-text-secondary) !important;
-            transition: all 0.3s ease;
+            margin: 0 8px;
+            display: inline-block;
+            padding: 8px 0;
+            color: rgba(255,255,255,0.9) !important;
         }
-        .nav-link::after {
+        .navbar-nav .nav-link.active {
+            color: var(--warm-color) !important;
+            font-weight: 600;
+        }
+        .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 8px;
+            bottom: -2px;
             left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 80%;
+            transform: translateX(-50%);
+            width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--color-blue-brand), #CCFBF1);
-            transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-origin: center;
+            background-color: var(--warm-color);
+            transition: var(--transition);
+            max-width: 100%;
         }
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--color-blue-brand) !important;
-        }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            transform: translateX(-50%) scaleX(1);
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
         }
 
-        /* ===================== 联系页原有样式（完全不变） ===================== */
-        .contact-section {
-            padding: 4rem 0;
-            background-color: var(--color-bg-main);
+        /* 页面标题：渐变背景+动态效果 */
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 120px 0 70px;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        .page-header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* 联系卡片：增强立体感与交互 */
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: none;
+            margin-bottom: 30px;
+        }
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .contact-card .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 24px 30px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-card .card-body {
+            padding: 30px;
+        }
+
+        /* 联系信息项：优化排版与响应式 */
         .contact-info-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 1.8rem;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+        .contact-info-item:last-child {
+            margin-bottom: 0;
         }
         .contact-info-item i {
-            font-size: 1.6rem;
-            color: var(--color-blue-brand);
-            margin-right: 1.2rem;
-            margin-top: 0.2rem;
-            width: 35px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-top: 2px;
+            width: 32px;
             text-align: center;
+            flex-shrink: 0;
         }
         .contact-info-item h5 {
-            margin-bottom: 0.4rem;
-            color: var(--color-text-primary);
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
         }
         .contact-info-item p {
+            color: var(--gray-color);
             margin: 0;
-            color: var(--color-text-secondary);
+            line-height: 1.6;
         }
+
+        /* 社交媒体：优化交互与视觉 */
         .social-media {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 2.5rem;
+            margin-top: 30px;
+        }
+        .social-media h5 {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
         .social-media a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            margin-right: 15px;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            transition: var(--transition);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+        .social-media a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.15);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);
+        }
+
+        /* 表单优化：增强可用性与视觉反馈 */
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 14px 20px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 5px rgba(230, 57, 70, 0.1);
+            outline: none;
+        }
+        .form-label {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .text-danger {
+            color: var(--primary-color) !important;
+        }
+        .form-check {
+            margin-top: 15px;
+        }
+        .form-check-input {
+            width: 1.2em;
+            height: 1.2em;
+            margin-top: 0.25em;
+            border-color: #ddd;
+        }
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .form-check-label {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+        }
+        .form-check-label a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .form-check-label a:hover {
+            text-decoration: underline;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            padding: 14px 0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(230, 57, 70, 0.15);
+        }
+        .btn-primary:hover {
+            background-color: #d62828;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.25);
+        }
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(230, 57, 70, 0.2);
+        }
+
+        /* 地图容器：优化视觉与交互 */
+        .map-container {
+            margin: 50px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 450px;
+            border: 1px solid #eee;
+        }
+        .map-placeholder {
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-blue-brand), #CCFBF1);
-            color: white;
-            font-size: 1.3rem;
-            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 5px 20px rgba(13, 110, 253, 0.25);
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: var(--transition);
         }
-        .social-media a:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.35);
+        .map-placeholder:hover {
+            background-color: #f0f0f0;
         }
-        /* 百度地图容器样式：和原有页面风格完全匹配 */
-        .map-container {
-            width: 100%;
-            height: 420px;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            margin-bottom: 2.5rem;
-            border: 1px solid rgba(13, 110, 253, 0.08);
+        .map-placeholder i {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 3.5rem;
         }
-        .form-label {
+        .map-placeholder h4 {
+            margin-bottom: 10px;
             font-weight: 600;
-            color: var(--color-text-primary);
         }
-        .form-control,
-        .form-select {
-            border-radius: 12px;
-            border: 1px solid rgba(13, 110, 253, 0.15);
-            background-color: var(--color-bg-main);
-            color: var(--color-text-primary);
-            padding: 0.85rem 1.2rem;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--color-blue-brand);
-            background-color: white;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-            color: var(--color-text-primary);
-        }
-        .form-control::placeholder {
-            color: #94A3B8;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #F97316, #FB923C);
-            border: none;
-            border-radius: 12px;
-            padding: 0.85rem 2.2rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(249, 115, 22, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        .map-placeholder p {
+            color: var(--gray-color);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        /* ===================== 响应式适配（与首页一致） ===================== */
+        /* 常见问题：优化交互与视觉 */
+        .faq-section {
+            margin: 60px 0 80px;
+        }
+        .faq-section h3 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .faq-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--warm-color);
+            border-radius: 3px;
+        }
+        .accordion-item {
+            border: 1px solid #eee;
+            border-radius: 10px !important;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .accordion-button {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            font-weight: 600;
+            padding: 20px 25px;
+            font-size: 1.05rem;
+            border: none;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: none;
+        }
+        .accordion-button:focus {
+            box-shadow: 0 0 0 5px rgba(230, 57, 70, 0.1);
+            border-color: var(--primary-color);
+        }
+        .accordion-button::after {
+            width: 1.2rem;
+            height: 1.2rem;
+            background-size: 1.2rem;
+        }
+        .accordion-body {
+            padding: 25px;
+            color: var(--gray-color);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .accordion-body ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .accordion-body li {
+            margin-bottom: 8px;
+        }
+        .accordion-body strong {
+            color: var(--secondary-color);
+        }
+
+        /* 页脚：优化布局与视觉 */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 80px 0 40px;
+            margin-top: 60px;
+        }
+        footer h5 {
+            color: var(--warm-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--warm-color);
+        }
+        footer p {
+            color: #ccc;
+            line-height: 1.7;
+        }
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        footer a:hover {
+            color: var(--warm-color);
+            transform: translateX(3px);
+        }
+        footer .list-unstyled li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        footer .list-unstyled li i {
+            color: var(--warm-color);
+            width: 18px;
+            text-align: center;
+        }
+        footer .social-links {
+            margin-top: 20px;
+        }
+        footer .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式优化：分阶段适配 */
         @media (max-width: 992px) {
-            .navbar-brand {
-                font-size: 1.4rem;
+            .page-header h1 {
+                font-size: 2.5rem;
             }
-            .nav-link {
-                font-size: 0.9rem;
-                padding: 0.6rem 0.8rem !important;
+            .map-container {
+                height: 400px;
             }
         }
         @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.2rem;
+            body {
+                padding-top: 65px;
             }
-            .nav-link {
-                font-size: 0.85rem;
-                text-align: center;
-                padding: 0.8rem 0 !important;
+            .page-header {
+                padding: 80px 0 50px;
+                margin-bottom: 30px;
             }
-            .nav-link::after {
-                bottom: 4px;
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            .contact-card .card-header {
+                font-size: 1.3rem;
+                padding: 20px 25px;
+            }
+            .contact-card .card-body {
+                padding: 20px;
+            }
+            .contact-info-item {
+                margin-bottom: 20px;
+                gap: 15px;
+            }
+            .contact-info-item i {
+                font-size: 1.5rem;
+            }
+            .map-container {
+                height: 350px;
+                margin: 30px 0;
+            }
+            .faq-section {
+                margin: 40px 0 60px;
+            }
+            .faq-section h3 {
+                font-size: 1.8rem;
+            }
+            footer {
+                padding: 60px 0 30px;
+            }
+        }
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .contact-info-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .contact-info-item i {
+                margin-top: 0;
+            }
+            .social-media a {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+                margin-right: 10px;
             }
             .map-container {
                 height: 300px;
             }
+            .accordion-button {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            .accordion-body {
+                padding: 20px;
+            }
         }
     </style>
-    <!-- 引入百度地图API：把这里的「你的AK密钥」替换成你申请的AK -->
-    <script src="https://api.map.baidu.com/api?v=3.0&ak=YPexuWRDw8uyo8E5ZVQTMwqWrJ32yFM4"></script>
 </head>
 <body>
-    <!-- 导航栏：与首页结构完全一致 -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNavbar">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-water"></i> 烟台旅游
+                <i class="fas fa-water me-2"></i> 烟台旅游
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -246,155 +546,383 @@
         </div>
     </nav>
 
-    <!-- 联系页面主体内容 -->
-    <section class="contact-section" style="padding-top: 120px;">
+    <!-- 页面标题 -->
+    <header class="page-header">
         <div class="container">
-            <div class="section-title text-center mb-5">
-                <h2>联系我们</h2>
-                <p>如有任何问题，欢迎随时与我们联系</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="contact-info">
-                        <div class="contact-info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h5>地址</h5>
-                                <p>山东省烟台市莱山区滨海中路168号</p>
+            <h1>联系我们</h1>
+            <p>用心倾听每一份声音，真诚解答每一个疑问 💛</p>
+        </div>
+    </header>
+
+    <!-- 联系内容 -->
+    <div class="container">
+        <div class="row g-5">
+            <!-- 联系信息 -->
+            <div class="col-lg-5">
+                <div class="contact-card">
+                    <div class="card-header">
+                        <i class="fas fa-headset"></i> 随时为您服务
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-info">
+                            <div class="contact-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h5>地址</h5>
+                                    <p>重庆市南岸区重庆邮电大学逸夫科技楼</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h5>电话</h5>
+                                    <p>15253500323（工作日 8:00-18:00）</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h5>邮箱</h5>
+                                    <p>2064849893@qq.com（24小时内回复）</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h5>工作时间</h5>
+                                    <p>周一至周五 8:00-18:00（节假日可留言）</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h5>电话</h5>
-                                <p>0535-12345678</p>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h5>邮箱</h5>
-                                <p>info@yantaitravel.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h5>工作时间</h5>
-                                <p>周一至周日 8:00-18:00</p>
-                            </div>
-                        </div>
+                        
                         <div class="social-media">
-                            <a href="#"><i class="fab fa-weixin"></i></a>
-                            <a href="#"><i class="fab fa-weibo"></i></a>
-                            <a href="#"><i class="fab fa-qq"></i></a>
+                            <h5>关注我们，解锁更多烟台惊喜</h5>
+                            <a href="#" title="微信" aria-label="微信">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" title="微博" aria-label="微博">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="#" title="QQ" aria-label="QQ">
+                                <i class="fab fa-qq"></i>
+                            </a>
+                            <a href="#" title="抖音" aria-label="抖音">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="#" title="小红书" aria-label="小红书">
+                                <i class="fas fa-book"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <!-- 实时百度地图容器：替换原来的占位区域 -->
-                    <div id="yantaiMap" class="map-container"></div>
-                    <!-- 留言表单：完全不变 -->
-                    <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" placeholder="请输入您的姓名">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">邮箱</label>
-                            <input type="email" class="form-control" id="email" placeholder="请输入您的邮箱">
-                        </div>
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">主题</label>
-                            <input type="text" class="form-control" id="subject" placeholder="请输入咨询主题">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">留言</label>
-                            <textarea class="form-control" id="message" rows="5" placeholder="请输入您的留言内容"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> 提交留言
-                        </button>
-                    </form>
+            </div>
+
+            <!-- 联系表单 -->
+            <div class="col-lg-7">
+                <div class="contact-card">
+                    <div class="card-header">
+                        <i class="fas fa-paper-plane"></i> 在线留言
+                    </div>
+                    <div class="card-body">
+                        <form id="contactForm" novalidate>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">姓名 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="name" required placeholder="请输入您的姓名">
+                                    <div class="invalid-feedback">请输入您的姓名</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">电话 <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phone" required placeholder="请输入您的手机号/座机号">
+                                    <div class="invalid-feedback">请输入您的电话</div>
+                                </div>
+                            </div>
+                            <div class="mb-4 mt-2">
+                                <label for="email" class="form-label">邮箱</label>
+                                <input type="email" class="form-control" id="email" placeholder="请输入您的邮箱（选填）">
+                                <div class="invalid-feedback">请输入有效的邮箱地址</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="form-label">咨询类型 <span class="text-danger">*</span></label>
+                                <select class="form-select" id="subject" required>
+                                    <option value="">请选择咨询类型</option>
+                                    <option value="attraction">景点咨询</option>
+                                    <option value="food">美食咨询</option>
+                                    <option value="accommodation">住宿咨询</option>
+                                    <option value="route">路线咨询</option>
+                                    <option value="complaint">投诉建议</option>
+                                    <option value="cooperation">商务合作</option>
+                                    <option value="other">其他</option>
+                                </select>
+                                <div class="invalid-feedback">请选择咨询类型</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">留言内容 <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="message" rows="6" required 
+                                          placeholder="请详细描述您的问题/建议，我们会尽快回复您 😊"></textarea>
+                                <div class="invalid-feedback">请输入留言内容</div>
+                            </div>
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="agree" required>
+                                <label class="form-check-label" for="agree">
+                                    我同意<a href="#" target="_blank">《隐私政策》</a>和<a href="#" target="_blank">《服务条款》</a>
+                                </label>
+                                <div class="invalid-feedback">请同意我们的条款</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-paper-plane me-2"></i> 提交留言
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- 页脚：完全不变 -->
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <h5>关于我们</h5>
-                    <p>烟台旅游网致力于为游客提供最全面的烟台旅游信息，包括景点介绍、美食推荐、住宿预订等服务。</p>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5>快速链接</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">首页</a></li>
-                        <li><a href="attractions.html">景点介绍</a></li>
-                        <li><a href="food.html">美食推荐</a></li>
-                        <li><a href="accommodation.html">住宿推荐</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5>联系我们</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学</li>
-                        <li><i class="fas fa-phone"></i> 15253500323</li>
-                        <li><i class="fas fa-envelope"></i> 2064849893@qq.com</li>
-                    </ul>
+        <!-- 地图 -->
+        <div class="map-container">
+            <div class="map-placeholder" onclick="alert('正在加载高德地图，请稍候...')">
+                <div class="text-center">
+                    <i class="fas fa-map-marked-alt mb-3"></i>
+                    <h4 class="mb-2">点击查看详细位置</h4>
+                    <p>实际项目中可嵌入百度地图或高德地图</p>
+                    <p class="small text-muted">地址：重庆市南岸区重庆邮电大学逸夫科技楼</p>
                 </div>
             </div>
-            <hr class="my-4">
-            <div class="text-center">
-                <p>&copy; 2026 烟台旅游网. 保留所有权利.</p>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="faq-section">
+            <h3>您可能想问？</h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeading1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                            烟台旅游最佳时间是什么时候？
+                        </button>
+                    </h2>
+                    <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>烟台旅游最佳时间是每年的4-10月。</p>
+                            <ul>
+                                <li><strong>春季（4-5月）</strong>：气候宜人，适合赏花，推荐前往烟台山、昆嵛山赏花</li>
+                                <li><strong>夏季（6-8月）</strong>：海滨度假黄金季节，可游泳、赶海，推荐养马岛、金沙滩</li>
+                                <li><strong>秋季（9-10月）</strong>：天气晴朗，海鲜最肥美，推荐长岛、蓬莱阁</li>
+                                <li><strong>冬季（11-3月）</strong>：游客较少，可体验冬日海景，住宿价格更实惠</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                            烟台有哪些必玩的景点？
+                        </button>
+                    </h2>
+                    <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>烟台必玩的景点推荐：</p>
+                            <ul>
+                                <li><strong>蓬莱阁</strong>：中国四大名楼之一，八仙过海传说发源地，5A级景区</li>
+                                <li><strong>养马岛</strong>：山东最大海岛，被誉为"东方夏威夷"，免费开放</li>
+                                <li><strong>烟台山景区</strong>：烟台城市地标，百年领事馆建筑群，了解烟台近代史</li>
+                                <li><strong>长岛</strong>：中国唯一海岛国家级风景名胜区，需乘船前往</li>
+                                <li><strong>金沙滩海滨公园</strong>：15公里金色海岸线，沙质细腻，适合休闲度假</li>
+                                <li><strong>张裕酒文化博物馆</strong>：了解中国葡萄酒文化的最佳场所，可品鉴葡萄酒</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                            去长岛需要准备什么？
+                        </button>
+                    </h2>
+                    <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>去长岛旅游必备清单：</p>
+                            <ul>
+                                <li><strong>证件</strong>：身份证（乘船实名制）、学生证（部分景点优惠）</li>
+                                <li><strong>衣物</strong>：舒适运动鞋、防晒衣、帽子、太阳镜、换洗衣物</li>
+                                <li><strong>防晒用品</strong>：高倍防晒霜、遮阳伞、防晒袖套</li>
+                                <li><strong>实用物品</strong>：充电宝、相机、常用药品（晕车药、肠胃药）</li>
+                                <li><strong>赶海工具</strong>：小铲子、小桶、防滑拖鞋、手套</li>
+                            </ul>
+                            <p class="mt-2"><strong>注意事项</strong>：长岛需从蓬莱蓬长客港乘船前往，船程约40分钟，建议提前1天关注天气和航班信息，避免因大风停航影响行程。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                            烟台有哪些特色美食？
+                        </button>
+                    </h2>
+                    <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>烟台特色美食推荐：</p>
+                            <ul>
+                                <li><strong>鲅鱼水饺</strong>：烟台招牌美食，个头大、馅料鲜，推荐老字号“喜乐小馆”</li>
+                                <li><strong>海肠捞饭</strong>：烟台最具代表性特色美食，鲜香味美，推荐“蓬莱春”</li>
+                                <li><strong>烟台焖子</strong>：百年小吃，煎至金黄后浇上麻汁、蒜泥，街头巷尾都能吃到</li>
+                                <li><strong>蓬莱小面</strong>：非物质文化遗产，汤鲜面滑，5-8元/碗</li>
+                                <li><strong>葱烧海参</strong>：鲁菜经典，选用烟台本地刺参，口感Q弹</li>
+                                <li><strong>清蒸海鲜</strong>：保持海鲜原汁原味，推荐第一海水浴场附近海鲜大排档</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqHeading5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                            如何在烟台选择住宿？
+                        </button>
+                    </h2>
+                    <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>烟台住宿选择建议：</p>
+                            <ul>
+                                <li><strong>芝罘区</strong>：市中心，交通便利，商业发达，适合首次来烟游客，推荐价位200-500元/晚</li>
+                                <li><strong>莱山区</strong>：沿海区域，海景房众多，适合度假休闲，推荐价位300-800元/晚</li>
+                                <li><strong>蓬莱区</strong>：靠近蓬莱阁等景点，适合文化旅游，推荐价位150-400元/晚</li>
+                                <li><strong>养马岛/长岛</strong>：海岛民宿，体验海岛生活，推荐价位200-600元/晚（旺季上浮）</li>
+                            </ul>
+                            <p class="mt-2"><strong>小贴士</strong>：建议根据行程安排选择住宿区域，若行程涵盖多个景点，优先选择芝罘区，交通最便利；旺季（7-8月）建议提前1-2周预订。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-5 mb-md-0">
+                    <h5>烟台旅游</h5>
+                    <p>山海仙境，魅力烟台。欢迎来到美丽的海滨城市烟台，体验独特的山海风光和深厚的文化底蕴。</p>
+                </div>
+                <div class="col-md-4 mb-5 mb-md-0">
+                    <h5>快速导航</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-chevron-right"></i> <a href="index.html">首页</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="attractions.html">景点介绍</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="food.html">美食推荐</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="accommodation.html">住宿推荐</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="routes.html">旅游路线</a></li>
+                        <li><i class="fas fa-chevron-right"></i> <a href="contact.html">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>联系信息</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学逸夫科技楼</li>
+                        <li><i class="fas fa-phone"></i> 15253500323</li>
+                        <li><i class="fas fa-envelope"></i> 2064849893@qq.com</li>
+                        <li><i class="fas fa-clock"></i> 周一至周五 8:00-18:00</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+                        <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
+                        <a href="#" aria-label="QQ"><i class="fab fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row copyright">
+                <div class="col text-center">
+                    <p>&copy; 2026 烟台旅游网. 保留所有权利. 渝ICP备12345678号</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- 脚本 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- 导航栏滚动变色JS：与首页一致 -->
+    <script src="js/script.js"></script>
+    <!-- 表单验证与交互 -->
     <script>
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('mainNavbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.getElementById('mainNavbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            }
-        });
+        // 表单实时验证与提交处理
+        (() => {
+            'use strict';
+            
+            // 获取表单元素
+            const form = document.getElementById('contactForm');
+            if (!form) return;
 
-        // ===================== 百度地图初始化代码 =====================
-        // 页面加载完成后初始化地图
-        window.onload = function() {
-            // 1. 创建地图实例，绑定到id为yantaiMap的容器
-            const map = new BMapGL.Map("yantaiMap");
-            // 2. 设置地图中心点：烟台莱山区滨海中路168号的经纬度
-            const point = new BMapGL.Point(106.616980, 29.539812);
-            // 3. 初始化地图，设置中心点和缩放级别（数字越大，地图放得越大）
-            map.centerAndZoom(point, 15);
-            // 4. 开启鼠标滚轮缩放（用户可以鼠标滚轮放大缩小地图）
-            map.enableScrollWheelZoom(true);
-            // 5. 添加地图标记点（红色定位图标）
-            const marker = new BMapGL.Marker(point);
-            map.addOverlay(marker);
-            // 6. 点击标记点弹出信息窗口
-            const infoWindow = new BMapGL.InfoWindow("<div style='padding:10px;'><h5>烟台旅游服务中心</h5><p>地址：山东省烟台市莱山区滨海中路168号</p></div>");
-            marker.addEventListener("click", function() {
-                map.openInfoWindow(infoWindow, point);
+            // 表单验证
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // 验证表单
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                // 模拟提交（实际项目中替换为AJAX请求）
+                const submitBtn = form.querySelector('.btn-primary');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> 提交中...';
+
+                // 模拟网络请求
+                setTimeout(() => {
+                    // 显示成功提示
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success mt-4';
+                    alertDiv.role = 'alert';
+                    alertDiv.innerHTML = '<i class="fas fa-check-circle me-2"></i> 留言提交成功！我们会尽快与您联系 😊';
+                    form.parentNode.insertBefore(alertDiv, form);
+
+                    // 重置表单
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    
+                    // 恢复按钮状态
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> 提交留言';
+                    
+                    // 3秒后关闭提示
+                    setTimeout(() => {
+                        alertDiv.style.opacity = '0';
+                        alertDiv.style.transition = 'opacity 0.5s ease';
+                        setTimeout(() => alertDiv.remove(), 500);
+                    }, 3000);
+                }, 1500);
             });
-            // 7. 页面加载完成自动打开信息窗口
-            map.openInfoWindow(infoWindow, point);
-        }
+
+            // 实时验证输入
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (form.classList.contains('was-validated')) {
+                        input.checkValidity();
+                    }
+                });
+            });
+        })();
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(29, 53, 87, 0.95) !important';
+                navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.backgroundColor = 'var(--secondary-color) !important';
+                navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            }
+        });
     </script>
 </body>
 </html>
