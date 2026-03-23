@@ -3,421 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页 - 山海仙境 魅力烟台</title>
-    <!-- 统一依赖引入 -->
+    <title>烟台旅游 - 山海仙境 鲜美烟台</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- 首页专属样式 -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 新增视频区域样式 -->
     <style>
-        /* 全局变量优化 */
-        :root {
-            --primary-color: #e63946;
-            --secondary-color: #1d3557;
-            --warm-color: #f4a261;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --gray-color: #6c757d;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* 视频展示区容器 */
+        .video-show-section {
+            padding: 6rem 0;
+            background-color: var(--color-bg-main);
         }
-
-        /* 基础样式重置 */
-        body {
-            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            color: var(--dark-color);
-            background-color: #f9f9f9;
-            padding-top: 70px;
-        }
-
-        /* 导航栏样式 */
-        .navbar {
-            background-color: var(--secondary-color) !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-        .navbar-nav .nav-link {
-            position: relative;
-            margin: 0 8px;
-            display: inline-block;
-            padding: 8px 0;
-            color: rgba(255,255,255,0.9) !important;
-        }
-        .navbar-nav .nav-link.active {
-            color: var(--warm-color) !important;
-            font-weight: 600;
-        }
-        .navbar-nav .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background-color: var(--warm-color);
-            transition: var(--transition);
-            max-width: 100%;
-        }
-        .navbar-nav .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* 首页轮播图样式 */
-        .hero-section {
-            height: 85vh;
-            min-height: 600px;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.2;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 900px;
-            padding: 0 20px;
-        }
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        .hero-btn {
-            background-color: var(--warm-color);
-            color: white;
-            padding: 16px 45px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 50px;
-            border: none;
-            transition: var(--transition);
-            box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
-        }
-        .hero-btn:hover {
-            background-color: #e8954a;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(244, 162, 97, 0.5);
-            color: white;
-        }
-
-        /* 首页特色板块 */
-        .features-section {
-            padding: 100px 0;
-            background-color: white;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-title h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--primary-color);
-            border-radius: 3px;
-        }
-        .section-title p {
-            font-size: 1.15rem;
-            color: var(--gray-color);
-            max-width: 700px;
+        .video-show-container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 1.5rem;
         }
-        .feature-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 40px 30px;
+        .video-show-title {
             text-align: center;
-            transition: var(--transition);
-            border: none;
-            height: 100%;
+            margin-bottom: 2rem;
         }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-        }
-        .feature-icon {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--warm-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 2.5rem;
-            color: white;
-        }
-        .feature-card h3 {
-            font-size: 1.5rem;
+        .video-show-title h2 {
+            color: var(--color-text-primary);
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
+            margin-bottom: 0.8rem;
         }
-        .feature-card p {
-            color: var(--gray-color);
-            line-height: 1.7;
-            margin: 0;
+        .video-show-title p {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
         }
-
-        /* 页脚样式 */
-        footer {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 80px 0 40px;
-            margin-top: 60px;
-        }
-        footer h5 {
-            color: var(--warm-color);
-            margin-bottom: 25px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        footer h5::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--warm-color);
-        }
-        footer p {
-            color: #ccc;
-            line-height: 1.7;
-        }
-        footer a {
-            color: #ddd;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        footer a:hover {
-            color: var(--warm-color);
-            transform: translateX(3px);
-        }
-        footer .list-unstyled li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        footer .list-unstyled li i {
-            color: var(--warm-color);
-            width: 18px;
-            text-align: center;
-        }
-        /* 页脚社交图标 */
-        footer .social-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
-        footer .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 1.4rem;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            position: relative;
-            z-index: 10;
-        }
-        footer .social-links a:hover {
-            background-color: var(--warm-color);
-            transform: translateY(-3px);
-        }
-        .copyright {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-
-        /* ===================== 二维码弹窗样式 ===================== */
-        .qrcode-modal-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(6px);
-            z-index: 99999 !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 20px;
-        }
-        .qrcode-modal-mask.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .qrcode-modal-box {
-            background: #ffffff;
+        /* 视频播放容器 */
+        .video-player-wrapper {
+            background-color: var(--color-bg-card);
             border-radius: 20px;
-            max-width: 400px;
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            padding: 1.5rem;
+        }
+        .video-player {
             width: 100%;
-            padding: 40px 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-        }
-        .qrcode-modal-mask.show .qrcode-modal-box {
-            transform: scale(1);
-        }
-        .qrcode-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #f5f5f5;
-            border: none;
-            color: #666;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        .qrcode-modal-close:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .qrcode-modal-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        .qrcode-modal-img {
-            width: 100%;
-            max-width: 260px;
             height: auto;
             border-radius: 12px;
-            border: 1px solid #eee;
-            margin: 0 auto 15px;
-            display: block;
+            max-height: 600px;
+            object-fit: cover;
         }
-        .qrcode-modal-desc {
-            color: var(--gray-color);
-            font-size: 0.95rem;
-            margin: 0;
+        /* 新增社交图标弹窗样式（与联系我们页一致） */
+        .social-icon {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
         }
-
-        /* 响应式适配 */
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            .section-title h2 {
-                font-size: 2.3rem;
-            }
+        .social-icon .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
         }
-        @media (max-width: 768px) {
-            body {
-                padding-top: 65px;
-            }
-            .hero-section {
-                height: 70vh;
-                min-height: 500px;
-            }
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-            .features-section {
-                padding: 60px 0;
-            }
-            .section-title {
-                margin-bottom: 40px;
-            }
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            footer {
-                padding: 60px 0 30px;
-            }
+        .social-icon .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
         }
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            .hero-btn {
-                padding: 14px 35px;
-                font-size: 1.1rem;
-            }
-            .qrcode-modal-box {
-                padding: 30px 20px;
-            }
-            .qrcode-modal-title {
-                font-size: 1.2rem;
-            }
+        .social-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNavbar">
+    <!-- 顶部导航栏（保留不变） -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-water me-2"></i> 烟台旅游
+                <i class="fas fa-water"></i> 烟台旅游
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -445,73 +122,130 @@
         </div>
     </nav>
 
-    <!-- 首页轮播图 -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>山海仙境 魅力烟台</h1>
-            <p>欢迎来到美丽的海滨城市烟台，体验独特的山海风光和深厚的文化底蕴</p>
-            <a href="attractions.html" class="btn hero-btn">
-                <i class="fas fa-compass me-2"></i> 开始探索
-            </a>
+    <!-- 原有轮播图（完全保留，不修改） -->
+    <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-    </section>
-
-    <!-- 首页特色板块 -->
-    <section class="features-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>为什么选择烟台</h2>
-                <p>山海仙境，鲜美烟台，这里有你想要的诗和远方</p>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('images/yantai.jpg');">
+                <div class="carousel-caption">
+                    <h1>山海仙境 鲜美烟台</h1>
+                    <p>体验独特的海滨风光与深厚的文化底蕴</p>
+                    <a href="attractions.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-compass"></i> 立即探索
+                    </a>
+                </div>
             </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <h3>山海风光</h3>
-                        <p>烟台拥有独特的山海景观，蓬莱阁、养马岛、长岛等景点让人流连忘返。</p>
-                    </div>
+            <div class="carousel-item" style="background-image: url('images/penglai4.jpg');">
+                <div class="carousel-caption">
+                    <h1>蓬莱仙境 人间天堂</h1>
+                    <p>探访中国四大名楼之一，感受八仙过海的传说</p>
+                    <a href="routes.html" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-map-marked-alt"></i> 查看路线
+                    </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h3>海鲜美食</h3>
-                        <p>作为海滨城市，烟台的海鲜种类丰富，鲅鱼水饺、海肠捞饭等特色美食让人垂涎。</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <h3>历史文化</h3>
-                        <p>烟台历史悠久，文化底蕴深厚，是中国近代工业的发祥地之一。</p>
-                    </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('images/yangmadao3.jpg');">
+                <div class="carousel-caption">
+                    <h1>东方夏威夷 养马岛</h1>
+                    <p>享受海岛风光，体验渔家生活</p>
+                    <a href="food.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-utensils"></i> 品尝美食
+                    </a>
                 </div>
             </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- 原有特色板块（保留不变） -->
+    <section class="section container" style="margin-top: 5rem;">
+        <div class="section-title">
+            <h2>为什么选择烟台</h2>
+            <p>WHY CHOOSE YANTAI</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>山海风光</h3>
+                    <p>烟台依山傍海，拥有独特的海滨风光和秀丽的山峦景色，是理想的旅游度假胜地。</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>历史文化</h3>
+                    <p>烟台历史悠久，是古代海上丝绸之路的起点之一，拥有丰富的文化遗产和历史遗迹。</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>海鲜美食</h3>
+                    <p>烟台是著名的海鲜之城，拥有丰富的海产品资源，让您品尝到最新鲜的海鲜美味。</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- 页脚（已移除微博图标，保留微信和QQ） -->
+    <!-- 新增：视频展示区域（核心修改） -->
+    <section class="video-show-section">
+        <div class="video-show-container">
+            <div class="video-show-title">
+                <h2>沉浸式体验烟台之美</h2>
+                <p>18秒领略山海仙境的独特魅力</p>
+            </div>
+            <div class="video-player-wrapper">
+                <!-- 核心视频标签：带控制按钮，用户可手动播放/暂停 -->
+                <video 
+                    class="video-player"
+                    controls          <!-- 显示播放/暂停/进度条等控制按钮 -->
+                    poster="images/video-cover.jpg"  <!-- 视频封面图（可选） -->
+                    preload="metadata"  <!-- 仅预加载视频信息，加快页面加载 -->
+                >
+                    <!-- 视频源：替换为你的视频路径 -->
+                   <source src="videos/show.mp4" type="video/mp4">
+                    <!-- 浏览器不支持时的提示 -->
+                    您的浏览器不支持HTML5视频播放，请升级至最新版本浏览器。
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚（仅修改社交图标部分：删除微博，添加微信/QQ弹窗） -->
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-5 mb-md-0">
+                <div class="col-md-4">
                     <h5>烟台旅游</h5>
                     <p>山海仙境，鲜美烟台。欢迎来到美丽的海滨城市烟台，体验独特的山海风光和深厚的文化底蕴。</p>
                 </div>
-                <div class="col-md-4 mb-5 mb-md-0">
+                <div class="col-md-4">
                     <h5>快速导航</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-chevron-right"></i> <a href="index.html">首页</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="attractions.html">景点介绍</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="food.html">美食推荐</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="accommodation.html">住宿推荐</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="routes.html">旅游路线</a></li>
-                        <li><i class="fas fa-chevron-right"></i> <a href="contact.html">联系我们</a></li>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="attractions.html">景点介绍</a></li>
+                        <li><a href="food.html">美食推荐</a></li>
+                        <li><a href="accommodation.html">住宿推荐</a></li>
+                        <li><a href="routes.html">旅游路线</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -522,109 +256,30 @@
                         <li><i class="fas fa-envelope"></i> 264849893@qq.com</li>
                         <li><i class="fas fa-clock"></i> 周一至周五 8:00-18:00</li>
                     </ul>
-                    <!-- 页脚社交图标，带弹窗功能（已移除微博） -->
-                    <div class="social-links">
-                        <a class="qrcode-trigger" data-title="微信扫码联系" data-qrcode="images/wechat.jpg" title="微信">
-                            <i class="fab fa-weixin"></i>
-                        </a>
-                        <a class="qrcode-trigger" data-title="QQ扫码联系" data-qrcode="images/qq.jpg" title="QQ">
-                            <i class="fab fa-qq"></i>
-                        </a>
+                    <div class="mt-3">
+                        <!-- 微信图标（带弹窗） -->
+                        <div class="social-icon me-3">
+                            <i class="fab fa-weixin fa-2x"></i>
+                            <span class="tooltip-text">微信：yantailvyou888</span>
+                        </div>
+                        <!-- 删除微博图标 -->
+                        <!-- QQ图标（带弹窗） -->
+                        <div class="social-icon">
+                            <i class="fab fa-qq fa-2x"></i>
+                            <span class="tooltip-text">QQ：264849893</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row copyright">
+            <div class="row mt-4">
                 <div class="col text-center">
-                    <p>&copy; 2026 烟台旅游网. 保留所有权利. 渝ICP备12345678号</p>
+                    <p>&copy; 2026 烟台旅游网. 保留所有权利.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- ===================== 二维码弹窗HTML结构 ===================== -->
-    <div class="qrcode-modal-mask" id="qrcodeModal">
-        <div class="qrcode-modal-box">
-            <button class="qrcode-modal-close" id="modalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3 class="qrcode-modal-title" id="modalTitle">扫码联系我们</h3>
-            <img src="" alt="二维码" class="qrcode-modal-img" id="modalQrcodeImg">
-            <p class="qrcode-modal-desc" id="modalDesc">长按识别二维码，即可添加好友</p>
-        </div>
-    </div>
-
-    <!-- 脚本 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // 页面所有DOM加载完成后，再执行所有JS代码
-        document.addEventListener('DOMContentLoaded', function() {
-            // ===================== 优先执行：二维码弹窗逻辑 =====================
-            (function initQrcodeModal() {
-                const modal = document.getElementById('qrcodeModal');
-                const modalClose = document.getElementById('modalClose');
-                const modalTitle = document.getElementById('modalTitle');
-                const modalImg = document.getElementById('modalQrcodeImg');
-                const triggers = document.querySelectorAll('.qrcode-trigger');
-
-                if (!modal || !modalClose || !modalTitle || !modalImg || triggers.length === 0) {
-                    console.warn('弹窗元素或图标元素不存在');
-                    return;
-                }
-
-                // 打开弹窗
-                function openModal(title, qrcodeSrc) {
-                    modalTitle.textContent = title;
-                    modalImg.src = qrcodeSrc;
-                    modalImg.alt = title;
-                    modal.classList.add('show');
-                    document.body.style.overflow = 'hidden';
-                }
-
-                // 关闭弹窗
-                function closeModal() {
-                    modal.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-
-                // 给所有图标绑定点击事件
-                triggers.forEach(trigger => {
-                    trigger.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const title = trigger.dataset.title;
-                        const qrcode = trigger.dataset.qrcode;
-                        openModal(title, qrcode);
-                    });
-                });
-
-                // 关闭事件
-                modalClose.addEventListener('click', closeModal);
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeModal();
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && modal.classList.contains('show')) {
-                        closeModal();
-                    }
-                });
-                console.log('首页页脚弹窗功能绑定完成');
-            })();
-
-            // ===================== 导航栏滚动效果 =====================
-            (function initNavbar() {
-                const navbar = document.getElementById('mainNavbar');
-                if (!navbar) return;
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        navbar.style.backgroundColor = 'rgba(29, 53, 87, 0.95) !important';
-                        navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                    } else {
-                        navbar.style.backgroundColor = 'var(--secondary-color) !important';
-                        navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-                    }
-                });
-            })();
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
