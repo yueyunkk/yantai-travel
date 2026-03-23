@@ -1,0 +1,1221 @@
+/* ===================== 全局变量配置 - 滨海仙境清新风格 ===================== */
+:root {
+    /* 1. 基底色 (60%) */
+    --color-bg-main: #F8FBFD;      /* 全页面主背景：极浅蓝调米白 */
+    --color-bg-card: #FFFFFF;      /* 卡片/模块背景：纯白，形成层级 */
+    
+    /* 2. 文字层级色 (WCAG 2.1 AA级) */
+    --color-text-primary: #1A2B3C;  /* 主标题/核心正文：拒绝纯黑 */
+    --color-text-secondary: #64748B;/* 次要正文/详情：辅助内容 */
+    --color-text-muted: #94A3B8;    /* 备注/标签/提示：弱化信息 */
+    
+    /* 3. 核心辅助色 (30%) - 滨海仙境骨架 */
+    --color-blue-light: #E0F2FE;    /* 浅海蓝：筛选栏/信息框/标签背景 */
+    --color-teal-clear: #CCFBF1;    /* 清透青：图标/分类标签/装饰 */
+    --color-blue-brand: #0EA5E9;     /* 品牌主色(中蓝)：导航高亮/图标/次要按钮 */
+    
+    /* 4. 专属主题点缀色 (7%) - 烟台特色IP */
+    --color-wine-red: #942F23;       /* 低饱和酒红：葡萄酒庄板块 */
+    --color-history-blue: #53697A;   /* 低饱和黛蓝：历史人文板块 */
+    --color-history-brown: #A0522D;  /* 赭石色：古迹装饰 */
+    --color-food-warm: #FED7AA;       /* 浅暖驼色：美食/乡村文旅 */
+    
+    /* 5. 核心CTA强调色 (3%) - 转化核心 */
+    --color-cta-orange: #F97316;      /* 活力暖橙：通用首选，醒目不违和 */
+    --color-cta-deepblue: #0284C7;    /* 深海蓝：高端雅致备选 */
+    
+    /* 动画与阴影 */
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===================== 全局重置 ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Microsoft Yahei', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* ===================== 导航栏样式 - 统一标准化版 ===================== */
+.navbar {
+    /* 首页顶部默认状态：半透明深色毛玻璃 */
+    background-color: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: var(--transition-smooth);
+}
+
+/* 滚动后状态：白色半透明 */
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(14, 165, 233, 0.12);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Logo样式：全局统一字体规格 */
+.navbar-brand {
+    font-family: 'Microsoft Yahei', 'PingFang SC', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    line-height: 1;
+    padding: 0.5rem 0;
+    color: #FFFFFF !important;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar.scrolled .navbar-brand {
+    color: var(--color-text-primary) !important;
+}
+
+.navbar-brand i {
+    color: var(--color-blue-brand);
+    margin-right: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+/* 导航链接容器：确保布局一致 */
+.navbar-nav {
+    align-items: center;
+    gap: 0; /* 消除默认间距影响 */
+}
+
+/* 导航链接：全页面统一样式基准 */
+.nav-link {
+    /* 字体样式全局统一 */
+    font-family: 'Microsoft Yahei', 'PingFang SC', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    
+    /* 位置布局统一 */
+    display: inline-block;
+    padding: 0.8rem 1.2rem !important;
+    margin: 0;
+    position: relative;
+    
+    /* 颜色与过渡 */
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: var(--transition-smooth);
+}
+
+/* 滚动后导航链接颜色 */
+.navbar.scrolled .nav-link {
+    color: var(--color-text-secondary) !important;
+}
+
+/* 导航链接下划线动效：统一所有项的动效逻辑 */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-blue-brand), var(--color-teal-clear));
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
+}
+
+/* Hover/Active状态统一处理 */
+.nav-link:hover,
+.nav-link.active {
+    color: #FFFFFF !important;
+}
+
+.navbar.scrolled .nav-link:hover,
+.navbar.scrolled .nav-link.active {
+    color: var(--color-blue-brand) !important;
+}
+
+/* 下划线展开动效：统一触发逻辑 */
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ===================== 页面通用标题栏 - 滨海通透感 ===================== */
+.page-header {
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.9), rgba(248, 251, 253, 0.95)), 
+                url('https://aka.doubaocdn.com/s/Ge0J1w4pCS');
+    background-size: cover;
+    background-position: center;
+    color: var(--color-text-primary);
+    padding: 9rem 0 5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.12), transparent 60%);
+    pointer-events: none;
+}
+
+.page-header h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 3px;
+    color: var(--color-text-primary);
+}
+
+.page-header p {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+/* ===================== 通用卡片样式 - 柔和通透 ===================== */
+.common-card,
+.attraction-card,
+.food-card,
+.hotel-card,
+.route-card {
+    border: 1px solid rgba(14, 165, 233, 0.08);
+    border-radius: 18px;
+    background-color: var(--color-bg-card);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.common-card:hover,
+.attraction-card:hover,
+.food-card:hover,
+.hotel-card:hover,
+.route-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card);
+    border-color: rgba(14, 165, 233, 0.2);
+}
+
+.common-card img,
+.attraction-card img,
+.food-card img,
+.hotel-card img {
+    height: 260px;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.common-card:hover img,
+.attraction-card:hover img,
+.food-card:hover img,
+.hotel-card:hover img {
+    transform: scale(1.05);
+}
+
+.common-card .card-body,
+.attraction-card .card-body,
+.food-card .card-body,
+.hotel-card .card-body {
+    padding: 2rem;
+    background-color: var(--color-bg-card);
+}
+
+.common-card .card-title,
+.attraction-card .card-title,
+.food-card .card-title,
+.hotel-card .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+}
+
+.common-card .card-text,
+.attraction-card .card-text,
+.food-card .card-text,
+.hotel-card .card-text {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+
+/* ===================== 星级评分 & 价格 & 标签 ===================== */
+.rating {
+    color: var(--color-blue-brand);
+    margin-bottom: 1rem;
+}
+.price {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-cta-orange);
+    margin: 1rem 0;
+}
+/* 基础标签样式：保证文字清晰，适配网站风格 */
+.badge {
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    line-height: 1;
+}
+/* 蓝色主标签：对应人文古迹、必玩推荐等，高对比度 */
+.badge-primary {
+    background-color: var(--color-blue-brand);
+    color: #FFFFFF !important;
+}
+/* 绿色标签：对应5A景区、鲁菜经典等，高对比度 */
+.badge-success {
+    background-color: #0D9488;
+    color: #FFFFFF !important;
+}
+/* 浅蓝标签：对应通用分类，和原有风格统一 */
+.badge-light {
+    background-color: var(--color-blue-light);
+    color: var(--color-blue-brand) !important;
+}
+/* 烟台特色IP标签（原有保留） */
+.badge-wine {
+    background-color: rgba(148, 47, 35, 0.08);
+    color: var(--color-wine-red);
+}
+.badge-history {
+    background-color: rgba(83, 105, 122, 0.08);
+    color: var(--color-history-blue);
+}
+.badge-food {
+    background-color: var(--color-food-warm);
+    color: #7C2D12;
+}
+/* ===================== 分类标签页 - 滨海清新 ===================== */
+.category-tabs {
+    margin-bottom: 3.5rem;
+    text-align: center;
+}
+/* 标签基础样式：强制提升优先级，避免Bootstrap默认样式覆盖 */
+.category-tabs .nav-link {
+    /* 未激活状态：深黑色文字+浅灰边框，在白色背景上绝对清晰 */
+    color: var(--color-text-primary) !important;
+    border: 1px solid rgba(100, 116, 139, 0.25);
+    background-color: var(--color-bg-card);
+    margin: 0 0.6rem 0.8rem;
+    border-radius: 30px;
+    padding: 0.7rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+/* 选中激活状态：渐变背景+纯白文字，高对比度 */
+.category-tabs .nav-link.active {
+    background: linear-gradient(135deg, var(--color-blue-brand), var(--color-teal-clear));
+    color: #FFFFFF !important;
+    border-color: transparent;
+    box-shadow: 0 5px 20px rgba(14, 165, 233, 0.25);
+}
+/* hover悬浮状态：浅蓝背景+品牌蓝文字，依然清晰 */
+.category-tabs .nav-link:hover:not(.active) {
+    border-color: var(--color-blue-brand);
+    color: var(--color-blue-brand) !important;
+    background-color: var(--color-blue-light);
+}
+/* 重置分类标签页的下划线动效（避免导航栏样式污染） */
+.category-tabs .nav-link::after {
+    display: none;
+}
+
+/* ===================== 筛选区域 & 区域推荐 ===================== */
+.filter-section,
+.accommodation-section,
+.faq-section {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(14, 165, 233, 0.08);
+    border-radius: 18px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 3rem;
+}
+
+.filter-section h3,
+.accommodation-section h3,
+.faq-section h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+    padding-bottom: 1rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.15);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+    padding: 0.85rem 1.2rem;
+    transition: var(--transition-smooth);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-blue-brand);
+    background-color: white;
+    box-shadow: 0 0 0 0.25rem rgba(14, 165, 233, 0.15);
+    color: var(--color-text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--color-text-muted);
+}
+
+.area-card {
+    border: 1px solid rgba(14, 165, 233, 0.08);
+    border-radius: 18px;
+    background-color: var(--color-bg-card);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.area-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(14, 165, 233, 0.2);
+    box-shadow: var(--shadow-card);
+}
+
+.area-card .card-body {
+    padding: 1.8rem;
+}
+
+.area-card .card-title {
+    color: var(--color-blue-brand);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.area-card .icon {
+    font-size: 2.5rem;
+    color: var(--color-blue-brand);
+    margin-bottom: 1rem;
+}
+
+/* ===================== 路线页面时间线 ===================== */
+.route-card .card-header {
+    background: linear-gradient(135deg, var(--color-blue-brand), var(--color-teal-clear));
+    color: white;
+    border-radius: 18px 18px 0 0 !important;
+    padding: 1.8rem;
+    border: none;
+}
+
+.route-card .card-header h3 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.route-card .card-body {
+    padding: 2.2rem;
+    background-color: var(--color-bg-card);
+}
+
+.route-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.8rem;
+    flex-wrap: wrap;
+}
+
+.route-info-item {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.route-info-item i {
+    font-size: 1.6rem;
+    color: var(--color-blue-brand);
+    margin-bottom: 0.6rem;
+}
+
+.route-info-item p {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.route-info-item strong {
+    color: var(--color-text-primary);
+    font-size: 1.1rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-blue-brand), var(--color-teal-clear));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.8rem;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--color-blue-brand);
+    border: 3px solid var(--color-bg-main);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.timeline-item h5 {
+    color: var(--color-blue-brand);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.timeline-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 0.6rem;
+}
+
+/* ===================== 折叠面板 ===================== */
+.accordion-button {
+    background-color: var(--color-bg-card);
+    color: var(--color-text-primary);
+    border: 1px solid rgba(14, 165, 233, 0.1);
+    border-radius: 14px !important;
+    padding: 1.2rem 1.5rem;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--color-blue-light);
+    color: var(--color-blue-brand);
+    box-shadow: none;
+    border-color: rgba(14, 165, 233, 0.2);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(14, 165, 233, 0.2);
+}
+
+.accordion-item {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.accordion-body {
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(14, 165, 233, 0.1);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    color: var(--color-text-secondary);
+}
+
+
+/* ===================== 联系页面 ===================== */
+.contact-info {
+    margin-bottom: 2.5rem;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.8rem;
+}
+
+.contact-info-item i {
+    font-size: 1.6rem;
+    color: var(--color-blue-brand);
+    margin-right: 1.2rem;
+    margin-top: 0.2rem;
+    width: 35px;
+    text-align: center;
+}
+
+.contact-info-item h5 {
+    margin-bottom: 0.4rem;
+    color: var(--color-text-primary);
+}
+
+.contact-info-item p {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.social-media {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+}
+
+.social-media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-blue-brand), var(--color-teal-clear));
+    color: white;
+    font-size: 1.3rem;
+    transition: var(--transition-smooth);
+    box-shadow: 0 5px 20px rgba(14, 165, 233, 0.25);
+}
+
+.social-media a:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+}
+
+.map-container {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(14, 165, 233, 0.08);
+}
+
+.map-placeholder {
+    background: linear-gradient(135deg, var(--color-blue-light), var(--color-bg-main));
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+}
+
+/* ===================== 按钮通用样式 ===================== */
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-cta-orange), #FB923C);
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 2.2rem;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    box-shadow: 0 5px 20px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--color-blue-brand), var(--color-teal-clear));
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 2.2rem;
+    font-weight: 700;
+    transition: var(--transition-smooth);
+    box-shadow: 0 5px 20px rgba(14, 165, 233, 0.25);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+}
+
+/* ===================== 页脚样式 ===================== */
+footer {
+    background-color: #0F172A;
+    color: white;
+    padding: 4rem 0 2rem;
+    margin-top: 6rem;
+}
+
+footer h5 {
+    margin-bottom: 1.8rem;
+    color: var(--color-blue-light);
+    font-weight: 700;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+footer a:hover {
+    color: var(--color-blue-light);
+    transform: translateX(3px);
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===================== 首页轮播图增强 ===================== */
+.carousel-item {
+    height: 100vh;
+    min-height: 650px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+/* 核心修改：去掉白色蒙版，改为「顶部微透、底部加深」的渐变，完全保留背景鲜亮感 */
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 渐变逻辑：顶部几乎透明，让海景的鲜亮颜色完全透出；底部轻微加深，给文字足够的对比度 */
+    background: linear-gradient(180deg, rgba(0, 20, 40, 0.15) 0%, rgba(0, 20, 40, 0.35) 100%);
+    z-index: 1;
+}
+.carousel-caption {
+    bottom: 50%;
+    transform: translateY(50%);
+    z-index: 10;
+    text-align: center;
+    padding: 0;
+    background: transparent;
+}
+/* 主标题优化：纯白+精致阴影，醒目高级，和鲜亮背景形成完美对比 */
+.carousel-caption h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+    text-shadow: 0 4px 25px rgba(0, 20, 40, 0.5);
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 4px;
+    line-height: 1.1;
+}
+/* 副标题优化：半透明白色+阴影，清晰不抢镜 */
+.carousel-caption p {
+    font-size: 1.45rem;
+    margin-bottom: 2.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 15px rgba(0, 20, 40, 0.4);
+    letter-spacing: 1px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* 按钮优化：强化质感，更醒目 */
+.carousel-caption .btn {
+    padding: 1.1rem 3.2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 30px rgba(249, 115, 22, 0.45);
+    transition: var(--transition-smooth);
+}
+.carousel-caption .btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(249, 115, 22, 0.6);
+}
+/* 轮播指示器优化：适配新风格 */
+.carousel-indicators {
+    z-index: 15;
+}
+.carousel-indicators button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    margin: 0 8px;
+    transition: var(--transition-smooth);
+}
+.carousel-indicators button.active {
+    background-color: var(--color-cta-orange);
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+}
+/* 轮播左右箭头优化：适配新风格 */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 15;
+    width: 55px;
+    height: 55px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    margin: auto 2rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: var(--color-cta-orange);
+    transform: scale(1.1);
+}
+/* ===================== 首页特色板块 ===================== */
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    font-family: 'Times New Roman', serif;
+}
+
+.section-title p {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border-radius: 18px;
+    background-color: var(--color-bg-card);
+    border: 1px solid rgba(14, 165, 233, 0.08);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(14, 165, 233, 0.2);
+    box-shadow: var(--shadow-card);
+}
+
+.feature-card .icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 1.8rem;
+    background: linear-gradient(135deg, var(--color-blue-brand), var(--color-teal-clear));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.2rem;
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.25);
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.feature-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+
+/* ===================== 滚动渐显动画类 ===================== */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================== 响应式适配 ===================== */
+@media (max-width: 992px) {
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 3rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2.2rem;
+    }
+    
+    .category-tabs .nav-link {
+        margin: 0.5rem;
+        display: inline-block;
+    }
+    
+    .route-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* 导航栏响应式适配 */
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 7rem 0 3.5rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 2.2rem;
+    }
+    
+    .carousel-item {
+        min-height: 550px;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    .timeline {
+        padding-left: 2rem;
+    }
+    
+    .timeline-item::before {
+        left: -2.3rem;
+    }
+    
+    .contact-info-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-info-item i {
+        margin-right: 0;
+        margin-bottom: 0.8rem;
+    }
+    
+    .social-media {
+        justify-content: center;
+    }
+    
+    /* 移动端导航栏优化 */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    .nav-link {
+        font-size: 0.85rem;
+        text-align: center;
+        padding: 0.8rem 0 !important;
+    }
+    .nav-link::after {
+        bottom: 4px;
+    }
+}
+/* ===================== 模态框样式优化 - 蓬莱阁详情专用 ===================== */
+.modal {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(248, 251, 253, 0.95) 0%, rgba(224, 242, 254, 0.95) 100%);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    color: white;
+    border: none;
+    padding: 1.8rem 2rem;
+    position: relative;
+}
+
+.modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #F97316, #FB923C);
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Times New Roman', serif;
+}
+
+.modal-header .btn-close {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.modal-header .btn-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 2.5rem;
+    color: #1A2B3C;
+    line-height: 1.8;
+}
+
+/* 模态框内标题样式 */
+.modal-body h6 {
+    color: #0EA5E9;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    margin-top: 1.8rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.modal-body h6::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #F97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+.modal-body h6:first-child {
+    margin-top: 0;
+}
+
+/* 基本信息样式 */
+.modal-body ul {
+    background-color: rgba(248, 251, 253, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid #0EA5E9;
+    margin-bottom: 1.8rem;
+}
+
+.modal-body ul li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.modal-body ul li strong {
+    color: #1A2B3C;
+    min-width: 80px;
+    font-weight: 600;
+}
+
+.modal-body ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* 景点特色段落样式 */
+.modal-body p {
+    color: #64748B;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+/* 游览建议样式 */
+.modal-body .suggestions {
+    background-color: rgba(254, 228, 208, 0.5);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.modal-body .suggestions p {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.modal-body .suggestions p::before {
+    content: "✓";
+    color: #F97316;
+    font-weight: bold;
+    margin-right: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.modal-footer {
+    background-color: rgba(248, 251, 253, 0.8);
+    border: none;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-footer .btn-primary {
+    background: linear-gradient(135deg, #F97316, #FB923C);
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(249, 115, 22, 0.3);
+}
+
+.modal-footer .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+}
+
+.modal-footer .btn-secondary {
+    background-color: rgba(14, 165, 233, 0.1);
+    color: #0EA5E9;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 12px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: rgba(14, 165, 233, 0.2);
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        border-radius: 15px;
+    }
+    
+    .modal-header {
+        padding: 1.5rem 1.8rem;
+    }
+    
+    .modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 2rem 1.8rem;
+    }
+    
+    .modal-footer {
+        padding: 1.2rem 1.8rem;
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn-secondary {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+/* ===================== 行程折叠按钮样式 ===================== */
+.route-collapse-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-blue-light);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-blue-brand);
+    text-align: left;
+    transition: var(--transition-smooth);
+    margin-bottom: 1rem;
+}
+.route-collapse-btn:hover {
+    background-color: rgba(14, 165, 233, 0.15);
+    border-color: var(--color-blue-brand);
+}
+/* 箭头样式：默认向下，展开时自动旋转180度变成向上 */
+.route-collapse-btn .arrow-icon {
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+/* 核心：Bootstrap展开时会自动去掉.collapsed类，箭头旋转 */
+.route-collapse-btn:not(.collapsed) .arrow-icon {
+    transform: rotate(180deg);
+}
+/* 折叠内容的内边距 */
+.route-collapse-content {
+    padding: 1rem 0.5rem 2rem;
+}

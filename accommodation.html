@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟台住宿推荐 - 山海仙境 魅力烟台</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 自定义CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 住宿页面专属风格 */
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .page-header {
+            background: url('images/accommodation-header.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 120px 0 60px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+        }
+        .area-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        .area-card:hover {
+            transform: translateY(-5px);
+        }
+        .area-card .icon {
+            font-size: 2.5rem;
+            color: #2a5298;
+            margin-bottom: 15px;
+        }
+        .filter-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .category-tabs .nav-link {
+            color: #495057;
+            border-radius: 8px 8px 0 0;
+            margin-right: 8px;
+            padding: 12px 20px;
+        }
+        .category-tabs .nav-link.active {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+        }
+        .hotel-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .hotel-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .hotel-card img {
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid #2a5298;
+        }
+        .hotel-card .rating {
+            color: #ffc107;
+            margin: 10px 0;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+        .badge {
+            margin: 0 4px 4px 0;
+        }
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .hotel-card img {
+                height: 180px;
+            }
+            .page-header {
+                padding: 80px 0 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water"></i> 烟台旅游
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attractions.html">景点介绍</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="food.html">美食推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="accommodation.html">住宿推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="routes.html">旅游路线</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">联系我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面顶部标题栏 -->
+    <header class="page-header">
+        <div class="container">
+            <h1>烟台住宿推荐</h1>
+            <p>精选烟台优质酒店、民宿，给您舒适的度假体验</p>
+        </div>
+    </header>
+
+    <!-- 住宿区域推荐 -->
+    <div class="container">
+        <div class="filter-section mb-5">
+            <h3><i class="fas fa-map-marker-alt"></i> 住宿区域推荐</h3>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="area-card">
+                        <div class="card-body text-center">
+                            <div class="icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h5 class="card-title">芝罘区</h5>
+                            <p class="card-text">市中心区域，交通便利，商业发达，适合首次来烟台的游客</p>
+                            <ul class="list-unstyled text-start" style="max-width: 220px; margin: 1rem auto 0;">
+                                <li><i class="fas fa-check text-success"></i> 烟台山景区附近</li>
+                                <li><i class="fas fa-check text-success"></i> 朝阳街历史文化街区</li>
+                                <li><i class="fas fa-check text-success"></i> 滨海广场周边</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="area-card">
+                        <div class="card-body text-center">
+                            <div class="icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h5 class="card-title">莱山区</h5>
+                            <p class="card-text">沿海区域，海景房众多，适合度假休闲，享受海滨风光</p>
+                            <ul class="list-unstyled text-start" style="max-width: 220px; margin: 1rem auto 0;">
+                                <li><i class="fas fa-check text-success"></i> 第一海水浴场附近</li>
+                                <li><i class="fas fa-check text-success"></i> 渔人码头周边</li>
+                                <li><i class="fas fa-check text-success"></i> 金沙滩海滨公园</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="area-card">
+                        <div class="card-body text-center">
+                            <div class="icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h5 class="card-title">蓬莱区</h5>
+                            <p class="card-text">历史文化区域，靠近蓬莱阁等景点，适合文化旅游</p>
+                            <ul class="list-unstyled text-start" style="max-width: 220px; margin: 1rem auto 0;">
+                                <li><i class="fas fa-check text-success"></i> 蓬莱阁景区附近</li>
+                                <li><i class="fas fa-check text-success"></i> 八仙过海景区周边</li>
+                                <li><i class="fas fa-check text-success"></i> 蓬莱水城附近</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 住宿筛选 -->
+    <div class="container">
+        <div class="filter-section">
+            <h3><i class="fas fa-filter"></i> 住宿筛选</h3>
+            <div class="row align-items-end">
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <label class="form-label">价格范围</label>
+                    <select class="form-select" id="priceFilter">
+                        <option value="all">全部价格</option>
+                        <option value="100-200">￥100-200</option>
+                        <option value="200-400">￥200-400</option>
+                        <option value="400-800">￥400-800</option>
+                        <option value="800+">￥800以上</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <label class="form-label">住宿类型</label>
+                    <select class="form-select" id="typeFilter">
+                        <option value="all">全部类型</option>
+                        <option value="hotel">星级酒店</option>
+                        <option value="homestay">民宿客栈</option>
+                        <option value="budget">经济型酒店</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                    <label class="form-label">位置区域</label>
+                    <select class="form-select" id="areaFilter">
+                        <option value="all">全部区域</option>
+                        <option value="zhifu">芝罘区</option>
+                        <option value="laishan">莱山区</option>
+                        <option value="penglai">蓬莱区</option>
+                        <option value="mouping">牟平区</option>
+                        <option value="changdao">长岛区</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" id="searchBtn">
+                        <i class="fas fa-search"></i> 搜索住宿
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 住宿分类标签 -->
+    <div class="container mt-5">
+        <ul class="nav category-tabs nav-pills" id="accommodationTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-accommodation-tab" data-bs-toggle="tab" data-bs-target="#all-accommodation" type="button" role="tab" aria-controls="all-accommodation" aria-selected="true">全部住宿</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="hotel-tab" data-bs-toggle="tab" data-bs-target="#hotel" type="button" role="tab" aria-controls="hotel" aria-selected="false">星级酒店</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="homestay-tab" data-bs-toggle="tab" data-bs-target="#homestay" type="button" role="tab" aria-controls="homestay" aria-selected="false">民宿客栈</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="budget-tab" data-bs-toggle="tab" data-bs-target="#budget" type="button" role="tab" aria-controls="budget" aria-selected="false">经济型酒店</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 住宿内容 -->
+    <div class="container mt-3">
+        <div class="tab-content" id="accommodationTabsContent">
+            <!-- 全部住宿 -->
+            <div class="tab-pane fade show active" id="all-accommodation" role="tabpanel" aria-labelledby="all-accommodation-tab">
+                <div class="row g-4">
+                    <!-- 烟台世茂希尔顿酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="800" 
+                         data-type="hotel" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/xierdun.jpg" class="card-img-top" alt="烟台世茂希尔顿酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台世茂希尔顿酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.7分</span>
+                                </div>
+                                <p class="card-text">依山傍海，滨海风光尽收眼底，云端海景房，含双早与行政酒廊，是烟台顶级豪华酒店。</p>
+                                <div class="price">￥800-1200/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">豪华型</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#hiltonModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 烟台鑫广万豪酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="700" 
+                         data-type="hotel" 
+                         data-area="laishan">
+                        <div class="hotel-card">
+                            <img src="images/wanhao.jpg" class="card-img-top" alt="烟台鑫广万豪酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台鑫广万豪酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.7分</span>
+                                </div>
+                                <p class="card-text">阳台瞰海，户外花园直通金沙滩，海景房视野无敌，餐饮丰富美味，服务一流。</p>
+                                <div class="price">￥600-1000/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">度假型</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#marriottModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 烟台金沙滩英迪格酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="900" 
+                         data-type="hotel" 
+                         data-area="penglai">
+                        <div class="hotel-card">
+                            <img src="images/yingdige.jpg" class="card-img-top" alt="烟台金沙滩英迪格酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台金沙滩英迪格酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">享180度观海视角，步行可达海边，正对大海，海景房景色满分，设计现代时尚。</p>
+                                <div class="price">￥700-1100/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">精品酒店</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#indigoModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 养马岛民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="250" 
+                         data-type="homestay" 
+                         data-area="mouping">
+                        <div class="hotel-card">
+                            <img src="images/yangmadaominsu.jpg" class="card-img-top" alt="养马岛民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">养马岛民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.5分</span>
+                                </div>
+                                <p class="card-text">海岛特色民宿，面朝大海，春暖花开，享受宁静的海岛时光，海景露台与农家餐，适合家庭出游。</p>
+                                <div class="price">￥200-400/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">特色体验</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#homestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 海岛日记民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="200" 
+                         data-type="homestay" 
+                         data-area="mouping">
+                        <div class="hotel-card">
+                            <img src="images/haidaoriji.jpg" class="card-img-top" alt="海岛日记民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">海岛日记民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.5分</span>
+                                </div>
+                                <p class="card-text">养马岛悬崖边的网红海景民宿，帆船造型建筑坐拥一线海景，地暖加持，咖啡书屋一应俱全，是海岛打卡必住之地。</p>
+                                <div class="price">￥200-400/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">网红民宿</span>
+                                    <span class="badge bg-success">悬崖海景</span>
+                                    <span class="badge bg-info">特色体验</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#haidaorijiModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 长岛心宿民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="changdao">
+                        <div class="hotel-card">
+                            <img src="images/xinsu.png" class="card-img-top" alt="长岛心宿民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">长岛心宿民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">全国甲级旅游民宿，枕山面海、区位得天独厚。配套兼顾雅致与野趣，餐厅、茶室、阅读区错落布局。</p>
+                                <div class="price">￥300-500/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">甲级民宿</span>
+                                    <span class="badge bg-info">海岛特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#changdaoHomestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 栖心蓬莱民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="penglai">
+                        <div class="hotel-card">
+                            <img src="images/qixin.jpg" class="card-img-top" alt="栖心蓬莱民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">栖心蓬莱民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.6分</span>
+                                </div>
+                                <p class="card-text">全国乙级旅游民宿，紧邻蓬莱阁景区，保留胶东老宅青砖黛瓦的古朴风貌，巧妙融入现代简约设计。</p>
+                                <div class="price">￥250-450/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">乙级民宿</span>
+                                    <span class="badge bg-info">古风庭院</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#qixinHomestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 合舍民宿坊 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="changdao">
+                        <div class="hotel-card">
+                            <img src="images/heshe.jpg" class="card-img-top" alt="合舍民宿坊">
+                            <div class="card-body">
+                                <h5 class="card-title">合舍民宿坊</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">海边渔村老宅改造而成，保留原生态石头墙与老宅形态，搭配敞亮落地窗，尽显海岛静谧韵味，高品质床品与智能设备一应俱全。</p>
+                                <div class="price">￥300-600/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">原生态民宿</span>
+                                    <span class="badge bg-success">海岛特色</span>
+                                    <span class="badge bg-info">智能设备</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#hesheModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 如家酒店·neo(烟台山朝阳街店) -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="150" 
+                         data-type="budget" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/rujia.png" class="card-img-top" alt="如家酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">如家酒店·neo(烟台山朝阳街店)</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-o"></i>
+                                    <span class="ms-2">4.2分</span>
+                                </div>
+                                <p class="card-text">步行3分钟到烟台山景区，5分钟到朝阳街，10分钟到第一海水浴场，位置优越，性价比高。</p>
+                                <div class="price">￥150-250/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">经济型</span>
+                                    <span class="badge bg-success">位置优越</span>
+                                    <span class="badge bg-info">性价比高</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#homeinnModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 朵悦酒店（烟台站滨海广场店） -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="hotel" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/duoyi.jpg" class="card-img-top" alt="朵悦酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">朵悦酒店（烟台站滨海广场店）</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-o"></i>
+                                    <span class="ms-2">4.3分</span>
+                                </div>
+                                <p class="card-text">步行至海边5分钟，提供免费洗衣服务，房间干净整洁，设施齐全。</p>
+                                <div class="price">￥300-500/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">中档型</span>
+                                    <span class="badge bg-success">近海边</span>
+                                    <span class="badge bg-info">服务周到</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#duoyueModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 星级酒店 -->
+            <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
+                <div class="row g-4">
+                    <!-- 烟台世茂希尔顿酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="800" 
+                         data-type="hotel" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/xierdun.jpg" class="card-img-top" alt="烟台世茂希尔顿酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台世茂希尔顿酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.7分</span>
+                                </div>
+                                <p class="card-text">依山傍海，滨海风光尽收眼底，云端海景房，含双早与行政酒廊，是烟台顶级豪华酒店。</p>
+                                <div class="price">￥800-1200/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">豪华型</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#hiltonModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 烟台鑫广万豪酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="700" 
+                         data-type="hotel" 
+                         data-area="laishan">
+                        <div class="hotel-card">
+                            <img src="images/wanhao.jpg" class="card-img-top" alt="烟台鑫广万豪酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台鑫广万豪酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.7分</span>
+                                </div>
+                                <p class="card-text">阳台瞰海，户外花园直通金沙滩，海景房视野无敌，餐饮丰富美味，服务一流。</p>
+                                <div class="price">￥600-1000/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">度假型</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#marriottModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 烟台金沙滩英迪格酒店 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="900" 
+                         data-type="hotel" 
+                         data-area="penglai">
+                        <div class="hotel-card">
+                            <img src="images/yingdige.jpg" class="card-img-top" alt="烟台金沙滩英迪格酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">烟台金沙滩英迪格酒店</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">享180度观海视角，步行可达海边，正对大海，海景房景色满分，设计现代时尚。</p>
+                                <div class="price">￥700-1100/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">五星级</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">精品酒店</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#indigoModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 朵悦酒店（烟台站滨海广场店） -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="hotel" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/duoyi.jpg" class="card-img-top" alt="朵悦酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">朵悦酒店（烟台站滨海广场店）</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-o"></i>
+                                    <span class="ms-2">4.3分</span>
+                                </div>
+                                <p class="card-text">步行至海边5分钟，提供免费洗衣服务，房间干净整洁，设施齐全。</p>
+                                <div class="price">￥300-500/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">中档型</span>
+                                    <span class="badge bg-success">近海边</span>
+                                    <span class="badge bg-info">服务周到</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#duoyueModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 民宿客栈 -->
+            <div class="tab-pane fade" id="homestay" role="tabpanel" aria-labelledby="homestay-tab">
+                <div class="row g-4">
+                    <!-- 养马岛民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="250" 
+                         data-type="homestay" 
+                         data-area="mouping">
+                        <div class="hotel-card">
+                            <img src="images/yangmadaominsu.jpg" class="card-img-top" alt="养马岛民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">养马岛民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.5分</span>
+                                </div>
+                                <p class="card-text">海岛特色民宿，面朝大海，春暖花开，享受宁静的海岛时光，海景露台与农家餐，适合家庭出游。</p>
+                                <div class="price">￥200-400/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">海景房</span>
+                                    <span class="badge bg-info">特色体验</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#homestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 长岛心宿民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="changdao">
+                        <div class="hotel-card">
+                            <img src="images/xinsu.png" class="card-img-top" alt="长岛心宿民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">长岛心宿民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">全国甲级旅游民宿，枕山面海、区位得天独厚。配套兼顾雅致与野趣，餐厅、茶室、阅读区错落布局。</p>
+                                <div class="price">￥300-500/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">甲级民宿</span>
+                                    <span class="badge bg-info">海岛特色</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#changdaoHomestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 栖心蓬莱民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="penglai">
+                        <div class="hotel-card">
+                            <img src="images/qixin.jpg" class="card-img-top" alt="栖心蓬莱民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">栖心蓬莱民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.6分</span>
+                                </div>
+                                <p class="card-text">全国乙级旅游民宿，紧邻蓬莱阁景区，保留胶东老宅青砖黛瓦的古朴风貌，巧妙融入现代简约设计。</p>
+                                <div class="price">￥250-450/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">民宿</span>
+                                    <span class="badge bg-success">乙级民宿</span>
+                                    <span class="badge bg-info">古风庭院</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#qixinHomestayModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 海岛日记民宿 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="200" 
+                         data-type="homestay" 
+                         data-area="mouping">
+                        <div class="hotel-card">
+                            <img src="images/haidaoriji.jpg" class="card-img-top" alt="海岛日记民宿">
+                            <div class="card-body">
+                                <h5 class="card-title">海岛日记民宿</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-2">4.5分</span>
+                                </div>
+                                <p class="card-text">养马岛悬崖边的网红海景民宿，帆船造型建筑坐拥一线海景，地暖加持，咖啡书屋一应俱全，是海岛打卡必住之地。</p>
+                                <div class="price">￥200-400/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">网红民宿</span>
+                                    <span class="badge bg-success">悬崖海景</span>
+                                    <span class="badge bg-info">特色体验</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#haidaorijiModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 合舍民宿坊 -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="300" 
+                         data-type="homestay" 
+                         data-area="changdao">
+                        <div class="hotel-card">
+                            <img src="images/heshe.jpg" class="card-img-top" alt="合舍民宿坊">
+                            <div class="card-body">
+                                <h5 class="card-title">合舍民宿坊</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="ms-2">4.8分</span>
+                                </div>
+                                <p class="card-text">海边渔村老宅改造而成，保留原生态石头墙与老宅形态，搭配敞亮落地窗，尽显海岛静谧韵味，高品质床品与智能设备一应俱全。</p>
+                                <div class="price">￥300-600/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">原生态民宿</span>
+                                    <span class="badge bg-success">海岛特色</span>
+                                    <span class="badge bg-info">智能设备</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#hesheModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 经济型酒店 -->
+            <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
+                <div class="row g-4">
+                    <!-- 如家酒店·neo(烟台山朝阳街店) -->
+                    <div class="col-lg-4 col-md-6 hotel-item" 
+                         data-price-min="150" 
+                         data-type="budget" 
+                         data-area="zhifu">
+                        <div class="hotel-card">
+                            <img src="images/rujia.png" class="card-img-top" alt="如家酒店">
+                            <div class="card-body">
+                                <h5 class="card-title">如家酒店·neo(烟台山朝阳街店)</h5>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-o"></i>
+                                    <span class="ms-2">4.2分</span>
+                                </div>
+                                <p class="card-text">步行3分钟到烟台山景区，5分钟到朝阳街，10分钟到第一海水浴场，位置优越，性价比高。</p>
+                                <div class="price">￥150-250/晚</div>
+                                <div>
+                                    <span class="badge bg-primary">经济型</span>
+                                    <span class="badge bg-success">位置优越</span>
+                                    <span class="badge bg-info">性价比高</span>
+                                </div>
+                                <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#homeinnModal">
+                                    <i class="fas fa-info-circle"></i> 详细介绍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 酒店详情模态框 -->
+    <!-- 烟台世茂希尔顿酒店模态框 -->
+    <div class="modal fade" id="hiltonModal" tabindex="-1" aria-labelledby="hiltonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hiltonModalLabel">烟台世茂希尔顿酒店详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/xierdun1.jpg" alt="烟台世茂希尔顿酒店" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市芝罘区大马路53号</li>
+                        <li><strong>价格：</strong>￥800-1200/晚</li>
+                        <li><strong>星级：</strong>五星级</li>
+                        <li><strong>评分：</strong>4.7分</li>
+                        <li><strong>开业时间：</strong>2018年</li>
+                    </ul>
+                    <h6 class="mt-3">酒店特色</h6>
+                    <p>烟台世茂希尔顿酒店位于烟台市核心位置，坐拥无敌海景，客房设计现代豪华，配备高端卫浴和智能控制系统。酒店拥有多个特色餐厅，提供中西融合美食，行政酒廊提供精致下午茶和晚间鸡尾酒。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台鑫广万豪酒店模态框 -->
+    <div class="modal fade" id="marriottModal" tabindex="-1" aria-labelledby="marriottModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="marriottModalLabel">烟台鑫广万豪酒店详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/wanhao1.jpg" alt="烟台鑫广万豪酒店" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市福山区宁波路10号</li>
+                        <li><strong>价格：</strong>￥600-1000/晚</li>
+                        <li><strong>星级：</strong>五星级</li>
+                        <li><strong>评分：</strong>4.7分</li>
+                    </ul>
+                    <h6 class="mt-3">酒店特色</h6>
+                    <p>烟台鑫广万豪酒店拥有宽敞的海景客房，私人阳台可欣赏金沙滩美景，酒店内设有室内泳池、健身中心和SPA，餐饮方面提供正宗鲁菜和国际美食，是商务和休闲旅客的理想选择。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 烟台金沙滩英迪格酒店模态框 -->
+    <div class="modal fade" id="indigoModal" tabindex="-1" aria-labelledby="indigoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="indigoModalLabel">烟台金沙滩英迪格酒店详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/yingdige1.jpg" alt="烟台金沙滩英迪格酒店" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市蓬莱区金沙滩路188号</li>
+                        <li><strong>价格：</strong>￥700-1100/晚</li>
+                        <li><strong>星级：</strong>五星级</li>
+                        <li><strong>评分：</strong>4.8分</li>
+                    </ul>
+                    <h6 class="mt-3">酒店特色</h6>
+                    <p>烟台金沙滩英迪格酒店拥有180度全海景客房，设计融合当地海洋文化元素，酒店内设有特色海景餐厅、无边泳池和海景酒吧，步行即可到达金沙滩海滨公园，是高端度假的首选。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 养马岛民宿模态框 -->
+    <div class="modal fade" id="homestayModal" tabindex="-1" aria-labelledby="homestayModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="homestayModalLabel">养马岛民宿详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/yangmadaominsu1.jpg" alt="养马岛民宿" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市牟平区养马岛环岛路</li>
+                        <li><strong>价格：</strong>￥200-400/晚</li>
+                        <li><strong>类型：</strong>海岛民宿</li>
+                        <li><strong>评分：</strong>4.5分</li>
+                    </ul>
+                    <h6 class="mt-3">民宿特色</h6>
+                    <p>养马岛民宿位于养马岛核心景区，步行可达海边，民宿由当地渔民改建，保留了胶东渔村特色，提供新鲜海鲜加工服务，可体验赶海、垂钓等海岛活动，是体验海岛生活的绝佳选择。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 海岛日记民宿模态框 -->
+    <div class="modal fade" id="haidaorijiModal" tabindex="-1" aria-labelledby="haidaorijiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="haidaorijiModalLabel">海岛日记民宿详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/haidaoriji1.jpg" alt="海岛日记民宿" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台养马岛后海悬崖边</li>
+                        <li><strong>价格：</strong>￥200-400/晚</li>
+                        <li><strong>类型：</strong>网红海景民宿</li>
+                        <li><strong>评分：</strong>4.5分</li>
+                        <li><strong>房间数量：</strong>11间（8间海景大床房+3间家庭海景房）</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">民宿特色</h6>
+                    <p>海岛日记是养马岛标志性网红民宿，建筑形似即将起航的白色帆船，核心设计理念为"人与大海对话"，极具辨识度与打卡属性。民宿坐拥悬崖一线海景，冬季配备地暖，内部设有咖啡厅、书屋，可承接团建、生日趴、求婚婚礼等活动，夏季还可体验帆船项目。</p>
+                    
+                    <h6 class="mt-3">设施服务</h6>
+                    <ul>
+                        <li>海景客房（8间大床房+3间家庭房）</li>
+                        <li>冬季地暖</li>
+                        <li>咖啡厅、书屋</li>
+                        <li>简餐、咖啡饮品供应</li>
+                        <li>免费停车场（可停20辆车）</li>
+                        <li>团建/派对/婚礼场地及配套服务</li>
+                        <li>夏季帆船体验项目</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">温馨提示</h6>
+                    <ul>
+                        <li>海边蚊虫较多，请注意及时关闭门窗</li>
+                        <li>海边日照强烈，出行请做好防晒措施</li>
+                        <li>民宿禁止携带宠物入住</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 长岛心宿民宿模态框 -->
+    <div class="modal fade" id="changdaoHomestayModal" tabindex="-1" aria-labelledby="changdaoHomestayModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changdaoHomestayModalLabel">长岛心宿民宿详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/xinsu1.jpg" alt="长岛心宿民宿" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市长岛区南长山岛</li>
+                        <li><strong>价格：</strong>￥300-500/晚</li>
+                        <li><strong>类型：</strong>甲级旅游民宿</li>
+                        <li><strong>评分：</strong>4.8分</li>
+                    </ul>
+                    <h6 class="mt-3">民宿特色</h6>
+                    <p>长岛心宿民宿是全国甲级旅游民宿，坐落于长岛核心景区，民宿设计融合海岛文化与现代美学，拥有茶室、阅读区、海景露台等公共空间，提供定制化海岛旅游服务，是深度体验长岛的绝佳居所。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 栖心蓬莱民宿模态框 -->
+    <div class="modal fade" id="qixinHomestayModal" tabindex="-1" aria-labelledby="qixinHomestayModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qixinHomestayModalLabel">栖心蓬莱民宿详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/qixin1.jpg" alt="栖心蓬莱民宿" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市蓬莱区阁西街88号</li>
+                        <li><strong>价格：</strong>￥250-450/晚</li>
+                        <li><strong>类型：</strong>乙级旅游民宿</li>
+                        <li><strong>评分：</strong>4.6分</li>
+                    </ul>
+                    <h6 class="mt-3">民宿特色</h6>
+                    <p>栖心蓬莱民宿紧邻蓬莱阁景区，保留了胶东传统老宅的建筑风貌，内部装修融入现代简约设计，民宿提供蓬莱文化讲解、特色胶东早餐等服务，是体验蓬莱历史文化的理想选择。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合舍民宿坊模态框 -->
+    <div class="modal fade" id="hesheModal" tabindex="-1" aria-labelledby="hesheModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hesheModalLabel">合舍民宿坊详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/heshe1.jpg" alt="合舍民宿坊" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市长岛综试区北长山乡北城村</li>
+                        <li><strong>价格：</strong>￥300-600/晚</li>
+                        <li><strong>类型：</strong>原生态海岛民宿</li>
+                        <li><strong>评分：</strong>4.8分</li>
+                        <li><strong>房间数量：</strong>6间</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">民宿特色</h6>
+                    <p>合舍民宿坊由海边渔村老宅改造而成，保留了原生态石头墙与老宅形态，搭配敞亮落地窗、鹅卵石绿竹等细节，尽显海岛静谧韵味。民宿配备丝涟床垫、智能马桶、电动窗帘等高品质床品与智能设备，设有KTV、棋牌室、茶台等公共休闲区域，适合家庭或好友聚会。</p>
+                    
+                    <h6 class="mt-3">设施服务</h6>
+                    <ul>
+                        <li>6间主题客房</li>
+                        <li>丝涟床垫、智能马桶、电动窗帘、投影仪、独立WiFi</li>
+                        <li>KTV、棋牌室、茶台等公共休闲区域</li>
+                        <li>免费停车位</li>
+                    </ul>
+                    
+                    <h6 class="mt-3">温馨提示</h6>
+                    <ul>
+                        <li>民宿禁止携带宠物入住</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 如家酒店·neo(烟台山朝阳街店)模态框 -->
+    <div class="modal fade" id="homeinnModal" tabindex="-1" aria-labelledby="homeinnModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="homeinnModalLabel">如家酒店·neo(烟台山朝阳街店)详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/rujia1.jpg" alt="如家酒店" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市芝罘区朝阳街58号</li>
+                        <li><strong>价格：</strong>￥150-250/晚</li>
+                        <li><strong>类型：</strong>经济型酒店</li>
+                        <li><strong>评分：</strong>4.2分</li>
+                    </ul>
+                    <h6 class="mt-3">酒店特色</h6>
+                    <p>如家酒店·neo烟台山朝阳街店位于烟台核心旅游区，周边餐饮、购物、景点众多，酒店提供干净整洁的客房，24小时热水、免费WiFi、自助洗衣等基础服务，性价比极高，适合预算有限的游客。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 朵悦酒店（烟台站滨海广场店）模态框 -->
+    <div class="modal fade" id="duoyueModal" tabindex="-1" aria-labelledby="duoyueModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="duoyueModalLabel">朵悦酒店（烟台站滨海广场店）详细介绍</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/duoyi1.jpg" alt="朵悦酒店" class="img-fluid mb-4 rounded">
+                    <h6>基本信息</h6>
+                    <ul>
+                        <li><strong>地址：</strong>烟台市芝罘区北马路150号</li>
+                        <li><strong>价格：</strong>￥300-500/晚</li>
+                        <li><strong>类型：</strong>中档型酒店</li>
+                        <li><strong>评分：</strong>4.3分</li>
+                    </ul>
+                    <h6 class="mt-3">酒店特色</h6>
+                    <p>朵悦酒店紧邻烟台站和滨海广场，交通便利，客房装修时尚简约，配备智能客控系统，酒店提供免费洗衣房、自助早餐、行李寄存等服务，是商务出行和旅游的优质选择。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 筛选功能脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('searchBtn');
+            const priceFilter = document.getElementById('priceFilter');
+            const typeFilter = document.getElementById('typeFilter');
+            const areaFilter = document.getElementById('areaFilter');
+            const hotelItems = document.querySelectorAll('.hotel-item');
+
+            // 筛选函数
+            function filterHotels() {
+                const priceValue = priceFilter.value;
+                const typeValue = typeFilter.value;
+                const areaValue = areaFilter.value;
+
+                hotelItems.forEach(item => {
+                    // 默认显示
+                    let showItem = true;
+
+                    // 价格筛选
+                    if (priceValue !== 'all') {
+                        const priceMin = parseInt(item.dataset.priceMin);
+                        switch(priceValue) {
+                            case '100-200':
+                                showItem = priceMin >= 100 && priceMin <= 200;
+                                break;
+                            case '200-400':
+                                showItem = priceMin >= 200 && priceMin <= 400;
+                                break;
+                            case '400-800':
+                                showItem = priceMin >= 400 && priceMin <= 800;
+                                break;
+                            case '800+':
+                                showItem = priceMin >= 800;
+                                break;
+                        }
+                    }
+
+                    // 类型筛选
+                    if (typeValue !== 'all' && showItem) {
+                        showItem = item.dataset.type === typeValue;
+                    }
+
+                    // 区域筛选
+                    if (areaValue !== 'all' && showItem) {
+                        showItem = item.dataset.area === areaValue;
+                    }
+
+                    // 控制显示隐藏
+                    item.style.display = showItem ? 'block' : 'none';
+                });
+            }
+
+            // 搜索按钮点击事件
+            searchBtn.addEventListener('click', filterHotels);
+
+            // 全部筛选条件重置为all时显示所有
+            priceFilter.addEventListener('change', function() {
+                if (priceFilter.value === 'all' && typeFilter.value === 'all' && areaFilter.value === 'all') {
+                    hotelItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                }
+            });
+
+            typeFilter.addEventListener('change', function() {
+                if (priceFilter.value === 'all' && typeFilter.value === 'all' && areaFilter.value === 'all') {
+                    hotelItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                }
+            });
+
+            areaFilter.addEventListener('change', function() {
+                if (priceFilter.value === 'all' && typeFilter.value === 'all' && areaFilter.value === 'all') {
+                    hotelItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
