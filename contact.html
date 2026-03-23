@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- 百度地图API 替换成你的AK -->
+    <!-- 【修复】百度地图API 替换成你的浏览器端AK -->
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=YPexuWRDw8uyo8E5ZVQTMwqWrJ32yFM4"></script>
     <!-- 联系页专属样式 -->
     <style>
         /* 全局变量优化 */
         :root {
-            --primary-color: #e63946; /* 热情红 */
-            --secondary-color: #1d3557; /* 深海蓝 */
-            --warm-color: #f4a261; /* 暖橙 */
+            --primary-color: #e63946;
+            --secondary-color: #1d3557;
+            --warm-color: #f4a261;
             --light-color: #f8f9fa;
             --dark-color: #212529;
             --gray-color: #6c757d;
@@ -161,7 +161,7 @@
             line-height: 1.6;
         }
 
-        /* 社交媒体图标区（已修改：去掉文字、删除微博、加点击弹窗） */
+        /* 社交媒体图标区 */
         .social-media {
             margin-top: 30px;
             display: flex;
@@ -384,7 +384,7 @@
             width: 18px;
             text-align: center;
         }
-        /* 页脚社交图标（已修改：删除微博、加点击弹窗） */
+        /* 页脚社交图标 */
         footer .social-links {
             margin-top: 20px;
             display: flex;
@@ -416,8 +416,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===================== 新增：二维码弹窗样式（高质感） ===================== */
-        /* 弹窗遮罩层 */
+        /* ===================== 二维码弹窗样式 ===================== */
         .qrcode-modal-mask {
             position: fixed;
             top: 0;
@@ -435,12 +434,10 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 20px;
         }
-        /* 弹窗显示状态 */
         .qrcode-modal-mask.show {
             opacity: 1;
             visibility: visible;
         }
-        /* 弹窗主体 */
         .qrcode-modal-box {
             background: #ffffff;
             border-radius: 20px;
@@ -456,7 +453,6 @@
         .qrcode-modal-mask.show .qrcode-modal-box {
             transform: scale(1);
         }
-        /* 关闭按钮 */
         .qrcode-modal-close {
             position: absolute;
             top: 15px;
@@ -472,20 +468,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
         .qrcode-modal-close:hover {
             background-color: var(--primary-color);
             color: white;
         }
-        /* 弹窗标题 */
         .qrcode-modal-title {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--secondary-color);
             margin-bottom: 20px;
         }
-        /* 二维码图片 */
         .qrcode-modal-img {
             width: 100%;
             max-width: 260px;
@@ -495,7 +489,6 @@
             margin: 0 auto 15px;
             display: block;
         }
-        /* 弹窗提示文字 */
         .qrcode-modal-desc {
             color: var(--gray-color);
             font-size: 0.95rem;
@@ -645,7 +638,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h5>地址</h5>
-                                    <p>重庆市南岸区重庆邮电大学逸夫科技楼</p>
+                                    <p>重庆市南岸区重庆邮电大学明志苑2舍511</p>
                                 </div>
                             </div>
                             <div class="contact-info-item">
@@ -671,18 +664,18 @@
                             </div>
                         </div>
                         
-                        <!-- 【已修改】去掉文字、删除微博图标，新增弹窗点击事件 -->
+                        <!-- 社交图标，带弹窗功能 -->
                         <div class="social-media">
-                            <a class="qrcode-trigger" data-title="微信扫码联系" data-qrcode="images/wechat.jpg" title="微信">
+                            <a class="qrcode-trigger" data-title="微信扫码联系" data-qrcode="images/wechat-qrcode.jpg" title="微信">
                                 <i class="fab fa-weixin"></i>
                             </a>
-                            <a class="qrcode-trigger" data-title="QQ扫码联系" data-qrcode="images/qq.jpg" title="QQ">
+                            <a class="qrcode-trigger" data-title="QQ扫码联系" data-qrcode="images/qq-qrcode.jpg" title="QQ">
                                 <i class="fab fa-qq"></i>
                             </a>
-                            <a class="qrcode-trigger" data-title="抖音扫码关注" data-qrcode="images/douyin.jpg" title="抖音">
+                            <a class="qrcode-trigger" data-title="抖音扫码关注" data-qrcode="images/douyin-qrcode.jpg" title="抖音">
                                 <i class="fab fa-tiktok"></i>
                             </a>
-                            <a class="qrcode-trigger" data-title="小红书扫码关注" data-qrcode="images/xiaohongshu.jpg" title="小红书">
+                            <a class="qrcode-trigger" data-title="小红书扫码关注" data-qrcode="images/xiaohongshu-qrcode.jpg" title="小红书">
                                 <i class="fas fa-book"></i>
                             </a>
                         </div>
@@ -891,17 +884,17 @@
                 <div class="col-md-4">
                     <h5>联系信息</h5>
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学逸夫科技楼</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 重庆市南岸区重庆邮电大学明志苑2舍511</li>
                         <li><i class="fas fa-phone"></i> 15253500323</li>
                         <li><i class="fas fa-envelope"></i> 2064849893@qq.com</li>
                         <li><i class="fas fa-clock"></i> 周一至周五 8:00-18:00</li>
                     </ul>
-                    <!-- 【已修改】删除微博图标，新增弹窗点击事件 -->
+                    <!-- 页脚社交图标，带弹窗功能 -->
                     <div class="social-links">
-                        <a class="qrcode-trigger" data-title="微信扫码联系" data-qrcode="images/wechat.jpg" title="微信">
+                        <a class="qrcode-trigger" data-title="微信扫码联系" data-qrcode="images/wechat-qrcode.jpg" title="微信">
                             <i class="fab fa-weixin"></i>
                         </a>
-                        <a class="qrcode-trigger" data-title="QQ扫码联系" data-qrcode="images/qq.jpg" title="QQ">
+                        <a class="qrcode-trigger" data-title="QQ扫码联系" data-qrcode="images/qq-qrcode.jpg" title="QQ">
                             <i class="fab fa-qq"></i>
                         </a>
                     </div>
@@ -915,7 +908,7 @@
         </div>
     </footer>
 
-    <!-- ===================== 新增：二维码弹窗HTML结构 ===================== -->
+    <!-- ===================== 二维码弹窗HTML结构 ===================== -->
     <div class="qrcode-modal-mask" id="qrcodeModal">
         <div class="qrcode-modal-box">
             <button class="qrcode-modal-close" id="modalClose">
@@ -929,83 +922,90 @@
 
     <!-- 脚本 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
     <script>
-        // 百度地图初始化
-        window.onload = function() {
-            const map = new BMap.Map("yantaiMap");
-            const point = new BMap.Point(106.616980, 29.5398112);
-            map.centerAndZoom(point, 15);
-            map.enableScrollWheelZoom(true);
-            map.addControl(new BMap.NavigationControl());
-            marker.addEventListener("click", function() {
+        // 【修复】页面所有DOM加载完成后，再执行所有JS代码
+        document.addEventListener('DOMContentLoaded', function() {
+            // ===================== 1. 百度地图初始化（修复所有报错） =====================
+            const mapContainer = document.getElementById('yantaiMap');
+            // 先判断地图容器是否存在，不存在就不执行，避免报错
+            if (mapContainer && window.BMap) {
+                // 创建地图实例
+                const map = new BMap.Map("yantaiMap");
+                // 中心点：重庆邮电大学的经纬度（和页面地址匹配）
+                const point = new BMap.Point(106.616980, 29.539812);
+                // 初始化地图，设置中心点和缩放级别
+                map.centerAndZoom(point, 15);
+                // 开启鼠标滚轮缩放
+                map.enableScrollWheelZoom(true);
+                // 添加缩放控件
+                map.addControl(new BMap.NavigationControl());
+                // 添加定位标记点
+                marker.addEventListener("click", function() {
+                    map.openInfoWindow(infoWindow, point);
+                });
+                // 页面加载自动打开信息窗口
                 map.openInfoWindow(infoWindow, point);
-            });
-            map.openInfoWindow(infoWindow, point);
-        }
+            }
 
-        // 表单验证与提交处理
-        (() => {
-            'use strict';
+            // ===================== 2. 表单验证与提交处理 =====================
             const form = document.getElementById('contactForm');
-            if (!form) return;
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (!form.checkValidity()) {
+                        form.classList.add('was-validated');
+                        return;
+                    }
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (!form.checkValidity()) {
-                    form.classList.add('was-validated');
-                    return;
-                }
+                    const submitBtn = form.querySelector('.btn-primary');
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> 提交中...';
 
-                const submitBtn = form.querySelector('.btn-primary');
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> 提交中...';
-
-                setTimeout(() => {
-                    const alertDiv = document.createElement('div');
-                    alertDiv.className = 'alert alert-success mt-4';
-                    alertDiv.role = 'alert';
-                    alertDiv.innerHTML = '<i class="fas fa-check-circle me-2"></i> 留言提交成功！我们会尽快与您联系 😊';
-                    form.parentNode.insertBefore(alertDiv, form);
-
-                    form.reset();
-                    form.classList.remove('was-validated');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> 提交留言';
-                    
                     setTimeout(() => {
-                        alertDiv.style.opacity = '0';
-                        alertDiv.style.transition = 'opacity 0.5s ease';
-                        setTimeout(() => alertDiv.remove(), 500);
-                    }, 3000);
-                }, 1500);
-            });
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert alert-success mt-4';
+                        alertDiv.role = 'alert';
+                        alertDiv.innerHTML = '<i class="fas fa-check-circle me-2"></i> 留言提交成功！我们会尽快与您联系 😊';
+                        form.parentNode.insertBefore(alertDiv, form);
 
-            const inputs = form.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                input.addEventListener('input', () => {
-                    if (form.classList.contains('was-validated')) {
-                        input.checkValidity();
+                        form.reset();
+                        form.classList.remove('was-validated');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> 提交留言';
+                        
+                        setTimeout(() => {
+                            alertDiv.style.opacity = '0';
+                            alertDiv.style.transition = 'opacity 0.5s ease';
+                            setTimeout(() => alertDiv.remove(), 500);
+                        }, 3000);
+                    }, 1500);
+                });
+
+                const inputs = form.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    input.addEventListener('input', () => {
+                        if (form.classList.contains('was-validated')) {
+                            input.checkValidity();
+                        }
+                    });
+                });
+            }
+
+            // ===================== 3. 导航栏滚动效果 =====================
+            const navbar = document.getElementById('mainNavbar');
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.style.backgroundColor = 'rgba(29, 53, 87, 0.95) !important';
+                        navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                    } else {
+                        navbar.style.backgroundColor = 'var(--secondary-color) !important';
+                        navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
                     }
                 });
-            });
-        })();
-
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.backgroundColor = 'rgba(29, 53, 87, 0.95) !important';
-                navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-            } else {
-                navbar.style.backgroundColor = 'var(--secondary-color) !important';
-                navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
             }
-        });
 
-        // ===================== 新增：二维码弹窗逻辑 =====================
-        (() => {
-            // 获取元素
+            // ===================== 4. 二维码弹窗逻辑 =====================
             const modal = document.getElementById('qrcodeModal');
             const modalClose = document.getElementById('modalClose');
             const modalTitle = document.getElementById('modalTitle');
@@ -1018,42 +1018,40 @@
                 modalImg.src = qrcodeSrc;
                 modalImg.alt = title;
                 modal.classList.add('show');
-                document.body.style.overflow = 'hidden'; // 禁止页面滚动
+                document.body.style.overflow = 'hidden';
             }
 
             // 关闭弹窗
             function closeModal() {
                 modal.classList.remove('show');
-                document.body.style.overflow = ''; // 恢复页面滚动
+                document.body.style.overflow = '';
             }
 
             // 给所有图标绑定点击事件
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const title = trigger.dataset.title;
-                    const qrcode = trigger.dataset.qrcode;
-                    openModal(title, qrcode);
+            if (triggers.length > 0) {
+                triggers.forEach(trigger => {
+                    trigger.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const title = trigger.dataset.title;
+                        const qrcode = trigger.dataset.qrcode;
+                        openModal(title, qrcode);
+                    });
                 });
-            });
+            }
 
-            // 点击关闭按钮关闭弹窗
-            modalClose.addEventListener('click', closeModal);
-
-            // 点击遮罩层关闭弹窗
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // 按ESC键关闭弹窗
+            // 关闭事件
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('show')) {
                     closeModal();
                 }
             });
-        })();
+        });
     </script>
 </body>
 </html>
