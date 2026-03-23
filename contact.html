@@ -828,10 +828,7 @@
             // 5. 添加地图控件（缩放按钮）
             map.addControl(new BMap.NavigationControl());
             // 6. 添加定位标记点
-            const marker = new BMap.Marker(point);
-            map.addOverlay(marker);
-            // 7. 点击标记弹出信息窗口
-            const infoWindow = new BMap.InfoWindow("<div style='padding:10px;'><h5>重庆邮电大学</h5><p>地址：重庆市南岸区重庆邮电大学</p></div>");
+          
             marker.addEventListener("click", function() {
                 map.openInfoWindow(infoWindow, point);
             });
