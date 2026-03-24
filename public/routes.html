@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟台旅游路线 - 山海仙境 魅力烟台</title>
+    <!-- 外部样式库 - 仅保留单次引入 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 自定义CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 补充基础样式优化体验 */
+        .navbar {
+            background-color: #165DFF;
+        }
+        .page-header {
+            padding: 100px 0 40px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8fb 100%);
+            margin-bottom: 30px;
+        }
+        .route-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 15px 20px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .route-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .route-info-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+        .route-info-item i {
+            font-size: 24px;
+            color: #165DFF;
+            margin-bottom: 5px;
+        }
+        .timeline {
+            border-left: 2px solid #165DFF;
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+        .timeline-item {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #165DFF;
+        }
+        .category-tabs .nav-link {
+            color: #333;
+            border: 1px solid transparent;
+        }
+        .category-tabs .nav-link.active {
+            background-color: #165DFF;
+            color: white;
+            border-color: #165DFF;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-water"></i> 烟台旅游
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attractions.html">景点介绍</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="food.html">美食推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accommodation.html">住宿推荐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="routes.html">旅游路线</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">联系我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1>烟台旅游路线</h1>
+            <p>精选多条经典路线，带你玩转山海仙境烟台</p>
+        </div>
+    </header>
+
+    <!-- 路线分类标签 -->
+    <div class="container">
+        <ul class="nav category-tabs mb-4" id="routeTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-route-tab" data-bs-toggle="tab" 
+                        data-bs-target="#all-route" type="button" role="tab" 
+                        aria-controls="all-route" aria-selected="true">全部路线</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="day1-tab" data-bs-toggle="tab" 
+                        data-bs-target="#day1" type="button" role="tab" 
+                        aria-controls="day1" aria-selected="false">1日游</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="day2-3-tab" data-bs-toggle="tab" 
+                        data-bs-target="#day2-3" type="button" role="tab" 
+                        aria-controls="day2-3" aria-selected="false">2-3日游</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="day5-tab" data-bs-toggle="tab" 
+                        data-bs-target="#day5" type="button" role="tab" 
+                        aria-controls="day5" aria-selected="false">5日深度游</button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 路线内容 -->
+    <div class="container">
+        <div class="tab-content" id="routeTabsContent">
+            <!-- 全部路线 -->
+            <div class="tab-pane fade show active" id="all-route" role="tabpanel" aria-labelledby="all-route-tab">
+                <!-- 烟台市区1日游 -->
+                <div class="route-card">
+                    <div class="card-header">
+                        <h3>烟台市区经典1日游</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info">
+                            <div class="route-info-item">
+                                <i class="fas fa-clock"></i>
+                                <p>游玩时长</p>
+                                <strong>1天</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>途经景点</p>
+                                <strong>6个</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-route"></i>
+                                <p>适合人群</p>
+                                <strong>首次到访、短途出行</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-car"></i>
+                                <p>交通方式</p>
+                                <strong>公交/打车/自驾</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="route1Accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="route1Heading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#route1Collapse" aria-expanded="true" 
+                                            aria-controls="route1Collapse">
+                                        查看详细行程安排
+                                    </button>
+                                </h2>
+                                <div id="route1Collapse" class="accordion-collapse collapse show" 
+                                     aria-labelledby="route1Heading" data-bs-parent="#route1Accordion">
+                                    <div class="accordion-body">
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>08:00-10:00 烟台山景区</h5>
+                                                <p>烟台的城市地标，打卡百年领事馆建筑群、冰心纪念馆，登上灯塔俯瞰烟台市区全景和海湾风光，漫步朝阳街历史文化街区。</p>
+                                                <span class="badge bg-info">必打卡</span>
+                                                <span class="badge bg-secondary">人文景观</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>10:30-12:00 张裕酒文化博物馆</h5>
+                                                <p>中国第一家葡萄酒企业的百年博物馆，参观地下百年酒窖，了解葡萄酒酿造历史，还可以体验品酒、DIY酒标。</p>
+                                                <span class="badge bg-info">特色体验</span>
+                                                <span class="badge bg-secondary">文化科普</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>12:00-13:30 午餐时间</h5>
+                                                <p>推荐在芝罘区朝阳街附近品尝烟台特色美食，鲅鱼水饺、烟台焖子、海鲜小炒。</p>
+                                                <span class="badge bg-warning">美食推荐</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>14:00-16:00 第一海水浴场+滨海广场</h5>
+                                                <p>漫步烟台滨海步道，感受烟台的海滨风光，打卡烟台海昌渔人码头，欧式建筑风格超出片，还可以参观鲸鲨馆。</p>
+                                                <span class="badge bg-info">自然风光</span>
+                                                <span class="badge bg-secondary">网红打卡</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>16:30-18:00 东炮台海滨风景区</h5>
+                                                <p>参观百年古炮台，了解烟台海防历史，漫步月亮湾，打卡月亮老人雕塑，是烟台浪漫的地标。</p>
+                                                <span class="badge bg-secondary">人文历史</span>
+                                                <span class="badge bg-secondary">海滨风光</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>18:30之后 晚餐+夜景</h5>
+                                                <p>推荐去烟大小吃街品尝本地小吃，或者去滨海广场看烟台夜景，感受海滨城市的夜晚魅力。</p>
+                                                <span class="badge bg-warning">美食夜市</span>
+                                                <span class="badge bg-secondary">夜景打卡</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 蓬莱阁1日游 -->
+                <div class="route-card">
+                    <div class="card-header">
+                        <h3>蓬莱仙境1日游</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info">
+                            <div class="route-info-item">
+                                <i class="fas fa-clock"></i>
+                                <p>游玩时长</p>
+                                <strong>1天</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>途经景点</p>
+                                <strong>4个</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-route"></i>
+                                <p>适合人群</p>
+                                <strong>文化爱好者、仙境打卡</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-car"></i>
+                                <p>交通方式</p>
+                                <strong>自驾/大巴/包车</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="route2Accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="route2Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#route2Collapse" aria-expanded="false" 
+                                            aria-controls="route2Collapse">
+                                        查看详细行程安排
+                                    </button>
+                                </h2>
+                                <div id="route2Collapse" class="accordion-collapse collapse" 
+                                     aria-labelledby="route2Heading" data-bs-parent="#route2Accordion">
+                                    <div class="accordion-body">
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>07:30-09:00 烟台市区前往蓬莱</h5>
+                                                <p>从烟台市区出发，自驾约1小时车程，也可乘坐烟台汽车总站前往蓬莱的大巴，约1.5小时。</p>
+                                                <span class="badge bg-secondary">交通提示</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>09:00-12:00 蓬莱阁景区</h5>
+                                                <p>中国四大名楼之一，打卡蓬莱阁主楼、八仙过海相关景点、田横山、黄渤海分界线，感受人间仙境的魅力。</p>
+                                                <span class="badge bg-danger">核心景点</span>
+                                                <span class="badge bg-info">必打卡</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>12:00-13:30 午餐时间</h5>
+                                                <p>推荐在蓬莱阁附近的海鲜餐厅，品尝蓬莱特色美食，蓬莱小面、海鲜小炒。</p>
+                                                <span class="badge bg-warning">美食推荐</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>14:00-16:00 八仙过海景区/三仙山风景区</h5>
+                                                <p>二选一即可，八仙过海景区以八仙文化为主题，三面环海，景色优美；三仙山风景区是古典园林景观，仙气十足。</p>
+                                                <span class="badge bg-secondary">文化景观</span>
+                                                <span class="badge bg-info">可选景点</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>16:30-18:00 蓬莱水城+戚继光故里</h5>
+                                                <p>参观中国古代水军基地蓬莱水城，了解抗倭名将戚继光的历史事迹，感受蓬莱的历史文化底蕴。</p>
+                                                <span class="badge bg-secondary">人文历史</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>18:00之后 返程烟台市区</h5>
+                                                <p>结束一天的仙境之旅，自驾返回烟台市区，也可选择在蓬莱住宿，体验蓬莱夜景。</p>
+                                                <span class="badge bg-secondary">行程结束</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 养马岛1日游 -->
+                <div class="route-card">
+                    <div class="card-header">
+                        <h3>养马岛海岛风光1日游</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info">
+                            <div class="route-info-item">
+                                <i class="fas fa-clock"></i>
+                                <p>游玩时长</p>
+                                <strong>1天</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>途经景点</p>
+                                <strong>环岛全线</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-route"></i>
+                                <p>适合人群</p>
+                                <strong>海岛爱好者、亲子家庭</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-car"></i>
+                                <p>交通方式</p>
+                                <strong>自驾/租车骑行</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="route3Accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="route3Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#route3Collapse" aria-expanded="false" 
+                                            aria-controls="route3Collapse">
+                                        查看详细行程安排
+                                    </button>
+                                </h2>
+                                <div id="route3Collapse" class="accordion-collapse collapse" 
+                                     aria-labelledby="route3Heading" data-bs-parent="#route3Accordion">
+                                    <div class="accordion-body">
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>08:00-09:00 烟台市区前往养马岛</h5>
+                                                <p>从烟台市区自驾前往养马岛，约40分钟车程，也可乘坐公交617路直达养马岛。</p>
+                                                <span class="badge bg-secondary">交通提示</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>09:00-12:00 养马岛环岛西线游览</h5>
+                                                <p>打卡天马广场、养马岛海水浴场、獐岛栈桥，这里是养马岛标志性打卡点，海水清澈，拍照超出片，还可以赶海拾贝。</p>
+                                                <span class="badge bg-info">必打卡</span>
+                                                <span class="badge bg-secondary">自然风光</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>12:00-13:30 午餐时间</h5>
+                                                <p>推荐在养马岛渔家乐用餐，品尝刚打捞的新鲜海鲜，性价比高，体验渔家风味。</p>
+                                                <span class="badge bg-warning">美食推荐</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>13:30-17:00 养马岛环岛东线游览</h5>
+                                                <p>打卡秦风崖、金海角码头、莲花夕照、后海礁石群，这里是养马岛风景最美的路段，果冻海、悬崖栈道，感受东方夏威夷的魅力。</p>
+                                                <span class="badge bg-danger">核心景观</span>
+                                                <span class="badge bg-secondary">网红打卡</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>17:00-18:30 海岛日落观赏</h5>
+                                                <p>在养马岛东端或西端观景台，等待海上日落，夕阳洒在海面上，景色绝美，是摄影爱好者的天堂。</p>
+                                                <span class="badge bg-info">特色体验</span>
+                                                <span class="badge bg-secondary">日落打卡</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>18:30之后 返程/海岛住宿</h5>
+                                                <p>可选择自驾返回烟台市区，也可以选择在养马岛民宿住宿，体验海岛的夜晚星空和清晨日出。</p>
+                                                <span class="badge bg-secondary">行程结束</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 烟台3日游 -->
+                <div class="route-card">
+                    <div class="card-header">
+                        <h3>烟台经典3日游（市区+蓬莱+养马岛）</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info">
+                            <div class="route-info-item">
+                                <i class="fas fa-clock"></i>
+                                <p>游玩时长</p>
+                                <strong>3天2晚</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>覆盖区域</p>
+                                <strong>市区/蓬莱/养马岛</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-route"></i>
+                                <p>适合人群</p>
+                                <strong>首次深度游、家庭出行</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-hotel"></i>
+                                <p>住宿建议</p>
+                                <strong>芝罘区/莱山区</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="route4Accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="route4Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#route4Collapse" aria-expanded="false" 
+                                            aria-controls="route4Collapse">
+                                        查看详细行程安排
+                                    </button>
+                                </h2>
+                                <div id="route4Collapse" class="accordion-collapse collapse" 
+                                     aria-labelledby="route4Heading" data-bs-parent="#route4Accordion">
+                                    <div class="accordion-body">
+                                        <h5 class="text-primary mb-3"><i class="fas fa-calendar-day"></i> 第一天：烟台市区深度游</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：烟台山景区+朝阳街</h5>
+                                                <p>游览烟台的母亲山，参观百年领事馆建筑群，登灯塔俯瞰海湾，漫步朝阳街历史文化街区，感受烟台的开埠文化。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：张裕酒文化博物馆+滨海广场</h5>
+                                                <p>了解中国葡萄酒百年历史，参观地下酒窖，品酒体验。之后漫步滨海广场，感受烟台的海滨风光。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>晚上：第一海水浴场+烟大小吃街</h5>
+                                                <p>在第一海水浴场看日落，之后去烟大小吃街品尝烟台特色小吃，体验烟台的夜生活。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第二天：蓬莱仙境游</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：蓬莱阁景区</h5>
+                                                <p>游览中国四大名楼之一的蓬莱阁，参观八仙过海相关景点，登田横山看黄渤海分界线，感受人间仙境的魅力。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：八仙过海景区/三仙山</h5>
+                                                <p>二选一游览，八仙过海景区以八仙文化为主题，三仙山是古典园林景观，仙气十足。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>晚上：返回烟台市区</h5>
+                                                <p>结束蓬莱仙境之旅，返回烟台市区，可选择在市区品尝海鲜大餐。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第三天：养马岛海岛游</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：养马岛环岛西线</h5>
+                                                <p>游览天马广场、海水浴场、獐岛栈桥，赶海拾贝，感受养马岛的清新海风。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：养马岛环岛东线</h5>
+                                                <p>游览秦风崖、金海角码头、莲花夕照，欣赏养马岛最美的海景，打卡果冻海秘境。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>傍晚：海岛日落+返程</h5>
+                                                <p>在养马岛观赏绝美海上日落，之后结束三天的烟台之旅，返程或继续你的旅程。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 烟台5日深度游 -->
+                <div class="route-card">
+                    <div class="card-header">
+                        <h3>烟台5日深度游（全域精华）</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info">
+                            <div class="route-info-item">
+                                <i class="fas fa-clock"></i>
+                                <p>游玩时长</p>
+                                <strong>5天4晚</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <p>覆盖区域</p>
+                                <strong>市区/蓬莱/养马岛/长岛/龙口</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-route"></i>
+                                <p>适合人群</p>
+                                <strong>深度游爱好者、休闲度假</strong>
+                            </div>
+                            <div class="route-info-item">
+                                <i class="fas fa-hotel"></i>
+                                <p>住宿建议</p>
+                                <strong>市区2晚+长岛1晚+蓬莱1晚</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion" id="route5Accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="route5Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#route5Collapse" aria-expanded="false" 
+                                            aria-controls="route5Collapse">
+                                        查看详细行程安排
+                                    </button>
+                                </h2>
+                                <div id="route5Collapse" class="accordion-collapse collapse" 
+                                     aria-labelledby="route5Heading" data-bs-parent="#route5Accordion">
+                                    <div class="accordion-body">
+                                        <h5 class="text-primary mb-3"><i class="fas fa-calendar-day"></i> 第一天：烟台市区经典游</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>全天：烟台山→张裕酒文化博物馆→滨海广场→东炮台→月亮湾</h5>
+                                                <p>深度游览烟台市区核心景点，感受烟台的开埠文化和海滨风光。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第二天：养马岛+牟氏庄园</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：养马岛环岛深度游</h5>
+                                                <p>游览养马岛全岛精华景点，体验海岛风光和赶海乐趣。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：牟氏庄园</h5>
+                                                <p>参观北方最大的地主庄园，了解胶东民俗文化。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第三天：蓬莱+长岛</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：蓬莱阁景区</h5>
+                                                <p>游览蓬莱阁核心景点，感受仙境文化。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：乘船前往长岛，入住渔家民宿</h5>
+                                                <p>体验长岛海岛风情，晚餐品尝长岛特色海鲜。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第四天：长岛环岛游</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>全天：九丈崖→月牙湾→望夫礁→烽山林海</h5>
+                                                <p>游览长岛北线精华景点，欣赏海岛地质奇观和黄渤海交汇风光。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第五天：龙口南山+返程</h5>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <h5>上午：龙口南山旅游景区</h5>
+                                                <p>游览南山大佛，感受佛教文化和山水景观。</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <h5>下午：返程</h5>
+                                                <p>结束5天深度游，返回出发地。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1日游 -->
+            <div class="tab-pane fade" id="day1" role="tabpanel" aria-labelledby="day1-tab">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- 烟台市区1日游 -->
+                        <div class="route-card">
+                            <div class="card-header">
+                                <h3>烟台市区经典1日游</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>1天</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>途经景点</p>
+                                        <strong>6个</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>首次到访、短途出行</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-car"></i>
+                                        <p>交通方式</p>
+                                        <strong>公交/打车/自驾</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route1AccordionDay1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route1HeadingDay1">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route1CollapseDay1" aria-expanded="true" 
+                                                    aria-controls="route1CollapseDay1">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route1CollapseDay1" class="accordion-collapse collapse show" 
+                                             aria-labelledby="route1HeadingDay1" data-bs-parent="#route1AccordionDay1">
+                                            <div class="accordion-body">
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>08:00-10:00 烟台山景区</h5>
+                                                        <p>烟台的城市地标，打卡百年领事馆建筑群、冰心纪念馆，登上灯塔俯瞰烟台市区全景和海湾风光，漫步朝阳街历史文化街区。</p>
+                                                        <span class="badge bg-info">必打卡</span>
+                                                        <span class="badge bg-secondary">人文景观</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>10:30-12:00 张裕酒文化博物馆</h5>
+                                                        <p>中国第一家葡萄酒企业的百年博物馆，参观地下百年酒窖，了解葡萄酒酿造历史，还可以体验品酒、DIY酒标。</p>
+                                                        <span class="badge bg-info">特色体验</span>
+                                                        <span class="badge bg-secondary">文化科普</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>12:00-13:30 午餐时间</h5>
+                                                        <p>推荐在芝罘区朝阳街附近品尝烟台特色美食，鲅鱼水饺、烟台焖子、海鲜小炒。</p>
+                                                        <span class="badge bg-warning">美食推荐</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>14:00-16:00 第一海水浴场+滨海广场</h5>
+                                                        <p>漫步烟台滨海步道，感受烟台的海滨风光，打卡烟台海昌渔人码头，欧式建筑风格超出片，还可以参观鲸鲨馆。</p>
+                                                        <span class="badge bg-info">自然风光</span>
+                                                        <span class="badge bg-secondary">网红打卡</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>16:30-18:00 东炮台海滨风景区</h5>
+                                                        <p>参观百年古炮台，了解烟台海防历史，漫步月亮湾，打卡月亮老人雕塑，是烟台浪漫的地标。</p>
+                                                        <span class="badge bg-secondary">人文历史</span>
+                                                        <span class="badge bg-secondary">海滨风光</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>18:30之后 晚餐+夜景</h5>
+                                                        <p>推荐去烟大小吃街品尝本地小吃，或者去滨海广场看烟台夜景，感受海滨城市的夜晚魅力。</p>
+                                                        <span class="badge bg-warning">美食夜市</span>
+                                                        <span class="badge bg-secondary">夜景打卡</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 蓬莱阁1日游 -->
+                        <div class="route-card mt-3">
+                            <div class="card-header">
+                                <h3>蓬莱仙境1日游</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>1天</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>途经景点</p>
+                                        <strong>4个</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>文化爱好者、仙境打卡</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-car"></i>
+                                        <p>交通方式</p>
+                                        <strong>自驾/大巴/包车</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route2AccordionDay1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route2HeadingDay1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route2CollapseDay1" aria-expanded="false" 
+                                                    aria-controls="route2CollapseDay1">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route2CollapseDay1" class="accordion-collapse collapse" 
+                                             aria-labelledby="route2HeadingDay1" data-bs-parent="#route2AccordionDay1">
+                                            <div class="accordion-body">
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>07:30-09:00 烟台市区前往蓬莱</h5>
+                                                        <p>从烟台市区出发，自驾约1小时车程，也可乘坐烟台汽车总站前往蓬莱的大巴，约1.5小时。</p>
+                                                        <span class="badge bg-secondary">交通提示</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>09:00-12:00 蓬莱阁景区</h5>
+                                                        <p>中国四大名楼之一，打卡蓬莱阁主楼、八仙过海相关景点、田横山、黄渤海分界线，感受人间仙境的魅力。</p>
+                                                        <span class="badge bg-danger">核心景点</span>
+                                                        <span class="badge bg-info">必打卡</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>12:00-13:30 午餐时间</h5>
+                                                        <p>推荐在蓬莱阁附近的海鲜餐厅，品尝蓬莱特色美食，蓬莱小面、海鲜小炒。</p>
+                                                        <span class="badge bg-warning">美食推荐</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>14:00-16:00 八仙过海景区/三仙山风景区</h5>
+                                                        <p>二选一即可，八仙过海景区以八仙文化为主题，三面环海，景色优美；三仙山风景区是古典园林景观，仙气十足。</p>
+                                                        <span class="badge bg-secondary">文化景观</span>
+                                                        <span class="badge bg-info">可选景点</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>16:30-18:00 蓬莱水城+戚继光故里</h5>
+                                                        <p>参观中国古代水军基地蓬莱水城，了解抗倭名将戚继光的历史事迹，感受蓬莱的历史文化底蕴。</p>
+                                                        <span class="badge bg-secondary">人文历史</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>18:00之后 返程烟台市区</h5>
+                                                        <p>结束一天的仙境之旅，自驾返回烟台市区，也可选择在蓬莱住宿，体验蓬莱夜景。</p>
+                                                        <span class="badge bg-secondary">行程结束</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 养马岛1日游 -->
+                        <div class="route-card mt-3">
+                            <div class="card-header">
+                                <h3>养马岛海岛风光1日游</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>1天</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>途经景点</p>
+                                        <strong>环岛全线</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>海岛爱好者、亲子家庭</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-car"></i>
+                                        <p>交通方式</p>
+                                        <strong>自驾/租车骑行</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route3AccordionDay1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route3HeadingDay1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route3CollapseDay1" aria-expanded="false" 
+                                                    aria-controls="route3CollapseDay1">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route3CollapseDay1" class="accordion-collapse collapse" 
+                                             aria-labelledby="route3HeadingDay1" data-bs-parent="#route3AccordionDay1">
+                                            <div class="accordion-body">
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>08:00-09:00 烟台市区前往养马岛</h5>
+                                                        <p>从烟台市区自驾前往养马岛，约40分钟车程，也可乘坐公交617路直达养马岛。</p>
+                                                        <span class="badge bg-secondary">交通提示</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>09:00-12:00 养马岛环岛西线游览</h5>
+                                                        <p>打卡天马广场、养马岛海水浴场、獐岛栈桥，这里是养马岛标志性打卡点，海水清澈，拍照超出片，还可以赶海拾贝。</p>
+                                                        <span class="badge bg-info">必打卡</span>
+                                                        <span class="badge bg-secondary">自然风光</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>12:00-13:30 午餐时间</h5>
+                                                        <p>推荐在养马岛渔家乐用餐，品尝刚打捞的新鲜海鲜，性价比高，体验渔家风味。</p>
+                                                        <span class="badge bg-warning">美食推荐</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>13:30-17:00 养马岛环岛东线游览</h5>
+                                                        <p>打卡秦风崖、金海角码头、莲花夕照、后海礁石群，这里是养马岛风景最美的路段，果冻海、悬崖栈道，感受东方夏威夷的魅力。</p>
+                                                        <span class="badge bg-danger">核心景观</span>
+                                                        <span class="badge bg-secondary">网红打卡</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>17:00-18:30 海岛日落观赏</h5>
+                                                        <p>在养马岛东端或西端观景台，等待海上日落，夕阳洒在海面上，景色绝美，是摄影爱好者的天堂。</p>
+                                                        <span class="badge bg-info">特色体验</span>
+                                                        <span class="badge bg-secondary">日落打卡</span>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>18:30之后 返程/海岛住宿</h5>
+                                                        <p>可选择自驾返回烟台市区，也可以选择在养马岛民宿住宿，体验海岛的夜晚星空和清晨日出。</p>
+                                                        <span class="badge bg-secondary">行程结束</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-3日游 -->
+            <div class="tab-pane fade" id="day2-3" role="tabpanel" aria-labelledby="day2-3-tab">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- 烟台经典3日游 -->
+                        <div class="route-card">
+                            <div class="card-header">
+                                <h3>烟台经典3日游（市区+蓬莱+养马岛）</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>3天2晚</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>覆盖区域</p>
+                                        <strong>市区/蓬莱/养马岛</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>首次深度游、家庭出行</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-hotel"></i>
+                                        <p>住宿建议</p>
+                                        <strong>芝罘区/莱山区</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route4AccordionDay23">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route4HeadingDay23">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route4CollapseDay23" aria-expanded="false" 
+                                                    aria-controls="route4CollapseDay23">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route4CollapseDay23" class="accordion-collapse collapse" 
+                                             aria-labelledby="route4HeadingDay23" data-bs-parent="#route4AccordionDay23">
+                                            <div class="accordion-body">
+                                                <h5 class="text-primary mb-3"><i class="fas fa-calendar-day"></i> 第一天：烟台市区深度游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：烟台山景区+朝阳街</h5>
+                                                        <p>游览烟台的母亲山，参观百年领事馆建筑群，登灯塔俯瞰海湾，漫步朝阳街历史文化街区，感受烟台的开埠文化。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：张裕酒文化博物馆+滨海广场</h5>
+                                                        <p>了解中国葡萄酒百年历史，参观地下酒窖，品酒体验。之后漫步滨海广场，感受烟台的海滨风光。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>晚上：第一海水浴场+烟大小吃街</h5>
+                                                        <p>在第一海水浴场看日落，之后去烟大小吃街品尝烟台特色小吃，体验烟台的夜生活。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第二天：蓬莱仙境游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：蓬莱阁景区</h5>
+                                                        <p>游览中国四大名楼之一的蓬莱阁，参观八仙过海相关景点，登田横山看黄渤海分界线，感受人间仙境的魅力。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：八仙过海景区/三仙山</h5>
+                                                        <p>二选一游览，八仙过海景区以八仙文化为主题，三仙山是古典园林景观，仙气十足。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>晚上：返回烟台市区</h5>
+                                                        <p>结束蓬莱仙境之旅，返回烟台市区，可选择在市区品尝海鲜大餐。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第三天：养马岛海岛游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：养马岛环岛西线</h5>
+                                                        <p>游览天马广场、海水浴场、獐岛栈桥，赶海拾贝，感受养马岛的清新海风。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：养马岛环岛东线</h5>
+                                                        <p>游览秦风崖、金海角码头、莲花夕照，欣赏养马岛最美的海景，打卡果冻海秘境。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>傍晚：海岛日落+返程</h5>
+                                                        <p>在养马岛观赏绝美海上日落，之后结束三天的烟台之旅，返程或继续你的旅程。</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 烟台2日精华游 -->
+                        <div class="route-card mt-3">
+                            <div class="card-header">
+                                <h3>烟台2日精华游（市区+养马岛）</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>2天1晚</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>覆盖区域</p>
+                                        <strong>市区/养马岛</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>短途度假、情侣出行</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-hotel"></i>
+                                        <p>住宿建议</p>
+                                        <strong>莱山区海景酒店</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route6AccordionDay23">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route6HeadingDay23">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route6CollapseDay23" aria-expanded="false" 
+                                                    aria-controls="route6CollapseDay23">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route6CollapseDay23" class="accordion-collapse collapse" 
+                                             aria-labelledby="route6HeadingDay23" data-bs-parent="#route6AccordionDay23">
+                                            <div class="accordion-body">
+                                                <h5 class="text-primary mb-3"><i class="fas fa-calendar-day"></i> 第一天：烟台市区游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：烟台山+朝阳街</h5>
+                                                        <p>游览烟台核心地标，感受开埠文化和历史底蕴。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：滨海广场+第一海水浴场</h5>
+                                                        <p>漫步海滨步道，体验烟台的滨海风情。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>晚上：渔人码头夜景+海鲜晚餐</h5>
+                                                        <p>欣赏渔人码头欧式建筑夜景，品尝正宗烟台海鲜。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第二天：养马岛环岛游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>全天：养马岛环岛深度游</h5>
+                                                        <p>游览养马岛全岛精华景点，体验赶海、看日落，深度感受海岛风光。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>傍晚：返程</h5>
+                                                        <p>结束2日精华游，返回出发地。</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5日深度游 -->
+            <div class="tab-pane fade" id="day5" role="tabpanel" aria-labelledby="day5-tab">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- 烟台5日深度游 -->
+                        <div class="route-card">
+                            <div class="card-header">
+                                <h3>烟台5日深度游（全域精华）</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="route-info">
+                                    <div class="route-info-item">
+                                        <i class="fas fa-clock"></i>
+                                        <p>游玩时长</p>
+                                        <strong>5天4晚</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                        <p>覆盖区域</p>
+                                        <strong>市区/蓬莱/养马岛/长岛/龙口</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-route"></i>
+                                        <p>适合人群</p>
+                                        <strong>深度游爱好者、休闲度假</strong>
+                                    </div>
+                                    <div class="route-info-item">
+                                        <i class="fas fa-hotel"></i>
+                                        <p>住宿建议</p>
+                                        <strong>市区2晚+长岛1晚+蓬莱1晚</strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="accordion" id="route5AccordionDay5">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="route5HeadingDay5">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                    data-bs-target="#route5CollapseDay5" aria-expanded="false" 
+                                                    aria-controls="route5CollapseDay5">
+                                                查看详细行程安排
+                                            </button>
+                                        </h2>
+                                        <div id="route5CollapseDay5" class="accordion-collapse collapse" 
+                                             aria-labelledby="route5HeadingDay5" data-bs-parent="#route5AccordionDay5">
+                                            <div class="accordion-body">
+                                                <h5 class="text-primary mb-3"><i class="fas fa-calendar-day"></i> 第一天：烟台市区经典游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>全天：烟台山→张裕酒文化博物馆→滨海广场→东炮台→月亮湾</h5>
+                                                        <p>深度游览烟台市区核心景点，感受烟台的开埠文化和海滨风光。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第二天：养马岛+牟氏庄园</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：养马岛环岛深度游</h5>
+                                                        <p>游览养马岛全岛精华景点，体验海岛风光和赶海乐趣。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：牟氏庄园</h5>
+                                                        <p>参观北方最大的地主庄园，了解胶东民俗文化。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第三天：蓬莱+长岛</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：蓬莱阁景区</h5>
+                                                        <p>游览蓬莱阁核心景点，感受仙境文化。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：乘船前往长岛，入住渔家民宿</h5>
+                                                        <p>体验长岛海岛风情，晚餐品尝长岛特色海鲜。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第四天：长岛环岛游</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>全天：九丈崖→月牙湾→望夫礁→烽山林海</h5>
+                                                        <p>游览长岛北线精华景点，欣赏海岛地质奇观和黄渤海交汇风光。</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <h5 class="text-primary mb-3 mt-4"><i class="fas fa-calendar-day"></i> 第五天：龙口南山+返程</h5>
+                                                <div class="timeline">
+                                                    <div class="timeline-item">
+                                                        <h5>上午：龙口南山旅游景区</h5>
+                                                        <p>游览南山大佛，感受佛教文化和山水景观。</p>
+                                                    </div>
+                                                    <div class="timeline-item">
+                                                        <h5>下午：返程</h5>
+                                                        <p>结束5天深度游，返回出发地。</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
