@@ -1,20 +1,19 @@
 {
   "name": "yantai-travel",
   "version": "1.0.0",
-  "description": "",
+  "description": "烟台旅游官网",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "npm install"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "body-parser": "^2.2.2",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "nodemailer": "^8.0.3"
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "nodemailer": "^6.9.16"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
