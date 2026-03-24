@@ -1045,7 +1045,7 @@
     };
 
     // 3. 异步提交到后端接口
-    fetch('http://localhost:3000/send-email', { // 后端接口地址，需和后端一致
+    fetch('/send-email', { // 后端接口地址，需和后端一致
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
