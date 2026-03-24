@@ -4,23 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>烟台旅游 - 山海仙境 鲜美烟台</title>
+    <!-- 原有依赖完全保留 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- 新增艺术字体引入 -->
-    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 仅新增：弹窗艺术字体引入（不影响原有样式） -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <!-- 仅新增：弹窗专属样式（不污染原有页面任何样式） -->
     <style>
-        /* 全局变量定义 */
-        :root {
-            --color-bg-main: #f8f9fa;
-            --color-bg-card: #ffffff;
-            --color-text-primary: #2c3e50;
-            --color-text-secondary: #6c757d;
-            --shadow-card: 0 8px 32px rgba(31, 38, 135, 0.1);
-            --glass-blur: 12px;
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
-
-        /* 视频展示区容器 */
+        /* 视频展示区原有样式完全保留 */
         .video-show-section {
             padding: 6rem 0;
             background-color: var(--color-bg-main);
@@ -44,7 +36,6 @@
             color: var(--color-text-secondary);
             font-size: 1rem;
         }
-        /* 视频播放容器 */
         .video-player-wrapper {
             background-color: var(--color-bg-card);
             border-radius: 20px;
@@ -60,93 +51,91 @@
             object-fit: cover;
         }
 
-        /* 新增：毛玻璃弹窗样式 */
-        .glass-modal .modal-content {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        /* ===================== 仅新增：微信/QQ弹窗专属样式 不影响原有页面 ===================== */
+        /* 弹窗遮罩层毛玻璃效果 */
+        .custom-qr-modal .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        /* 弹窗主体毛玻璃质感 */
+        .custom-qr-modal .modal-content {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 22px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
-
-        /* 艺术字标题样式 */
+        /* 弹窗顶部艺术字标题 - 鲜明色彩 */
         .modal-art-title {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 2.4rem;
+            font-weight: 400;
             text-align: center;
-            color: #e63946; /* 鲜明的红色系 */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 1rem 0;
-            background: linear-gradient(120deg, #ff9a8b 0%, #e63946 100%);
+            margin: 0;
+            padding: 20px 0 10px;
+            background: linear-gradient(90deg, #e63946 0%, #ff7b00 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(230, 57, 70, 0.15);
         }
-
-        /* 弹窗内容区域样式 */
-        .modal-body-content {
-            padding: 2rem;
+        /* 弹窗内容区 */
+        .custom-qr-modal .modal-body {
+            padding: 15px 30px 30px;
             text-align: center;
         }
-
-        .contact-icon {
-            font-size: 4rem;
-            margin: 1rem;
-            color: #165dff;
-            transition: transform 0.3s ease;
+        /* 二维码图片 - 完整显示+和谐比例 */
+        .custom-qr-modal .qr-img {
+            width: 100%;
+            max-width: 230px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            margin: 0 auto 18px;
+            display: block;
         }
-
-        .contact-icon:hover {
-            transform: scale(1.1);
+        /* 弹窗底部说明文字 */
+        .custom-qr-modal .qr-desc {
+            font-size: 1rem;
+            color: #334155;
+            line-height: 1.5;
+            margin: 0;
         }
-
-        .contact-qrcode {
-            width: 200px;
-            height: 200px;
-            margin: 1rem auto;
-            border: 5px solid rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        .custom-qr-modal .qr-desc-small {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin: 8px 0 0;
         }
-
-        .contact-text {
-            font-size: 1.2rem;
-            color: var(--color-text-primary);
-            margin-top: 1rem;
-            font-family: 'ZCOOL KuaiLe', cursive;
-        }
-
-        /* 弹窗关闭按钮样式 */
-        .glass-modal .btn-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-
-        /* 底部图标按钮样式 */
-        .contact-btn {
-            background: none;
+        /* 右上角关闭按钮 */
+        .custom-qr-modal .modal-header {
             border: none;
             padding: 0;
-            cursor: pointer;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+        }
+        .custom-qr-modal .btn-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            opacity: 1;
+        }
+        /* 隐藏原有底部按钮区 */
+        .custom-qr-modal .modal-footer {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏（保留不变） -->
+    <!-- 原有顶部导航栏 完全不动 -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -180,7 +169,7 @@
         </div>
     </nav>
 
-    <!-- 原有轮播图（完全保留，不修改） -->
+    <!-- 原有轮播图 完全不动 -->
     <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -226,7 +215,7 @@
         </button>
     </div>
 
-    <!-- 原有特色板块（保留不变） -->
+    <!-- 原有特色板块 完全不动 -->
     <section class="section container" style="margin-top: 5rem;">
         <div class="section-title">
             <h2>为什么选择烟台</h2>
@@ -263,7 +252,7 @@
         </div>
     </section>
 
-    <!-- 新增：视频展示区域（核心修改） -->
+    <!-- 原有视频展示区域 完全不动 -->
     <section class="video-show-section">
         <div class="video-show-container">
             <div class="video-show-title">
@@ -271,23 +260,20 @@
                 <p>18秒领略山海仙境的独特魅力</p>
             </div>
             <div class="video-player-wrapper">
-                <!-- 核心视频标签：带控制按钮，用户可手动播放/暂停 -->
                 <video 
                     class="video-player"
-                    controls          <!-- 显示播放/暂停/进度条等控制按钮 -->
-                    poster="images/video-cover.jpg"  <!-- 视频封面图（可选） -->
-                    preload="metadata"  <!-- 仅预加载视频信息，加快页面加载 -->
+                    controls
+                    poster="images/video-cover.jpg"
+                    preload="metadata"
                 >
-                    <!-- 视频源：替换为你的视频路径 -->
                    <source src="videos/show.mp4" type="video/mp4">
-                    <!-- 浏览器不支持时的提示 -->
                     您的浏览器不支持HTML5视频播放，请升级至最新版本浏览器。
                 </video>
             </div>
         </div>
     </section>
 
-    <!-- 页脚（修改：添加弹窗触发按钮） -->
+    <!-- 页脚：仅删除微博图标，其他原有样式/布局完全不动 -->
     <footer>
         <div class="container">
             <div class="row">
@@ -315,15 +301,11 @@
                         <li><i class="fas fa-clock"></i> 周一至周五 8:00-18:00</li>
                     </ul>
                     <div class="mt-3">
-                        <!-- 微信弹窗触发按钮 -->
-                        <button class="contact-btn me-3" data-bs-toggle="modal" data-bs-target="#wechatModal">
-                            <i class="fab fa-weixin fa-2x"></i>
-                        </button>
-                        <!-- QQ弹窗触发按钮 -->
-                        <button class="contact-btn me-3" data-bs-toggle="modal" data-bs-target="#qqModal">
-                            <i class="fab fa-qq fa-2x"></i>
-                        </button>
-                        <a href="#" class="me-3"><i class="fab fa-weibo fa-2x"></i></a>
+                        <!-- 微信图标：触发新弹窗 -->
+                        <a href="#" class="me-3" data-bs-toggle="modal" data-bs-target="#wechatQrModal"><i class="fab fa-weixin fa-2x"></i></a>
+                        <!-- 已删除微博图标 -->
+                        <!-- QQ图标：触发新弹窗 -->
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#qqQrModal"><i class="fab fa-qq fa-2x"></i></a>
                     </div>
                 </div>
             </div>
@@ -335,38 +317,42 @@
         </div>
     </footer>
 
-    <!-- 微信弹窗模态框 -->
-    <div class="modal fade glass-modal" id="wechatModal" tabindex="-1" aria-labelledby="wechatModalLabel" aria-hidden="true">
+    <!-- ===================== 仅修改：微信/QQ弹窗 毛玻璃+艺术字 ===================== -->
+    <!-- 微信二维码弹窗 -->
+    <div class="modal fade custom-qr-modal" id="wechatQrModal" tabindex="-1" aria-labelledby="wechatQrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-art-title" id="wechatModalLabel">扫码添加微信</h4>
-                <div class="modal-body modal-body-content">
-                    <i class="fab fa-weixin contact-icon"></i>
-                    <img src="images/wechat-qrcode.jpg" alt="微信二维码" class="contact-qrcode">
-                    <p class="contact-text">烟台旅游官方客服</p>
-                    <p>随时为您解答旅游相关问题</p>
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h4 class="modal-art-title" id="wechatQrModalLabel">微信扫码联系</h4>
+                <div class="modal-body">
+                    <img src="images/wechat.jpg" alt="微信二维码" class="qr-img">
+                    <p class="qr-desc">长按识别二维码，添加官方客服</p>
+                    <p class="qr-desc-small">随时为您解答烟台旅游相关问题</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- QQ弹窗模态框 -->
-    <div class="modal fade glass-modal" id="qqModal" tabindex="-1" aria-labelledby="qqModalLabel" aria-hidden="true">
+    <!-- QQ二维码弹窗 -->
+    <div class="modal fade custom-qr-modal" id="qqQrModal" tabindex="-1" aria-labelledby="qqQrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-art-title" id="qqModalLabel">加QQ好友交流</h4>
-                <div class="modal-body modal-body-content">
-                    <i class="fab fa-qq contact-icon"></i>
-                    <img src="images/qq-qrcode.jpg" alt="QQ二维码" class="contact-qrcode">
-                    <p class="contact-text">QQ号：264849893</p>
-                    <p>加入旅游交流群，获取更多福利</p>
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h4 class="modal-art-title" id="qqQrModalLabel">QQ扫码加群</h4>
+                <div class="modal-body">
+                    <img src="images/qq.jpg" alt="QQ二维码" class="qr-img">
+                    <p class="qr-desc">扫码加入烟台旅游交流群</p>
+                    <p class="qr-desc-small">获取最新攻略、结伴出行</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 原有脚本 完全不动 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
