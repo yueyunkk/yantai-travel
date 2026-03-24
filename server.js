@@ -5,102 +5,41 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
+// 本地测试用3000端口，部署时平台会自动分配端口
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
 
-// ==================== 启动日志（第一步就打印，确认代码执行） ====================
-console.log('🚀 开始执行server.js代码');
-console.log('📌 环境变量EMAIL_PASS是否存在：', !!process.env.EMAIL_PASS);
-if (process.env.EMAIL_PASS) {
-  console.log('📌 环境变量EMAIL_PASS长度：', process.env.EMAIL_PASS.length);
-}
+// ---------------- 中间件配置 ----------------
+app.use(cors()); // 允许跨域请求
+app.use(bodyParser.json()); // 解析前端发来的JSON数据
+// 托管public文件夹里的前端页面（这样访问根目录就能看到首页）
+app.use(express.static(path.join(__dirname, 'public')));
 
-// 中间件配置
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-const publicPath = path.join(__dirname, 'public');
-console.log('📌 前端静态文件路径：', publicPath);
-app.use(express.static(publicPath));
-
-// ==================== 邮箱配置（强制打印所有错误） ====================
-let transporter = null;
-const EMAIL_USER = '2064849893@qq.com'; // 你的发件邮箱
-const EMAIL_TO = '2064849893@qq.com'; // 你的收件邮箱
-
-try {
-  console.log('📧 开始初始化邮箱服务...');
-  if (!process.env.EMAIL_PASS) {
-    throw new Error('未读取到EMAIL_PASS环境变量！请检查Railway的Variables配置');
+// ---------------- 邮箱配置（必须修改！） ----------------
+const transporter = nodemailer.createTransport({
+  host: 'smtp.qq.com', // 如果你用163邮箱，改成 smtp.163.com
+  port: 465,
+  secure: true,
+  auth: {
+    user: '2064849893@qq.com', // 改成你的发送邮箱（比如你的QQ邮箱）
+    pass: 'jbuweecavezbcgaa' // 改成你的SMTP授权码（不是邮箱密码！）
   }
-
-  transporter = nodemailer.createTransport({
-    host: 'smtp.qq.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    },
-    // 开启调试日志，打印SMTP连接全过程
-    debug: true,
-    logger: true
-  });
-
-  // 验证邮箱连接（强制等待结果）
-  console.log('📧 正在验证邮箱SMTP连接...');
-  transporter.verify(function (error, success) {
-    if (error) {
-      console.error('❌ 邮箱SMTP连接失败，详细错误：', error);
-    } else {
-      console.log('✅ 邮箱SMTP连接成功！可以正常发送邮件');
-    }
-  });
-
-} catch (error) {
-  console.error('❌ 邮箱初始化失败，详细错误：', error);
-}
-
-// ==================== 接口配置 ====================
-// 健康检查
-app.get('/health', (req, res) => {
-  console.log('🏥 收到健康检查请求');
-  res.status(200).send('OK');
 });
 
-// 首页
-app.get('/', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
-
-// 留言提交接口（全日志版）
+// ---------------- 处理留言提交的接口 ----------------
 app.post('/send-email', async (req, res) => {
-  console.log('📥 收到留言提交请求，完整请求体：', JSON.stringify(req.body, null, 2));
   try {
+    // 1. 获取前端提交的数据
     const { name, phone, email, subject, message } = req.body;
 
-    // 校验必填项
+    // 2. 简单验证必填项
     if (!name || !phone || !subject || !message) {
-      console.log('❌ 表单校验失败，缺少必填项');
-      return res.status(400).json({
-        success: false,
-        message: '请填写姓名、电话、咨询类型和留言内容！'
-      });
+      return res.json({ success: false, message: '请填写必填的姓名、电话、咨询类型和留言！' });
     }
 
-    // 检查邮箱服务
-    if (!transporter) {
-      console.log('❌ 邮箱服务未初始化，无法发送邮件');
-      return res.status(500).json({
-        success: false,
-        message: '邮件服务未就绪，请联系管理员检查配置！'
-      });
-    }
-
-    // 构造邮件
+    // 3. 构造邮件内容
     const mailOptions = {
-      from: `烟台旅游留言 <${EMAIL_USER}>`,
-      to: EMAIL_TO,
+      from: `烟台旅游留言 <2064849893@qq.com>`, // 发件人（和上面user一致）
+      to: '2064849893@qq.com', // 改成你接收留言的邮箱（可以和发件人一样）
       subject: `【烟台旅游新留言】${name} - ${subject}`,
       html: `
         <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
@@ -118,34 +57,18 @@ app.post('/send-email', async (req, res) => {
       `
     };
 
-    // 发送邮件
-    console.log('📤 开始发送邮件...');
-    const sendResult = await transporter.sendMail(mailOptions);
-    console.log('✅ 邮件发送成功！发送结果：', sendResult);
-    res.json({
-      success: true,
-      message: '留言提交成功！我们会尽快与您联系 😊'
-    });
+    // 4. 发送邮件
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true, message: '留言提交成功！我们会尽快与您联系 😊' });
 
   } catch (error) {
-    console.error('❌ 接口处理失败，完整错误：', error);
-    res.status(500).json({
-      success: false,
-      message: '服务器处理失败：' + error.message
-    });
+    console.error('邮件发送失败：', error);
+    res.json({ success: false, message: '服务器出错了，请稍后重试！' });
   }
 });
 
-// ==================== 启动服务器 ====================
-try {
-  app.listen(PORT, HOST, () => {
-    console.log('=====================================');
-    console.log(`✅ 服务器已成功启动！`);
-    console.log(`🌐 监听地址：http://${HOST}:${PORT}`);
-    console.log(`🏥 健康检查地址：http://${HOST}:${PORT}/health`);
-    console.log('=====================================');
-  });
-} catch (error) {
-  console.error('❌ 服务器启动失败：', error);
-  process.exit(1);
-}
+// ---------------- 启动服务器 ----------------
+app.listen(PORT, () => {
+  console.log(`✅ 服务器已启动！`);
+  console.log(`📱 本地测试地址：http://localhost:${PORT}`);
+});
