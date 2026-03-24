@@ -1,4 +1,3 @@
-// 引入所有必须的模块，杜绝模块缺失错误
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -6,22 +5,17 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-// 【关键】Railway必须用环境变量PORT，绝对不能写死端口
 const PORT = process.env.PORT || 3000;
-// 【关键】必须监听0.0.0.0，适配容器环境
 const HOST = '0.0.0.0';
 
-// ==================== 中间件配置（必须按顺序） ====================
-// 允许跨域
+// 中间件配置
 app.use(cors());
-// 解析JSON请求体
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// 【关键】托管public文件夹里的前端页面，必须用绝对路径
 const publicPath = path.join(__dirname, 'public');
 app.use(express.static(publicPath));
 
-// ==================== 邮箱配置（增加容错，不会导致服务崩溃） ====================
+// 邮箱配置
 let transporter = null;
 try {
   transporter = nodemailer.createTransport({
@@ -29,60 +23,61 @@ try {
     port: 465,
     secure: true,
     auth: {
-      user: '2064849893@qq.com', // 你的发件邮箱
-      pass: process.env.EMAIL_PASS // 从Railway环境变量读取授权码
+      user: '2064849893@qq.com',
+      pass: process.env.EMAIL_PASS
     }
   });
-  // 验证邮箱配置是否正确
-  transporter.verify((error) => {
+
+  // 启动时验证邮箱连接
+  transporter.verify((error, success) => {
     if (error) {
-      console.warn('⚠️ 邮箱配置验证失败：', error.message);
+      console.error('❌ 邮箱服务连接失败：', error);
     } else {
-      console.log('✅ 邮箱服务配置成功，可正常发送邮件');
+      console.log('✅ 邮箱服务连接正常，可发送邮件');
     }
   });
 } catch (error) {
-  console.warn('⚠️ 邮箱初始化失败，不影响网站访问：', error.message);
+  console.error('❌ 邮箱初始化失败：', error);
 }
 
-// ==================== 接口配置 ====================
-// 【关键】健康检查接口，Railway必须通过这个接口判断服务是否正常
+// 健康检查接口
 app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
 
-// 根路径，直接返回首页
+// 根路径返回首页
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-// 留言提交接口（全容错版，绝对不会导致服务崩溃）
+// 留言提交接口（全日志版）
 app.post('/send-email', async (req, res) => {
-  console.log('📥 收到留言提交请求');
+  console.log('📥 收到留言提交请求，请求体：', req.body);
   try {
-    // 安全获取表单数据
     const { name, phone, email, subject, message } = req.body;
 
     // 校验必填项
     if (!name || !phone || !subject || !message) {
+      console.log('❌ 表单校验失败，缺少必填项');
       return res.status(400).json({
         success: false,
         message: '请填写姓名、电话、咨询类型和留言内容！'
       });
     }
 
-    // 检查邮箱服务是否就绪
+    // 检查邮箱服务
     if (!transporter) {
+      console.log('❌ 邮箱服务未就绪');
       return res.status(500).json({
         success: false,
         message: '邮件服务未就绪，请稍后重试！'
       });
     }
 
-    // 构造邮件内容
+    // 构造邮件
     const mailOptions = {
       from: `烟台旅游留言 <2064849893@qq.com>`,
-      to: '2064849893@qq.com', // 你的收件邮箱
+      to: '2064849893@qq.com',
       subject: `【烟台旅游新留言】${name} - ${subject}`,
       html: `
         <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
@@ -101,6 +96,7 @@ app.post('/send-email', async (req, res) => {
     };
 
     // 发送邮件
+    console.log('📤 开始发送邮件...');
     await transporter.sendMail(mailOptions);
     console.log('✅ 邮件发送成功！');
     res.json({
@@ -109,15 +105,15 @@ app.post('/send-email', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ 接口处理失败：', error);
+    console.error('❌ 接口处理失败，详细错误：', error);
     res.status(500).json({
       success: false,
-      message: '服务器处理失败，请稍后重试！'
+      message: '服务器处理失败：' + error.message
     });
   }
 });
 
-// ==================== 启动服务器 ====================
+// 启动服务器
 try {
   app.listen(PORT, HOST, () => {
     console.log('=====================================');
