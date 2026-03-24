@@ -991,10 +991,7 @@
                     map.addControl(new BMap.NavigationControl());
                     
                     // marker变量在当前作用域内声明，绝对不会泄露
-                    const marker = new BMap.Marker(point);
-                    map.addOverlay(marker);
-
-                    const infoWindow = new BMap.InfoWindow("<div style='padding:10px;'><h5>重庆邮电大学</h5><p>地址：重庆市南岸区重庆邮电大学逸夫科技楼</p></div>");
+        
                     marker.addEventListener("click", function() {
                         map.openInfoWindow(infoWindow, point);
                     });
