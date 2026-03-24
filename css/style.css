@@ -1214,28 +1214,26 @@ footer p {
 /* 核心：Bootstrap展开时会自动去掉.collapsed类，箭头旋转 */
 .route-collapse-btn:not(.collapsed) .arrow-icon {
     transform: rotate(180deg);
-}
-/* 优化后的二维码弹窗样式 - 高级质感+黄金比例 */
-/* 弹窗遮罩层 - 毛玻璃质感 */
+}/* 优化后的二维码弹窗样式 - 修复标题+完整显示二维码+高级质感 */
+/* 弹窗遮罩层 - 柔和毛玻璃质感 */
 .qr-modal .modal-backdrop {
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
-/* 弹窗整体容器 - 二维码弹窗黄金比例宽度 */
+/* 弹窗整体容器 - 黄金比例宽度，适配内容 */
 .qr-modal .modal-dialog {
-    max-width: 360px;
+    max-width: 380px;
     margin: 1.75rem auto;
 }
-/* 弹窗内容卡片 - 高级质感设计 */
+/* 弹窗内容卡片 - 高级圆角+多层光影质感 */
 .qr-modal .modal-content {
     border: none;
-    border-radius: 20px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 24px;
+    background: #ffffff;
     box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-        0 8px 32px rgba(0, 0, 0, 0.15);
+        0 25px 70px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
     overflow: hidden;
     transform: scale(0.96);
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1243,56 +1241,71 @@ footer p {
 .qr-modal.show .modal-content {
     transform: scale(1);
 }
-/* 弹窗头部 - 无边界一体化设计 */
+/* 弹窗头部 - 修复标题不和谐问题，去掉生硬蓝色背景 */
 .qr-modal .modal-header {
     border-bottom: none;
-    padding: 28px 28px 12px;
+    padding: 0;
+    position: relative;
+    flex-direction: column;
     justify-content: center;
-    text-align: center;
 }
+/* 顶部精致装饰条（替代原来的满版蓝色块） */
+.qr-modal .modal-header::before {
+    content: '';
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #1d3557 0%, #e63946 100%);
+    display: block;
+}
+/* 标题样式优化 - 和谐排版+高级质感 */
 .qr-modal .modal-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #1e293b;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
+    padding: 24px 28px 12px;
+    width: 100%;
+    text-align: center;
 }
 .qr-modal .modal-header .btn-close {
     display: none;
 }
-/* 弹窗主体 - 二维码区域比例优化 */
+/* 弹窗主体 - 优化内边距，保证二维码完整显示 */
 .qr-modal .modal-body {
     padding: 12px 28px 20px;
     text-align: center;
 }
-/* 二维码图片 - 悬浮质感 */
+/* 二维码图片 - 修复显示不全问题，100%完整展示 */
 .qr-modal .qr-img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
     box-shadow: 
-        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 10px 30px rgba(0, 0, 0, 0.15),
         0 0 0 1px rgba(0, 0, 0, 0.06);
-    margin-bottom: 16px;
+    margin: 0 auto 18px;
+    display: block;
 }
 /* 二维码下方说明文字 */
 .qr-modal .modal-body p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #64748b;
     line-height: 1.5;
     margin: 0;
 }
-/* 弹窗底部 - 无边界一体化设计 */
+/* 弹窗底部 - 优化按钮区域 */
 .qr-modal .modal-footer {
     border-top: none;
-    padding: 0 28px 28px;
+    padding: 0 28px 32px;
     justify-content: center;
 }
-/* 关闭按钮 - 贴合网站主色调的高级质感 */
+/* 关闭按钮 - 高级质感+贴合网站主色调 */
 .qr-modal .modal-footer .btn {
-    border-radius: 10px;
-    padding: 10px 36px;
-    font-size: 0.95rem;
+    border-radius: 50px;
+    padding: 12px 48px;
+    font-size: 1.05rem;
     font-weight: 500;
     border: none;
     transition: all 0.3s ease;
@@ -1300,17 +1313,13 @@ footer p {
 .qr-modal .modal-footer .btn-secondary {
     background: linear-gradient(145deg, #e63946 0%, #d62828 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
 }
 .qr-modal .modal-footer .btn-secondary:hover {
     background: linear-gradient(145deg, #d62828 0%, #b71c1c 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(230, 57, 70, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(230, 57, 70, 0.45);
 }
 .qr-modal .modal-footer .btn-secondary:active {
     transform: translateY(0);
-}
-/* 折叠内容的内边距 */
-.route-collapse-content {
-    padding: 1rem 0.5rem 2rem;
 }
