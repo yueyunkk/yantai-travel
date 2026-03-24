@@ -1214,4 +1214,156 @@ footer p {
 /* 核心：Bootstrap展开时会自动去掉.collapsed类，箭头旋转 */
 .route-collapse-btn:not(.collapsed) .arrow-icon {
     transform: rotate(180deg);
-}/* 优化后的二维码弹窗样式 - 修复标题+完整显示二维码+高级质感 */
+}
+/* ===================== 高级二维码弹窗专属样式 ===================== */
+/* 弹窗遮罩层：毛玻璃质感，提升高级感 */
+.custom-qrcode-modal .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+/* 弹窗主体：大圆角+柔和阴影，精致卡片感 */
+.custom-qrcode-modal .modal-dialog {
+    max-width: 420px;
+    margin: 1.75rem auto;
+    padding: 0 15px;
+}
+.custom-qrcode-modal .modal-content {
+    border: none;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: modalFadeIn 0.35s ease forwards;
+}
+/* 弹窗弹出动画 */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+/* 顶部蓝色装饰条：匹配截图视觉，更有设计感 */
+.custom-qrcode-modal .modal-top-bar {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(90deg, #1677ff 0%, #4096ff 100%);
+    position: relative;
+}
+/* 右上角圆形关闭按钮：高级悬浮设计 */
+.custom-qrcode-modal .modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    padding: 0;
+}
+.custom-qrcode-modal .modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+/* 弹窗标题：层级清晰，大气美观 */
+.custom-qrcode-modal .modal-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1d2129;
+    text-align: center;
+    margin: -40px 0 25px 0;
+    position: relative;
+    z-index: 5;
+    background: white;
+    display: inline-block;
+    padding: 0 20px;
+    border-radius: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* 二维码卡片容器：保证图片完整显示，不截断 */
+.custom-qrcode-modal .qrcode-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(22, 119, 255, 0.1);
+    margin: 0 auto 25px;
+    max-width: 280px;
+}
+/* 二维码图片：100%完整显示，无挤压截断 */
+.custom-qrcode-modal .qrcode-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+/* 二维码底部小字 */
+.custom-qrcode-modal .qrcode-tips {
+    font-size: 0.9rem;
+    color: #86909c;
+    text-align: center;
+    margin: 15px 0 0;
+    line-height: 1.4;
+}
+/* 弹窗底部说明文字 */
+.custom-qrcode-modal .modal-desc {
+    font-size: 1.15rem;
+    color: #4e5969;
+    text-align: center;
+    margin: 0 0 40px;
+    line-height: 1.5;
+}
+/* 隐藏Bootstrap默认元素，避免样式冲突 */
+.custom-qrcode-modal .modal-header,
+.custom-qrcode-modal .modal-footer {
+    display: none !important;
+}
+.custom-qrcode-modal .modal-body {
+    padding: 0 30px;
+}
+
+/* 响应式适配：手机端完美显示 */
+@media (max-width: 576px) {
+    .custom-qrcode-modal .modal-dialog {
+        max-width: 100%;
+    }
+    .custom-qrcode-modal .modal-top-bar {
+        height: 80px;
+    }
+    .custom-qrcode-modal .modal-close-btn {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+        font-size: 1rem;
+    }
+    .custom-qrcode-modal .modal-title {
+        font-size: 1.5rem;
+        margin-top: -30px;
+    }
+    .custom-qrcode-modal .modal-body {
+        padding: 0 20px;
+    }
+    .custom-qrcode-modal .qrcode-card {
+        max-width: 240px;
+        padding: 16px;
+    }
+    .custom-qrcode-modal .modal-desc {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+}
