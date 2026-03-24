@@ -51,86 +51,166 @@
             object-fit: cover;
         }
 
-        /* ===================== 仅新增：微信/QQ弹窗专属样式 不影响原有页面 ===================== */
-        /* 弹窗遮罩层毛玻璃效果 */
-        .custom-qr-modal .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        /* ===================== 二维码弹窗样式 ===================== */
+        .qrcode-modal-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(6px);
+            z-index: 99999 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
         }
-        /* 弹窗主体毛玻璃质感 */
-        .custom-qr-modal .modal-content {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 22px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
+        .qrcode-modal-mask.show {
+            opacity: 1;
+            visibility: visible;
         }
-        /* 弹窗顶部艺术字标题 - 鲜明色彩 */
-        .modal-art-title {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2.4rem;
-            font-weight: 400;
-            text-align: center;
-            margin: 0;
-            padding: 20px 0 10px;
-            background: linear-gradient(90deg, #e63946 0%, #ff7b00 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 8px rgba(230, 57, 70, 0.15);
-        }
-        /* 弹窗内容区 */
-        .custom-qr-modal .modal-body {
-            padding: 15px 30px 30px;
-            text-align: center;
-        }
-        /* 二维码图片 - 完整显示+和谐比例 */
-        .custom-qr-modal .qr-img {
+        .qrcode-modal-box {
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 400px;
             width: 100%;
-            max-width: 230px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+        .qrcode-modal-mask.show .qrcode-modal-box {
+            transform: scale(1);
+        }
+        .qrcode-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            border: none;
+            color: #666;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .qrcode-modal-close:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .qrcode-modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        .qrcode-modal-img {
+            width: 100%;
+            max-width: 260px;
             height: auto;
-            object-fit: contain;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            margin: 0 auto 18px;
+            border: 1px solid #eee;
+            margin: 0 auto 15px;
             display: block;
         }
-        /* 弹窗底部说明文字 */
-        .custom-qr-modal .qr-desc {
-            font-size: 1rem;
-            color: #334155;
-            line-height: 1.5;
+        .qrcode-modal-desc {
+            color: var(--gray-color);
+            font-size: 0.95rem;
             margin: 0;
         }
-        .custom-qr-modal .qr-desc-small {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin: 8px 0 0;
+
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
         }
-        /* 右上角关闭按钮 */
-        .custom-qr-modal .modal-header {
-            border: none;
-            padding: 0;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 10;
+        @media (max-width: 768px) {
+            body {
+                padding-top: 65px;
+            }
+            .page-header {
+                padding: 80px 0 50px;
+                margin-bottom: 30px;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            .contact-card .card-header {
+                font-size: 1.3rem;
+                padding: 20px 25px;
+            }
+            .contact-card .card-body {
+                padding: 20px;
+            }
+            .contact-info-item {
+                margin-bottom: 20px;
+                gap: 15px;
+            }
+            .contact-info-item i {
+                font-size: 1.5rem;
+            }
+            .social-media a {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+            .map-container {
+                height: 350px;
+            }
+            .faq-section {
+                margin: 40px 0 60px;
+            }
+            .faq-section h3 {
+                font-size: 1.8rem;
+            }
+            footer {
+                padding: 60px 0 30px;
+            }
         }
-        .custom-qr-modal .btn-close {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            opacity: 1;
-        }
-        /* 隐藏原有底部按钮区 */
-        .custom-qr-modal .modal-footer {
-            display: none;
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .contact-info-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .contact-info-item i {
+                margin-top: 0;
+            }
+            .social-media a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            .accordion-button {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            .accordion-body {
+                padding: 20px;
+            }
+            .qrcode-modal-box {
+                padding: 30px 20px;
+            }
+            .qrcode-modal-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
