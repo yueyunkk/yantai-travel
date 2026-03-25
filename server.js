@@ -31,6 +31,10 @@ const transporter = nodemailer.createTransport({
                                        // 1. 若未开双重验证 → 你的 Outlook 登录密码
                                        // 2. 若已开双重验证 → 必须去「账号安全」生成「应用密码」
   },
+   // 新增：延长所有超时时间到 60 秒
+  connectionTimeout: 60000, // 连接超时 60 秒
+  greetingTimeout: 60000,    // 握手超时 60 秒
+  socketTimeout: 60000,      // 传输超时 60 秒
   tls: {
     ciphers: 'SSLv3', // 解决部分环境的 TLS 兼容问题（可选，不加也可能正常）
     rejectUnauthorized: false // 避免证书校验报错（可选）
