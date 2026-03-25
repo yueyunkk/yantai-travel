@@ -7,6 +7,7 @@ const path = require('path');
 const app = express();
 // 本地测试用3000端口，部署时平台会自动分配端口
 const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
 
 // ---------------- 中间件配置 ----------------
 app.use(cors()); // 允许跨域请求
@@ -69,6 +70,6 @@ app.post('/send-email', async (req, res) => {
 
 // ---------------- 启动服务器 ----------------
 app.listen(PORT, () => {
-  console.log(`✅ 服务器已启动！`);
+ console.log(`✅ 服务器已启动！监听端口：${PORT}`);
   console.log(`📱 本地测试地址：http://localhost:${PORT}`);
 });
