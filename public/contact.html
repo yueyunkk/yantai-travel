@@ -738,7 +738,7 @@
                                 </label>
                                 <div class="invalid-feedback">请同意我们的条款</div>
                             </div>
-                            <button type="submit" class="btn btn-primary ">
+                            <button type="submit" class="btn btn-primary w-100">
                                 <i class="fas fa-paper-plane me-2"></i> 提交留言
                             </button>
                         </form>
@@ -985,7 +985,7 @@
                 const mapContainer = document.getElementById('yantaiMap');
                 if (mapContainer && window.BMap) {
                     const map = new BMap.Map("yantaiMap");
-                    const point = new BMap.Point(106.616980, 29.539812);
+                    const point = new BMap.Point(106.6054, 29.5333);
                     map.centerAndZoom(point, 15);
                     map.enableScrollWheelZoom(true);
                     map.addControl(new BMap.NavigationControl());
@@ -1004,86 +1004,66 @@
             }
 
             // ===================== 表单验证与提交处理 =====================
-        
-// 等待页面所有元素加载完成后执行
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ 表单脚本加载完成');
-    // 获取表单元素
-    const form = document.getElementById('contactForm');
-    if (!form) {
-        console.error('❌ 找不到id为contactForm的表单，请检查表单id是否正确');
+          document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // 阻止默认刷新提交
+    
+    // 1. 前端校验（增强版，补充原生校验不足）
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+    const agree = document.getElementById('agree').checked;
+    
+    if (!name) {
+        alert('请输入您的姓名！');
+        return;
+    }
+    if (!phone) {
+        alert('请输入您的电话！');
+        return;
+    }
+    if (!subject) {
+        alert('请选择咨询类型！');
+        return;
+    }
+    if (!message) {
+        alert('请输入留言内容！');
+        return;
+    }
+    if (!agree) {
+        alert('请同意隐私政策和服务条款！');
         return;
     }
 
-    // 【关键修复】给提交事件的函数加上async关键字，才能在里面用await
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // 阻止表单默认刷新页面
-        console.log('📝 表单提交事件触发');
+    // 2. 组装提交数据
+    const formData = {
+        name: name,
+        phone: phone,
+        email: document.getElementById('email').value.trim() || '',
+        subject: subject,
+        message: message
+    };
 
-        // 1. Bootstrap原生表单校验
-        if (!form.checkValidity()) {
-            form.classList.add('was-validated');
-            return;
+    // 3. 异步提交到后端接口
+    fetch('http://localhost:3000/send-email', { // 后端接口地址，需和后端一致
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('提交成功！我们会尽快与您联系～');
+            document.getElementById('contactForm').reset(); // 重置表单
+        } else {
+            alert('提交失败：' + (data.msg || '服务器错误，请稍后重试'));
         }
-
-        // 2. 提交按钮状态切换，防止重复提交
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> 提交中...';
-
-        // 3. 请求超时控制（15秒超时，和后端保持一致）
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 15000);
-
-        try {
-            // 4. 收集表单数据
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                email: document.getElementById('email').value.trim() || '',
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value.trim()
-            };
-            console.log('📦 提交的表单数据：', formData);
-
-            // 5. 发送请求到后端接口（相对路径，线上线下通用）
-            const response = await fetch('/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-                signal: controller.signal // 绑定超时控制器
-            });
-
-            // 6. 处理后端返回结果
-            clearTimeout(timeout);
-            const result = await response.json();
-            console.log('📨 后端返回结果：', result);
-
-            if (result.success) {
-                // 提交成功
-                alert('✅ ' + result.message);
-                form.reset(); // 重置表单
-                form.classList.remove('was-validated');
-            } else {
-                // 提交失败，显示后端返回的具体原因
-                alert('❌ ' + result.message);
-            }
-
-        } catch (error) {
-            clearTimeout(timeout);
-            // 区分超时错误和其他网络错误
-            if (error.name === 'AbortError') {
-                alert('❌ 请求超时，请稍后重试！');
-            } else {
-                console.error('❌ 提交错误详情：', error);
-                alert('❌ 网络请求失败，请检查网络后重试！');
-            }
-        } finally {
-            // 无论成功失败，都恢复按钮状态
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnText;
-        }
+    })
+    .catch(error => {
+        console.error('提交错误：', error);
+        alert('提交失败！请检查网络或联系管理员');
     });
 });
 
