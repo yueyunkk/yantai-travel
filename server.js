@@ -1,4 +1,21 @@
-require('dotenv').config();
+require('dotenv').config(); // 如果你用了 .env 就保留，没有就删掉
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
+
+// 新增：引入 Resend
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY); // 从环境变量读取 API Key
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -41,61 +58,59 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// 留言提交接口
-app.post('/send-email', (req, res) => {
-    console.log('📥 收到留言提交请求');
+// 替换你原来的这段代码 ↓
+app.post('/send-email', async (req, res) => {
+  console.log('收到留言提交请求');
+  try {
+    const { name, phone, email, subject, message } = req.body;
 
-    // 【关键修复】创建一个async函数来执行包含await的逻辑
-    const sendEmail = async () => {
-        try {
-            const { name, phone, email, subject, message } = req.body;
+    // 1. 校验必填项
+    if (!name || !phone || !subject || !message) {
+      return res.status(400).json({
+        success: false,
+        message: '请填写姓名、电话、咨询类型和留言内容！'
+      });
+    }
 
-            // 1. 校验必填项
-            if (!name || !phone || !subject || !message) {
-                return res.status(400).json({
-                    success: false,
-                    message: '请填写姓名、电话、咨询类型和留言内容！'
-                });
-            }
+    // 2. 发送邮件（Resend 版本）
+    console.log('📤 正在发送邮件...');
+    const { data, error } = await resend.emails.send({
+      from: '烟台旅游留言 <onboarding@resend.dev>', // Resend 提供的默认测试发件邮箱
+      to: ['yueyunkk@outlook.com'], // 你的收件邮箱，和原来保持一致
+      subject: `【烟台旅游新留言】${name} - ${subject}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #e63946; text-align: center;">您有一条新的烟台旅游留言</h2>
+          <hr>
+          <p><strong>姓名：</strong>${name}</p>
+          <p><strong>电话：</strong>${phone}</p>
+          <p><strong>邮箱：</strong>${email || '用户未填写'}</p>
+          <p><strong>咨询类型：</strong>${subject}</p>
+          <p><strong>留言内容：</strong></p>
+          <p style="background: #f8f9fa; padding: 15px; border-radius: 8px;">${message}</p>
+          <hr>
+          <p style="text-align: center; color: #888; font-size: 12px;">提交时间：${new Date().toLocaleString('zh-CN')}</p>
+        </div>
+      `
+    });
 
-            // 2. 构造邮件内容
-            const mailOptions = {
-                from: `烟台旅游留言 <yueyunkk@outlook.com>`, // 必须和认证邮箱一致
-                to: 'yueyunkk@outlook.com',
-                subject: `【烟台旅游新留言】${name} - ${subject}`,
-                html: `
-                    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                      <h2 style="color: #e63946; text-align: center;">您有一条新的烟台旅游留言</h2>
-                      <hr>
-                      <p><strong>姓名：</strong>${name}</p>
-                      <p><strong>电话：</strong>${phone}</p>
-                      <p><strong>邮箱：</strong>${email || '用户未填写'}</p>
-                      <p><strong>咨询类型：</strong>${subject}</p>
-                      <p><strong>留言内容：</strong></p>
-                      <p style="background: #f8f9fa; padding: 15px; border-radius: 8px;">${message}</p>
-                      <hr>
-                      <p style="text-align: center; color: #888; font-size: 12px;">提交时间：${new Date().toLocaleString('zh-CN')}</p>
-                    </div>
-                `
-            };
+    if (error) throw error;
+    console.log('✅ 邮件发送成功！');
 
-            // 3. 发送邮件（现在在async函数里，可以正常使用await）
-            console.log('📤 正在发送邮件...');
-            await transporter.sendMail(mailOptions);
-            console.log('✅ 邮件发送成功！');
+    // 3. 返回成功结果
+    res.json({
+      success: true,
+      message: '留言提交成功！我们会尽快与您联系 😊'
+    });
 
-            // 4. 返回成功结果
-            res.json({
-                success: true,
-                message: '留言提交成功！我们会尽快与您联系 😊'
-            });
-
-        } catch (error) {
-            console.error('❌ 邮件发送失败：', error);
-            res.status(500).json({
-                success: false,
-                message: `服务器出错：${error.message}`
-            });
+  } catch (error) {
+    console.error('❌ 邮件发送失败：', error);
+    res.status(500).json({
+      success: false,
+      message: `服务器出错：${error.message}`
+    });
+  }
+});
         }
     };
 
