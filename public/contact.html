@@ -1045,27 +1045,30 @@
     };
 
     // 3. 异步提交到后端接口
-    fetch('/send-email', { // 后端接口地址，需和后端一致
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('提交成功！我们会尽快与您联系～');
-            document.getElementById('contactForm').reset(); // 重置表单
-        } else {
-            alert('提交失败：' + (data.msg || '服务器错误，请稍后重试'));
-        }
-    })
-    .catch(error => {
-        console.error('提交错误：', error);
-        alert('提交失败！请检查网络或联系管理员');
-    });
-});
+    // 带超时的fetch请求
+const controller = new AbortController();
+const timeout = setTimeout(() => controller.abort(), 15000); // 15秒超时
+
+try {
+  const response = await fetch('/send-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+    signal: controller.signal // 绑定超时控制器
+  });
+
+  clearTimeout(timeout);
+  const result = await response.json();
+  // 后续的成功/失败处理逻辑不变
+} catch (error) {
+  clearTimeout(timeout);
+  if (error.name === 'AbortError') {
+    alert('❌ 请求超时，请稍后重试！');
+  } else {
+    console.error('提交错误：', error);
+    alert('❌ 网络请求失败，请检查网络后重试！');
+  }
+}
 
             // ===================== 导航栏滚动效果 =====================
             (function initNavbar() {
