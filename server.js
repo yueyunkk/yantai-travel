@@ -19,18 +19,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ==================== 邮箱配置（统一邮箱，修复501报错） ====================
-const MY_QQ_EMAIL = '2064849893@qq.com'; // 这里只填一次，下面自动统一引用，避免不一致
+const MY_QQ_EMAIL = 'yueyunkk@outlook.com'; // 这里只填一次，下面自动统一引用，避免不一致
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.qq.com',
-  port: 465,
-  secure: true,
+  host: 'smtp-mail.outlook.com', // 严格按图片里的SMTP服务器填写
+  port: 587,                    // 固定端口 587
+  secure: false,               // 587 端口用 STARTTLS，所以 secure 必须是 false
   auth: {
-    user: MY_QQ_EMAIL, // 认证登录邮箱，和上面的变量完全一致
-    pass: process.env.EMAIL_PASS // 从.env读取SMTP授权码
+    user: 'yueyunkk@outlook.com', // 填写你的完整 Outlook 邮箱
+    pass: process.env.EMAIL_PASS        // 填写：
+                                       // 1. 若未开双重验证 → 你的 Outlook 登录密码
+                                       // 2. 若已开双重验证 → 必须去「账号安全」生成「应用密码」
   },
-  connectionTimeout: 10 * 1000,
-  socketTimeout: 15 * 1000
+  tls: {
+    ciphers: 'SSLv3', // 解决部分环境的 TLS 兼容问题（可选，不加也可能正常）
+    rejectUnauthorized: false // 避免证书校验报错（可选）
+  }
 });
 
 // 留言提交接口
@@ -52,8 +56,8 @@ app.post('/send-email', (req, res) => {
 
             // 2. 构造邮件内容
             const mailOptions = {
-                from: `烟台旅游留言 <2064849893@qq.com>`, // 必须和认证邮箱一致
-                to: '2064849893@qq.com',
+                from: `烟台旅游留言 <yueyunkk@outlook.com>`, // 必须和认证邮箱一致
+                to: 'yueyunkk@outlook.com',
                 subject: `【烟台旅游新留言】${name} - ${subject}`,
                 html: `
                     <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
