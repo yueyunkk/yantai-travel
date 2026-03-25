@@ -985,7 +985,7 @@
                 const mapContainer = document.getElementById('yantaiMap');
                 if (mapContainer && window.BMap) {
                     const map = new BMap.Map("yantaiMap");
-                    const point = new BMap.Point(106.6054, 29.5333);
+                    const point = new BMap.Point(106.616980, 29.539812);
                     map.centerAndZoom(point, 15);
                     map.enableScrollWheelZoom(true);
                     map.addControl(new BMap.NavigationControl());
@@ -1045,7 +1045,7 @@
     };
 
     // 3. 异步提交到后端接口
-    fetch('http://localhost:3000/send-email', { // 后端接口地址，需和后端一致
+    fetch('/send-email', { // 后端接口地址，需和后端一致
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
