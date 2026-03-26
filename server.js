@@ -95,8 +95,8 @@ app.post('/send-email', async (req, res) => {
     // 3. 发送邮件（Resend 版本）
     console.log('📤 正在发送邮件...');
     const { data, error } = await resend.emails.send({
-      from: '烟台旅游留言 <onboarding@resend.dev>', // 等域名验证通过后改成：<no-reply@yueyunkk.fun>
-      to: ['2064849893@qq.com'], // 先临时用 QQ 邮箱，验证通过后改成：['yueyunkk@outlook.com']
+      from: '烟台旅游留言 <no-reply@yueyunkk.fun>', // 等域名验证通过后改成：<no-reply@yueyunkk.fun>
+     to: ['yueyunkk@outlook.com'],// 先临时用 QQ 邮箱，验证通过后改成：['yueyunkk@outlook.com']
       subject: `【烟台旅游新留言】${name} - ${subject}`,
       html: `
         <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
